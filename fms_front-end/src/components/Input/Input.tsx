@@ -1,21 +1,22 @@
+import { InputHTMLAttributes } from "react";
+import styles from './Input.module.css'
 
-
-interface InputProps{
-    value : string;
-    placeholder? : string,
-    type : 'text' | 'password';
-    onChange : (e : React.ChangeEvent<HTMLInputElement>) => void;
+interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
+    label? : string;
+    errMessage? : string;
 }
 
 
-const Input = ({value, placeholder, type} : InputProps) =>{
+const Input = ({label, errMessage, ...props} : InputProps) =>{
     return(
-        <div>
+        <div className={styles.inputbox}>
             <input
-            type={value}
-            placeholder={placeholder}
+                className={styles.input}
+                {...props}
+                required
             />
-            <label></label>
+            {label && <label className={styles.label}>{label}</label>}
+            {errMessage && <span>{errMessage}</span>}
         </div>
     )
 }

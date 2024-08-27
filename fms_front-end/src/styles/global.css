@@ -4,10 +4,32 @@
     Colors
     */
     --color-bk:#000000;
+    --color-lg : #e4e4e4;
     --color-wh:#ffffff;
+
+
+    /*
+    Paddings
+    */
+    --pad-wide : 2rem;
+    --pad-mid : 1.5rem;
+    --pad-default : 1rem;
+    --pad-half : 0.5rem;
+
+    /*
+    Border-radius
+    */
+    --radius-max : 10px;
+    --radius-default : 6px;
+    --radius-min : 4px;
+
 }
 
-
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 
 html,
 body,
@@ -149,6 +171,10 @@ img {
   -khtml-user-drag: none;
   -moz-user-drag: none;
   -o-user-drag: none;
+}
+
+input{
+  outline: none;
 }
 
 body {

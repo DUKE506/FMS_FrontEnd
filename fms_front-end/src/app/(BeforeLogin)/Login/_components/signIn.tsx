@@ -11,13 +11,17 @@ interface SignInUser{
 
 
 const SignIn = () => {
-    const [user, setUser] = useState({
+    const [user, setUser] = useState<SignInUser>({
         id:"",
         password:""
     })
 
     const handleChange = (e : ChangeEvent<HTMLInputElement>) =>{
         const {name, value} = e.target;
+        setUser(prevUser =>({
+            ...prevUser,
+            [name] : value
+        }));
     }
 
     return(
@@ -27,9 +31,11 @@ const SignIn = () => {
                     Sign In
                 </h1>
                 <Input
+                label="User ID"
+                name="id"
                 value={user.id}
                 type="text"
-                placeholder="User ID"
+                // placeholder="User ID"
                 onChange={handleChange}
                 />
             </div>

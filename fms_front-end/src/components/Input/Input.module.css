@@ -1,0 +1,43 @@
+
+.inputbox{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.input {
+    position: relative;
+    padding : var(--pad-default);
+    border : 2px solid var(--color-lg);
+    border-radius: var(--radius-default);
+    transition: all .3s;
+}
+
+.label{
+    position : absolute;
+    top: 50%;
+    left: var(--pad-default);
+    transform: translateY(-50%);
+
+    color: var(--color-lg);
+    transition: all .3s;
+    
+    /* padding : var(--pad-default); */
+}
+
+.input:focus {
+    border : 2px solid #223377;
+    
+}
+
+.input:valid ~.label,
+.input:focus ~.label
+{
+    top : 0;
+    transform: translateY(-50%);
+    color:#223377;
+    font-weight: bold;
+    background-color: var(--color-wh);
+    padding: 0 var(--pad-half); 
+}
+
