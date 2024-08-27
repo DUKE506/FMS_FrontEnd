@@ -6,6 +6,7 @@
     --color-bk:#000000;
     --color-lg : #e4e4e4;
     --color-wh:#ffffff;
+    --color-main : #1a84b6;
 
 
     /*
@@ -22,6 +23,8 @@
     --radius-max : 10px;
     --radius-default : 6px;
     --radius-min : 4px;
+
+
 
 }
 
