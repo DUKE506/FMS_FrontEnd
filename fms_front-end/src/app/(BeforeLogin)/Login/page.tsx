@@ -1,11 +1,11 @@
 import SignIn from "./_components/signIn";
-
+import styles from "./page.module.css"
 
 
 const Login = () =>{
 
     return(
-        <div>
+        <div className={styles.login}>
             <SignIn/>
         </div>
     )

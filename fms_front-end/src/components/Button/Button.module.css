@@ -1,0 +1,16 @@
+
+.button{
+    padding : var(--pad-default) var(--pad-wide);
+    border-radius: var(--radius-min);
+
+
+    color: white;
+    /* background-color: var(--color-gr1); */
+    background-color: var(--color-gr3);
+    transition: all .3s;
+}
+
+.button:hover{
+    /* background-color: var(--color-gr3); */
+    background-color: var(--color-gr1);
+}

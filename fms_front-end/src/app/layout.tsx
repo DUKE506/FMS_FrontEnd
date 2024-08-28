@@ -22,9 +22,7 @@ export default function RootLayout({
           </div>
         </div>
         <section id="content">
-          <div className="inner">
             {children}
-          </div>
         </section>
       </body>
     </html>

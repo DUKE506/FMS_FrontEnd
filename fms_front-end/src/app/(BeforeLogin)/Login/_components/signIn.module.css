@@ -1,0 +1,36 @@
+
+
+.sign{
+    display: flex;
+    width: 1000px;
+
+    border: 2px solid var(--color-lg);
+    border-radius: var(--radius-min);
+}
+
+.title{
+    font-weight: bold;
+    color: var(--color-gr1);
+}
+
+.item{
+    width: 100%;
+}
+
+.wrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap : var(--pad-wide);
+
+
+    padding : 0 50px;
+    height: 100%;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;    
+    gap: var(--pad-default);
+    width: 100%;
+}

@@ -3,13 +3,14 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    width: 100%;
 }
 
 .input {
     position: relative;
     padding : var(--pad-default);
     border : 2px solid var(--color-lg);
-    border-radius: var(--radius-default);
+    border-radius: var(--radius-min);
     transition: all .3s;
 }
 
@@ -22,11 +23,12 @@
     color: var(--color-lg);
     transition: all .3s;
     
+    font-size: 0.9rem;
     /* padding : var(--pad-default); */
 }
 
 .input:focus {
-    border : 2px solid #223377;
+    border : 2px solid var(--color-gr3);
     
 }
 
@@ -35,7 +37,7 @@
 {
     top : 0;
     transform: translateY(-50%);
-    color:#223377;
+    color:var(--color-gr3);
     font-weight: bold;
     background-color: var(--color-wh);
     padding: 0 var(--pad-half); 
