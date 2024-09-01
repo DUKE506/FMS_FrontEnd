@@ -1,13 +1,12 @@
-
-
-.sign{
+.sign {
     display: flex;
     width: 1000px;
 
     border: 2px solid var(--color-lg);
     border-radius: var(--radius-min);
+    position: relative;
 }
 
-.item{
+.item {
     width: 100%;
 }
