@@ -1,0 +1,11 @@
+
+.nav{
+    padding: var(--pad-default) 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.link{
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,49 @@
+
+.profile{
+    width: fit-content;
+    display: flex;
+    gap: var(--pad-default);
+    border-radius: var(--radius-default);
+
+    background-color: white;
+    padding: var(--pad-half);
+
+    box-shadow:  0 0 6px 2px #d3d3d3;
+}
+
+.user{
+    display: flex;
+    gap: var(--pad-half);
+}
+
+.img{
+    border-radius: 50%;
+    padding: 0.3rem;
+    background-color: var(--color-grn1);
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+}
+
+.job{
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--color-gr1);
+}
+
+.name{
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--color-grn1);
+}
+
+.icon{
+    display: flex;
+    align-items: center;
+}
+
+.icon:hover{
+    cursor: pointer;
+}

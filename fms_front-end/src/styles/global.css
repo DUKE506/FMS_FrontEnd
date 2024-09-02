@@ -10,6 +10,7 @@
     --color-gr1:#606060;
     --color-gr2:#929292;
     --color-gr3:#444444;
+    --color-gr4: #f3f3f3;
 
     --color-grn1:#518071;
 
@@ -227,10 +228,11 @@ body {
 #content {
   flex: 1;
   margin-top: calc(var(--pad-main)*5);
+  background-color: var(--color-gr4);
 }
 
 .inner {
-  inline-size: min(100% - 200px* 2, 1820px);
+  inline-size: min(100% - 50px*2, 1920px);
   margin-inline: auto;
 }
 
@@ -243,13 +245,13 @@ body {
 
 @media (max-width: 1280px) {
   .inner  {
-      inline-size: min(100% - 50px* 2, 1820px);
+      inline-size: min(100% - 50px* 2, 1920px);
   }
 }
 
 @media (max-width: 480px) {
   .inner  {
-      inline-size: min(100% - 20px* 2, 1820px);
+      inline-size: min(100% - 20px* 2, 1920px);
   }
 }
 
