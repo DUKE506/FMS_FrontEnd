@@ -36,6 +36,10 @@
     --radius-min : 4px;
 
 
+    /*
+    Box-shadow
+    */
+    --bs-default : 0 0 6px 2px #d3d3d3;
 
 }
 

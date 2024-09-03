@@ -1,0 +1,10 @@
+
+
+.container{
+    
+    border-radius: var(--radius-default);
+    padding: var(--pad-default);
+
+    box-shadow: var(--bs-default);
+    background-color: var(--color-wh);
+}
