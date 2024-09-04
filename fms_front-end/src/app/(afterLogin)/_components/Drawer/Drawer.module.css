@@ -1,0 +1,18 @@
+
+.Group{
+
+}
+
+.tab{
+    width: 100%;
+    display: flex;
+    gap : var(--pad-default);
+
+    padding: var(--pad-default);
+    border: 1px solide;
+
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--color-gr1);
+
+}
