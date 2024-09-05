@@ -1,10 +1,12 @@
+import TableContainer from "./_components/Container/Table";
+
 
 
 
 const Place = () => {
     return(
         <div>
-            하이
+            <TableContainer title="all place"/>
         </div>
     )
 }
