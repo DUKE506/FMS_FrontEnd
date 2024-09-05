@@ -9,8 +9,11 @@ export default function Layout({children} : Props){
     return(
         <div className="inner">
             <Nav />
-            <Drawer loginType={true}/>
-            {children}
+            <div className="body">
+                <Drawer loginType={true}/>
+                {children}
+            </div>
+            
         </div>
     )
     

@@ -1,3 +1,8 @@
+.drawer{
+    display: flex;
+    flex-direction: column;
+    gap: var(--pad-half);
+}
 
 .Group{
 
@@ -9,10 +14,39 @@
     gap : var(--pad-default);
 
     padding: var(--pad-default);
-    border: 1px solide;
+    /* border: 1px solid; */
 
     font-size: 0.9rem;
     font-weight: bold;
     color: var(--color-gr1);
 
+    border-radius: var(--radius-default);
+
+    transition: all .3s;
+    overflow: hidden;
+}
+
+.tab:hover{
+    background-color: var(--color-grn1);
+}
+.tab:hover .icon,
+.tab:hover .title{
+    color: var(--color-gr4);
+    fill: var(--color-gr4);
+} 
+
+.active {
+    background-color: var(--color-grn1);
+}
+.active .icon,
+.active .title
+{
+    color: var(--color-gr4);
+    fill: var(--color-gr4);
+}
+
+
+.title{
+    display: flex;
+    align-items: center;
 }
