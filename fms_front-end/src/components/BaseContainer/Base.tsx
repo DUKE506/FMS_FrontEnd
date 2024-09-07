@@ -1,12 +1,12 @@
 
 import { ReactNode } from 'react'
-import styles from './Card.module.css'
+import styles from './Base.module.css'
 
-interface CardContainerProps {
+interface BaseContainerProps {
     children : ReactNode
 }
 
-const CardContainer = ({children} : CardContainerProps) => {
+const BaseContainer = ({children} : BaseContainerProps) => {
 
     return(
         <div className={styles.container}>
@@ -15,4 +15,4 @@ const CardContainer = ({children} : CardContainerProps) => {
     )
 }
 
-export default CardContainer;
+export default BaseContainer;

@@ -1,0 +1,58 @@
+
+
+.table{
+    width: 100%;
+    table-layout: auto;
+}
+
+
+.thead{
+    background-color: var(--color-grn1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.thead_tr{
+    
+}
+
+.th{
+    padding: var(--pad-default);
+
+
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--color-wh);
+    white-space: nowrap;
+}
+/*
+헤더 둥글게
+*/
+.th:first-child {
+    border-radius: var(--radius-default) 0 0 var(--radius-default);
+}
+.th:last-child{
+    border-radius: 0 var(--radius-default) var(--radius-default) 0;
+}
+
+
+
+
+.tr{
+    border-bottom: 1px solid var(--color-gr1);
+}
+
+.tr:hover .td{
+    /* background-color: #eeeeee; */
+    background-color: #51807125
+}
+
+
+.td{
+    text-align: center;
+    padding: var(--pad-default);
+
+    font-size: 0.8rem;
+    color: var(--color-gr3);
+    background-color: var(--color-wh);
+}

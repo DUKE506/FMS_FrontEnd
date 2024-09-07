@@ -1,0 +1,14 @@
+
+
+.place{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.analysis_section{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin : var(--pad-wide) 0;
+}

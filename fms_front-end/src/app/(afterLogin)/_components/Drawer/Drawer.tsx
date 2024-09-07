@@ -1,9 +1,10 @@
 "use client"
-import CardContainer from "@/components/Card/Card";
+import BaseContainer from "@/components/BaseContainer/Base";
 import styles from './Drawer.module.css'
 import Link from 'next/link'
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+
 
 interface DrawerGroupProps{
     title : string;
@@ -81,7 +82,7 @@ export const DrawerGroup = ({title, icon, url, children} : DrawerGroupProps)=>{
 const Drawer = ({loginType}:DrawerProps) => {
     return(
         <>
-            <CardContainer>
+            <BaseContainer>
                 <div className={styles.drawer}>
                     {
                         loginType ?
@@ -184,7 +185,7 @@ const Drawer = ({loginType}:DrawerProps) => {
                     }
                     
                 </div>
-            </CardContainer>
+            </BaseContainer>
         </>
     )
 }

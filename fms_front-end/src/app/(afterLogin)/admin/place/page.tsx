@@ -1,3 +1,9 @@
+"use client"
+
+import BaseContainer from "@/components/BaseContainer/Base";
+import { Body, Columns, Header, HeaderCell, HeaderRow, Table } from "./_components/Table/Table";
+import styles from './page.module.css'
+import { AnalysisCard } from "./_components/Card/AnalysislCard";
 
 //사업장 테이블 인터페이스
 interface PlaceTableProps {
@@ -7,13 +13,17 @@ interface PlaceTableProps {
     contract_num: string;
     tel: string;
     contract_at: Date | string;
-    state: PlaceState
+    state: number
 }
 
-const enum PlaceState {
+enum PlaceState {
     해약 = 0,
     계약 = 1,
     중단 = 2,
+}
+
+const getPlaceStateText = (state : PlaceState) : string =>{
+    return PlaceState[state];
 }
 
 const mockupPlaceTable: PlaceTableProps[] = [
@@ -46,15 +56,59 @@ const mockupPlaceTable: PlaceTableProps[] = [
     }
 ]
 
-const PlaceTableHeader = [
-
-]
-
 const Place = ({ }) => {
-    return (
-        <div>
+    console.log(mockupPlaceTable[0].code)
+    const colums = [
+        {header : "코드", accessor : 'code' as const},
+        {header : "이름", accessor : 'name' as const},
+        {header : "주소", accessor : 'addr' as const},
+        {header : "계약번호", accessor : 'contract_num' as const},
+        {header : "전화번호", accessor : 'tel' as const},
+        { 
+            header: "계약일자", 
+            accessor: 'contract_at' as const,
+            render: (value: Date | string) => value instanceof Date ? value.toLocaleDateString() : value
+        },
+        {
+            header : "계약상태", 
+            accessor : 'state' as const,
+            render: (value: number) => getPlaceStateText(value as PlaceState)
+        },
+        
+    ];
 
+    return (
+        <div className={styles.place}>
+            <div className={styles.analysis_section}>
+                <BaseContainer>
+                    <AnalysisCard title='전체 사업장수' value={mockupPlaceTable.length}/>
+                </BaseContainer>
+                <BaseContainer>
+                    <AnalysisCard title='사업장별 평균 매니저 수' value={4.6}/>
+                </BaseContainer>
+                <BaseContainer>
+                    <AnalysisCard title='사업장별 평균 직원 수' value={24.8}/>
+                </BaseContainer>
+            </div>
+            <BaseContainer>
+                <Table data={mockupPlaceTable}>
+                    <Header>
+                        <HeaderRow>
+                            {colums.map((headercol, idx) => (
+                                <HeaderCell key={idx}>
+                                    {headercol.header}
+                                </HeaderCell>
+                            ))}
+                        </HeaderRow>
+                    </Header>
+                    <Body>
+                        <Columns columns={colums}/>
+                    </Body>
+                </Table>
+            </BaseContainer>
         </div>
+        
+        
     )
 }
 

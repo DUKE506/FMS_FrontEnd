@@ -1,0 +1,21 @@
+
+
+.card{
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap :var(--pad-default)
+}
+
+.label{
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-gr1);
+
+}
+
+.value{
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--color-grn1);
+}

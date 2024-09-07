@@ -250,6 +250,7 @@ body {
 .body{
   width: 100%;
   display: flex;
+  gap : var(--pad-wide)
 }
 
 @media (max-width: 1280px) {
