@@ -1,45 +1,48 @@
-:root{
+:root {
 
-    /*
+  /*
     Colors
     */
-    --color-bk:#000000;
-    --color-lg : #e4e4e4;
-    --color-wh:#ffffff;
+  --color-bk: #000000;
+  --color-lg: #e4e4e4;
+  --color-wh: #ffffff;
 
-    --color-gr1:#606060;
-    --color-gr2:#929292;
-    --color-gr3:#444444;
-    --color-gr4: #f3f3f3;
+  --color-gr1: #606060;
+  --color-gr2: #929292;
+  --color-gr3: #444444;
+  --color-gr4: #f3f3f3;
+  --color-gr5: #d3d3d3;
 
-    --color-grn1:#518071;
+  --color-grn1: #518071;
+  --color-grn1-1: #51807125;
+  --color-grn2: #9bca96;
 
-    --color-pp1:#474554;
-    --color-pp2:#ACA7CB;
+  --color-pp1: #474554;
+  --color-pp2: #ACA7CB;
 
-    --color-main : #1a84b6;
+  --color-main: #1a84b6;
 
 
-    /*
+  /*
     Paddings
     */
-    --pad-wide : 2rem;
-    --pad-mid : 1.5rem;
-    --pad-default : 1rem;
-    --pad-half : 0.5rem;
+  --pad-wide: 2rem;
+  --pad-mid: 1.5rem;
+  --pad-default: 1rem;
+  --pad-half: 0.5rem;
 
-    /*
+  /*
     Border-radius
     */
-    --radius-max : 10px;
-    --radius-default : 6px;
-    --radius-min : 4px;
+  --radius-max: 10px;
+  --radius-default: 6px;
+  --radius-min: 4px;
 
 
-    /*
+  /*
     Box-shadow
     */
-    --bs-default : 0 0 6px 2px #d3d3d3;
+  --bs-default: 0 0 6px 2px #d3d3d3;
 
 }
 
@@ -153,7 +156,8 @@ section {
   display: block;
 }
 
-html,body{
+html,
+body {
   height: 100%;
 }
 
@@ -195,7 +199,8 @@ img {
   -o-user-drag: none;
 }
 
-input,button{
+input,
+button {
   outline: none;
   border: none;
 }
@@ -240,28 +245,28 @@ body {
   margin-inline: auto;
 }
 
-.na-layout{
+.na-layout {
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.body{
+.body {
   width: 100%;
   display: flex;
-  gap : var(--pad-wide)
+  gap: var(--pad-wide)
 }
 
 @media (max-width: 1280px) {
-  .inner  {
-      inline-size: min(100% - 50px* 2, 1920px);
+  .inner {
+    inline-size: min(100% - 50px* 2, 1920px);
   }
 }
 
 @media (max-width: 480px) {
-  .inner  {
-      inline-size: min(100% - 20px* 2, 1920px);
+  .inner {
+    inline-size: min(100% - 20px* 2, 1920px);
   }
 }
 
@@ -275,8 +280,10 @@ a {
 }
 
 * {
-  -ms-overflow-style: none; /* 인터넷 익스플로러 */
-  scrollbar-width: none; /* 파이어폭스 */
+  -ms-overflow-style: none;
+  /* 인터넷 익스플로러 */
+  scrollbar-width: none;
+  /* 파이어폭스 */
 }
 
 

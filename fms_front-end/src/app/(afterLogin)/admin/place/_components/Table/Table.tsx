@@ -1,7 +1,7 @@
 
 
 import styles from './Table.module.css'
-import { Children, createContext, ReactNode, useContext } from 'react';
+import { Children, createContext, ReactNode, useContext, useEffect } from 'react';
 
 //테이블 데이터 타입 정의
 type TableData = Record<string, any>
@@ -20,6 +20,8 @@ interface ColumnProps<T extends TableData> {
     accessor: keyof T;
     render?: (value: any, item: T) => ReactNode;
 }
+
+
 
 export const Table = <T extends TableData>({ data, children }: TableProps<T>) => {
     return (
@@ -63,41 +65,59 @@ export const Body = ({ children }: { children: ReactNode }) => {
     )
 }
 
-export const Row = ({ children }: { children: ReactNode }) => {
+export const Row = ({ children, onClick }: { children: ReactNode; onClick?: () => void }) => {
     return (
-        <tr className={styles.tr}>
+        <tr className={styles.tr} onClick={onClick}>
             {children}
         </tr>
     )
 }
 
-export const Cell = ({ children }: { children: ReactNode }) => {
+export const Cell = ({ children, active }: { children: ReactNode; active: boolean }) => {
+
+    console.log("셀 컴포넌트 : " + active)
     return (
-        <td className={styles.td}>
+        <td className={`${styles.td} ${active ? styles.active : ''}`}>
             {children}
         </td>
     )
 }
 
-export const Columns = <T extends TableData>({columns} : {columns : ColumnProps<T>[]}) =>{
+export const Columns = <T extends TableData>({
+    columns,
+    onRowClick,
+    checkItems,
+}: {
+    columns: ColumnProps<T>[];
+    onRowClick: (row: T) => void;
+    checkItems: T[];
+}) => {
     const data = useContext(TableContext) as T[];
 
-    return(
+    //체크 요소 contextapi로 전달받아서 내부적으로 관리
+    useEffect(() => {
+
+    }, [checkItems])
+
+
+    return (
         <>
             {data.map((item, idx) => {
-                return(
-                    <Row key={idx}>
-                    {columns.map((col, idx) => (
-                        <Cell key={idx}>
-                            {col.render
+                const isActive = checkItems.some(checkItem => checkItem['id'] === item['id']);
+
+                return (
+                    <Row key={idx} onClick={() => onRowClick(item)}>
+                        {columns.map((col, idx) => (
+                            <Cell key={idx} active={isActive}>
+                                {col.render
                                     ? col.render(item[col.accessor], item)
                                     : item[col.accessor]
-                            }
-                        </Cell>    
-                    ))}
-                </Row>    
+                                }
+                            </Cell>
+                        ))}
+                    </Row>
                 )
-                
+
             })}
         </>
     )

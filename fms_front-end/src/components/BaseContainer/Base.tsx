@@ -3,16 +3,36 @@ import { ReactNode } from 'react'
 import styles from './Base.module.css'
 
 interface BaseContainerProps {
-    children : ReactNode
+    children: ReactNode;
+    header?: ReactNode;
 }
 
-const BaseContainer = ({children} : BaseContainerProps) => {
+interface HeaderProps {
+    title?: string;
+    children?: ReactNode;
+}
 
-    return(
+export const BaseContainer = ({ children, header }: BaseContainerProps) => {
+
+    return (
         <div className={styles.container}>
-            {children}
+            {header}
+            <div className={styles.body}>
+                {children}
+            </div>
         </div>
     )
 }
 
-export default BaseContainer;
+export const BaseHeader = ({ title, children }: HeaderProps) => {
+    return (
+        <div className={styles.header}>
+            <h2 className={styles.title}>
+                {title}
+            </h2>
+            <div className={styles.opt_section}>
+                {children}
+            </div>
+        </div>
+    )
+}

@@ -1,10 +1,27 @@
+.container {
+    display: flex;
+    flex-direction: column;
 
-
-.container{
-    
     border-radius: var(--radius-default);
     padding: var(--pad-default);
 
     box-shadow: var(--bs-default);
     background-color: var(--color-wh);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--pad-default) 0;
+    /* border-bottom: 1px solid var(--color-gr2); */
+}
+
+.title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-gr1);
+}
+
+.body {
+    padding: var(--pad-default) 0;
 }

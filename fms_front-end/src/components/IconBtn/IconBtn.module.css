@@ -1,0 +1,38 @@
+.btn {
+    position: relative;
+    outline: none;
+    background-color: inherit;
+    z-index: 2;
+}
+
+.icon {
+    position: relative;
+    fill: var(--color-gr1);
+}
+
+.explain {
+    opacity: 0;
+    /* display: none; */
+    position: absolute;
+    top: -30px;
+    left: 10px;
+    transform: translate(-50%, -50%);
+
+    border: 1px solid var(--color-gr1);
+    border-radius: var(--radius-default);
+    padding: var(--pad-default);
+
+    background-color: var(--color-gr5);
+    transition: all .3s;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+
+.btn:hover .explain {
+    opacity: 1;
+
+
+}
