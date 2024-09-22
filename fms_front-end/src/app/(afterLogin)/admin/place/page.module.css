@@ -10,5 +10,5 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin : var(--pad-wide) 0;
+    margin-bottom : var(--pad-wide) ;
 }
