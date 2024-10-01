@@ -10,7 +10,10 @@ import PlaceDashBoard from './_components/PlaceDashBoard/PlaceDashBoard';
 
 
 
-
+/**
+ * 사업장 테이블 조회
+ * @returns 
+ */
 const getPlaceTables = async (): Promise<PlaceTableProps[]> => {
     const res = await findAllPlaceTable();
     if (res.status !== 200) {
