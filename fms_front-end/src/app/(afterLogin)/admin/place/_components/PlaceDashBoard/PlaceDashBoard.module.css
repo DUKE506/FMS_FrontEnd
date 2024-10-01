@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    gap: calc(var(--pad-wide) * 4);
+
+}
+
+
+.box {
+    position: relative;
+    width: 50%;
+
+    border-radius: var(--radius-default);
+    /* border: 2px solid var(--color-gr1); */
+
+    box-shadow: var(--bs-default);
+}
+
+.box::after {
+    display: block;
+    content: "";
+    padding-bottom: 100%;
+}

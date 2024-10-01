@@ -1,20 +1,9 @@
 "use client"
 
-import { findAllPlaceTable } from "@/app/api/place/place";
-import { Body, Columns, Header, HeaderCell, HeaderRow, Table } from "../Table/Table";
+import { Body, Columns, Header, HeaderCell, HeaderRow, Table } from "../../../../_components/Table/Table";
 import { useState } from "react";
+import { PlaceTableProps } from "@/app/types/place/place.type";
 
-//사업장 테이블 인터페이스
-interface PlaceTableProps {
-    id: number;
-    code: string;
-    name: string;
-    addr: string;
-    contractNum: string;
-    tel: string;
-    contractedAt: Date;
-    state: boolean
-}
 
 
 
@@ -22,7 +11,6 @@ interface PlaceTableProps {
 const getPlaceStateText = (state: boolean): string => {
     return state ? '계약' : '해약';
 }
-
 
 
 //Table Header
@@ -45,32 +33,22 @@ const colums = [
 ];
 
 
-const PlaceTable = ({placedata} : {placedata:PlaceTableProps[]}) => {
+const PlaceTable = ({ placedata }: { placedata: PlaceTableProps[] }) => {
     const [checkItems, setCheckItems] = useState<PlaceTableProps[]>([]);
-    
-     //row 체크 함수
-     const handleRowCheck = (row: PlaceTableProps) => {
-        console.log("체크 : " + row.name);
 
+    //row 체크 함수
+    const handleRowCheck = (row: PlaceTableProps) => {
         if (checkItems.find(item => item.id == row.id) != undefined) {
-            console.log("체크 해제")
             setCheckItems(checkItems.filter(item => item !== row))
-            checkItems.map((item) => {
-                console.log("현재 체크 항목 : " + item.name)
-            })
         } else {
-            console.log("체크")
             setCheckItems(prev => {
                 return [...prev, row];
             });
-            checkItems.map((item) => {
-                console.log("현재 체크 항목 : " + item.name)
-            }) 
         }
 
     }
 
-    return(
+    return (
         <Table data={placedata}>
             <Header>
                 <HeaderRow>
@@ -86,7 +64,7 @@ const PlaceTable = ({placedata} : {placedata:PlaceTableProps[]}) => {
                     columns={colums}
                     onRowClick={handleRowCheck}
                     checkItems={checkItems}
-                /> 
+                />
             </Body>
         </Table>
     )

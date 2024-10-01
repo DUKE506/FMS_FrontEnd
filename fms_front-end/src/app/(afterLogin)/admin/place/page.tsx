@@ -1,35 +1,29 @@
-import { Body, Columns, Header, HeaderCell, HeaderRow, Table } from "./_components/Table/Table";
 import styles from './page.module.css'
 import { AnalysisCard } from "./_components/Card/AnalysislCard";
-import { useState } from "react";
 import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base";
 import { IconBtn } from "@/components/IconBtn/IconBtn";
 import { findAllPlaceTable } from "@/app/api/place/place";
 import PlaceTable from "./_components/PlaceTable/PlaceTable";
-
-//사업장 테이블 인터페이스
-interface PlaceTableProps {
-    id: number;
-    code: string;
-    name: string;
-    addr: string;
-    contractNum: string;
-    tel: string;
-    contractedAt: Date;
-    state: boolean
-}
+import { PlaceTableProps } from "@/app/types/place/place.type";
+import PlaceDashBoard from './_components/PlaceDashBoard/PlaceDashBoard';
 
 
 
-const getPlaceTables = async () => {
+
+
+const getPlaceTables = async (): Promise<PlaceTableProps[]> => {
     const res = await findAllPlaceTable();
-    if(!res.ok) {throw new Error('조회 실패')};
-    return res.json();
+    if (res.status !== 200) {
+        throw new Error(`조회 실패 : ${res.status} ${res.statusText}}`)
+    }
+
+    return res.data;
 }
 
 
 const Place = async ({ }) => {
     const places = await getPlaceTables();
+    const selectedPlace = null;
 
     return (
         <div className={styles.place}>
@@ -53,8 +47,13 @@ const Place = async ({ }) => {
                         />
                     </BaseHeader>
                 }>
-                    <PlaceTable placedata={places}/>
+                <PlaceTable placedata={places} />
             </BaseContainer>
+            {
+                selectedPlace !== null ?
+                    <PlaceDashBoard /> : ''
+            }
+
         </div>
 
 

@@ -1,43 +1,78 @@
-const BaseUrl = "http://localhost:3001"
+const BaseUrl = "http://localhost:3000"
 
-export const apiManager = async(
-    endpoint : string,
+export interface ApiResponse<T> {
+    data: T;
+    status: number;
+    statusText: string;
+    headers: Headers;
+}
+
+
+export const apiManager = async <T>(
+    endpoint: string,
     options: RequestInit = {}
-):Promise<Response> => {
+): Promise<ApiResponse<T>> => {
     const url = new URL(endpoint, BaseUrl);
-    
-    const defaultOptions : RequestInit = {
-        credentials : 'include',
-        headers : {
-            'Content-Type' : 'application/json',
+
+    const defaultOptions: RequestInit = {
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
         },
+        cache: 'no-store',
         ...options,
     };
+    try {
+        const response = await fetch(url.toString(), defaultOptions);
 
-    console.log("gdgd",url.toString()); 
-    const response = await fetch(url.toString(), defaultOptions);
+        let data;
+        const contentType = response.headers.get("content-type");
 
-    console.log(response)
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-    
-    return response;
-}
+        if (contentType && contentType.includes("application/json")) {
+            data = await response.json();
+        } else {
+            data = await response.text();
+        }
+
+        if (!response.ok) {
+            throw new Error(
+                JSON.stringify({
+                    status: response.status,
+                    statusText: response.statusText,
+                    data,
+                    url
+                })
+            );
+        }
+        return {
+            data,
+            status: response.status,
+            statusText: response.statusText,
+            headers: response.headers
+        }
+    } catch (err) {
+        console.log("API request failed", err);
+        throw err;
+    }
+};
 
 
 // Helper functions for common HTTP methods
-export const get = (endpoint: string, options?: RequestInit) => {
-    console.log('sds', endpoint);
-    apiManager(endpoint, { ...options, method: 'GET' });
+export const get = async <T>(endpoint: string, options?: RequestInit): Promise<ApiResponse<T>> => {
+    return await apiManager<T>(endpoint, { ...options, method: 'GET' });
 }
-    
 
-export const post = (endpoint: string, body: any, options?: RequestInit) => 
-apiManager(endpoint, { ...options, method: 'POST', body });
 
-export const put = (endpoint: string, body: any, options?: RequestInit) => 
-apiManager(endpoint, { ...options, method: 'PUT', body });
+export const post = async <T>(endpoint: string, body: any, options?: RequestInit): Promise<ApiResponse<T>> => {
+    return apiManager<T>(endpoint, { ...options, method: 'POST', body: JSON.stringify(body) });
+}
 
-export const del = (endpoint: string, options?: RequestInit) => 
-apiManager(endpoint, { ...options, method: 'DELETE' });
+
+export const put = async <T>(endpoint: string, body: any, options?: RequestInit): Promise<ApiResponse<T>> => {
+    return apiManager<T>(endpoint, { ...options, method: 'PUT', body: JSON.stringify(body) });
+}
+
+
+export const del = async <T>(endpoint: string, options?: RequestInit): Promise<ApiResponse<T>> => {
+    return apiManager<T>(endpoint, { ...options, method: 'DELETE' });
+}

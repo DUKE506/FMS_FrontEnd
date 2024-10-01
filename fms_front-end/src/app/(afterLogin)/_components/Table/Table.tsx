@@ -74,8 +74,6 @@ export const Row = ({ children, onClick }: { children: ReactNode; onClick?: () =
 }
 
 export const Cell = ({ children, active }: { children: ReactNode; active: boolean }) => {
-
-    console.log("셀 컴포넌트 : " + active)
     return (
         <td className={`${styles.td} ${active ? styles.active : ''}`}>
             {children}
