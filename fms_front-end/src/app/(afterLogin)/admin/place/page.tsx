@@ -6,6 +6,7 @@ import { findAllPlaceTable } from "@/app/api/place/place";
 import PlaceTable from "./_components/PlaceTable/PlaceTable";
 import { PlaceTableProps } from "@/app/types/place/place.type";
 import PlaceDashBoard from './_components/PlaceDashBoard/PlaceDashBoard';
+import Link from 'next/link';
 
 
 
@@ -44,10 +45,13 @@ const Place = async ({ }) => {
             <BaseContainer
                 header={
                     <BaseHeader title="사업장">
-                        <IconBtn
-                            title="Add"
-                            svg={<svg xmlns="http://www.w3.org/2000/svg" width={20} viewBox="0 0 448 512"><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z" /></svg>}
-                        />
+                        <Link href='/admin/place/add'>
+                            <IconBtn
+                                title="Add"
+                                svg={<svg xmlns="http://www.w3.org/2000/svg" width={20} viewBox="0 0 448 512"><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z" /></svg>}
+                            />
+                        </Link>
+
                     </BaseHeader>
                 }>
                 <PlaceTable placedata={places} />

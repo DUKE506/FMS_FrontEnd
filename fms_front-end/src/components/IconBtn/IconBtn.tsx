@@ -7,6 +7,8 @@ interface IconBtnProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     svg?: ReactNode;
 }
 
+
+
 export const IconBtn = ({ title, svg, ...props }: IconBtnProps) => {
     return (
         <button {...props} className={styles.btn}>
