@@ -1,0 +1,39 @@
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: var(--pad-default);
+
+    background-color: white;
+
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pad-default);
+
+}
+
+.input {
+    flex: 2;
+    width: 100%;
+    padding: var(--pad-default);
+    border-radius: var(--radius-default);
+    font-size: 0.8rem;
+
+    border: 2px solid var(--color-gr2);
+    transition: all .3s;
+}
+
+.input:focus {
+    border: 2px solid var(--color-grn1);
+}
+
+
+.label {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    width: 100%;
+    font-size: 0.8rem;
+}

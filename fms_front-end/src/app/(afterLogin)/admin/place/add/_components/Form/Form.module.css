@@ -1,0 +1,7 @@
+.form {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* row-gap: var(--pad-wide);
+    column-gap: var(--pad-default); */
+    gap: var(--pad-wide);
+}

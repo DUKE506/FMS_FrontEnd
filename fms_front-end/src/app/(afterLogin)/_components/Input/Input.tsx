@@ -1,8 +1,7 @@
 import { InputHTMLAttributes } from "react"
 import Styles from './Input.module.css'
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-}
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> { }
 
 
 // label, input
@@ -14,7 +13,7 @@ const Input = ({ ...props }: InputProps) => {
 }
 
 interface LabelProps {
-    label: string;
+    label?: string;
 }
 
 const Label = ({ label }: LabelProps) => {
@@ -26,18 +25,25 @@ const Label = ({ label }: LabelProps) => {
 }
 
 
-export const RowInput = () => {
+interface InputContainerProps {
+    input: InputHTMLAttributes<HTMLInputElement>,
+    label?: string,
+}
+
+export const RowInput = ({ input, label }: InputContainerProps) => {
     return (
         <div className={Styles.row}>
-
+            <Label label={label} />
+            <Input {...input} />
         </div>
     )
 }
 
-export const ColInput = () => {
+export const ColInput = ({ input, label }: InputContainerProps) => {
     return (
         <div className={Styles.col}>
-
+            <Label label={label} />
+            <Input {...input} />
         </div>
     )
 }
