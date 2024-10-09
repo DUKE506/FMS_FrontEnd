@@ -52,7 +52,7 @@ export const DrawerGroup = ({ title, icon, url, children }: DrawerGroupProps) =>
     const [curPage, setCurPage] = useState(false);
 
     useEffect(() => {
-        if (path === url) {
+        if (path.includes(url??'')) {
             setCurPage(true);
         } else {
             setCurPage(false);

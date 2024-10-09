@@ -9,3 +9,13 @@ export interface PlaceTableProps {
     contractedAt: Date;
     state: boolean
 }
+
+export interface CreatePlaceProps{
+    name : string;
+    code : string;
+    tel : string;
+    addr: string;
+    contractNum : string;
+    contractedAt : string;
+    note : string;
+}

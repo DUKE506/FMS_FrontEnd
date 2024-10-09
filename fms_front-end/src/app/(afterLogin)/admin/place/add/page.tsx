@@ -1,10 +1,10 @@
 import { FormContainer } from "./_components/Form/Form"
-
+import Styles from './page.module.css'
 
 
 const PlaceAdd = () => {
     return (
-        <div>
+        <div className={Styles.container}>
             <FormContainer />
         </div>
     )
