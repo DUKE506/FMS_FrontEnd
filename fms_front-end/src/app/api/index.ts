@@ -4,7 +4,6 @@ export interface ApiResponse<T> {
     data: T;
     status: number;
     statusText: string;
-    headers: Headers;
 }
 
 
@@ -48,7 +47,6 @@ export const apiManager = async <T>(
             data,
             status: response.status,
             statusText: response.statusText,
-            headers: response.headers
         }
     } catch (err) {
         console.log("API request failed", err);

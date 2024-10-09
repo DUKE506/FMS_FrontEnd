@@ -3,7 +3,10 @@ import { ColInput } from "@/app/(afterLogin)/_components/Input/Input"
 import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base"
 import Styles from './Form.module.css'
 import { useState } from "react"
-import { CreatePlaceProps } from "@/app/types/place/place.type"
+import { CreatePlaceProps } from "@/types/place/place.type"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "@/lib/store"
+import { updateField } from "@/lib/features/place/placeSlice"
 
 /**
  * 이미지 / 입력 폼형태 구조
@@ -26,21 +29,12 @@ export const FormContainer = () => {
 }
 
 export const Form = () => {
-    const [place, setPlace] = useState<CreatePlaceProps>({
-        name : '',
-        code : '',
-        tel : '',
-        addr : '',
-        contractNum : '',
-        contractedAt : '',
-        note : '',
-    })
+    const dispatch = useDispatch();
+    const place = useSelector((state: RootState) => state.place);
 
-    const handelInputChanges = (e : React.ChangeEvent<HTMLInputElement>) =>{
-        const {name, value} = e.target;
-        setPlace((prev) => {
-            return {...prev, [name] : value}
-        });
+    const handelInputChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        dispatch(updateField({ name, value }))
     }
 
 
@@ -50,9 +44,9 @@ export const Form = () => {
                 input={{
                     type: 'text',
                     placeholder: '이름',
-                    name : 'name',
-                    value : place.name,
-                    onChange:handelInputChanges
+                    name: 'name',
+                    value: place.name,
+                    onChange: handelInputChanges
                 }}
                 label="이름"
             />
@@ -60,9 +54,9 @@ export const Form = () => {
                 input={{
                     type: 'text',
                     placeholder: '코드',
-                    name : 'code',
-                    value : place.code,
-                    onChange:handelInputChanges
+                    name: 'code',
+                    value: place.code,
+                    onChange: handelInputChanges
                 }}
                 label="코드"
             />
@@ -70,9 +64,9 @@ export const Form = () => {
                 input={{
                     type: 'text',
                     placeholder: '전화번호',
-                    name : 'tel',
-                    value : place.tel,
-                    onChange:handelInputChanges
+                    name: 'tel',
+                    value: place.tel,
+                    onChange: handelInputChanges
                 }}
                 label="전화번호"
             />
@@ -80,9 +74,9 @@ export const Form = () => {
                 input={{
                     type: 'text',
                     placeholder: '주소',
-                    name : 'addr',
-                    value : place.addr,
-                    onChange:handelInputChanges
+                    name: 'addr',
+                    value: place.addr,
+                    onChange: handelInputChanges
                 }}
                 label="주소"
             />
@@ -90,19 +84,19 @@ export const Form = () => {
                 input={{
                     type: 'text',
                     placeholder: '계약번호',
-                    name : 'contractNum',
-                    value : place.contractNum,
-                    onChange:handelInputChanges
+                    name: 'contractNum',
+                    value: place.contractNum,
+                    onChange: handelInputChanges
                 }}
                 label="계약번호"
             />
             <ColInput
                 input={{
-                    type: 'text',
+                    type: 'date',
                     placeholder: '계약일자',
-                    name : 'contractedAt',
-                    value : place.contractedAt,
-                    onChange:handelInputChanges
+                    name: 'contractedAt',
+                    // value: place.contractedAt,
+                    onChange: handelInputChanges
                 }}
                 label="계약일자"
             />
@@ -110,9 +104,9 @@ export const Form = () => {
                 input={{
                     type: 'text',
                     placeholder: '비고',
-                    name : 'note',
-                    value : place.note,
-                    onChange:handelInputChanges
+                    name: 'note',
+                    value: place.note,
+                    onChange: handelInputChanges
                 }}
                 label="비고"
             />

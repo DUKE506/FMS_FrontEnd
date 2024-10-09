@@ -2,7 +2,7 @@
 
 import { Body, Columns, Header, HeaderCell, HeaderRow, Table } from "../../../../_components/Table/Table";
 import { useState } from "react";
-import { PlaceTableProps } from "@/app/types/place/place.type";
+import { PlaceTableProps } from "@/types/place/place.type";
 
 
 

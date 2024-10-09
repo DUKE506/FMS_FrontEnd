@@ -10,12 +10,12 @@ export interface PlaceTableProps {
     state: boolean
 }
 
-export interface CreatePlaceProps{
-    name : string;
-    code : string;
-    tel : string;
+export interface CreatePlaceProps {
+    name: string;
+    code: string;
+    tel: string;
     addr: string;
-    contractNum : string;
-    contractedAt : string;
-    note : string;
+    contractNum: string;
+    contractedAt: Date | null;
+    note: string;
 }

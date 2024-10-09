@@ -1,37 +1,42 @@
+import { CreatePlaceProps } from '@/types/place/place.type';
 import { RootState } from '@/lib/store'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { submitPlace } from './placeActions';
 
-// Define a type for the slice state
-export interface CounterState {
-  value: number
-}
+const initialState: CreatePlaceProps = {
+  name: '',
+  code: '',
+  tel: '',
+  addr: '',
+  contractNum: '',
+  contractedAt: null,
+  note: '',
+};
 
-// Define the initial state using that type
-const initialState: CounterState = {
-  value: 0
-}
-
-export const counterSlice = createSlice({
-  name: 'user',
-  // `createSlice` will infer the state type from the `initialState` argument
+const placeSlice = createSlice({
+  name: 'place',
   initialState,
   reducers: {
-    increment: state => {
-      state.value += 1
+    updateField: (state, action: PayloadAction<{ name: string; value: string | Date }>) => {
+      const { name, value } = action.payload;
+      return { ...state, [name]: value };
     },
-    decrement: state => {
-      state.value -= 1
-    },
-    // Use the PayloadAction type to declare the contents of `action.payload`
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload
-    }
+    resetForm: () => initialState,
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(submitPlace.pending, (state) => {
+        //로딩
+      })
+      .addCase(submitPlace.fulfilled, (state, action) => {
+        console.log(state)
+      })
+      .addCase(submitPlace.rejected, (state, action) => {
+        console.log("실패")
+      })
   }
 })
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions
+export const { updateField, resetForm } = placeSlice.actions;
+export default placeSlice.reducer;
 
-// Other code such as selectors can use the imported `RootState` type
-export const selectCount = (state: RootState) => state.counter.value
-
-export default counterSlice.reducer
