@@ -3,11 +3,19 @@ import { ColInput } from "@/app/(afterLogin)/_components/Input/Input";
 import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base";
 import Styles from './DetailForm.module.css'
 import { DetailPlaceProps } from "@/types/place/place.type";
-import { placeInfoProps } from "@/lib/features/place/placeDetailSlice";
+import { placeInfoProps, updatePlaceInfo } from "@/lib/features/place/placeDetailSlice";
 import { useEffect } from "react";
 import moment from "moment";
+import { useDispatch } from "react-redux";
 
 const DetailForm = ({ place, edit }: { place: placeInfoProps; edit: boolean }) => {
+    const dispatch = useDispatch();
+
+
+    const handleDataChanges = (e : React.ChangeEvent<HTMLInputElement>) => {        
+        const {name, value} = e.target;
+        dispatch(updatePlaceInfo({name,value}))
+    }
 
     useEffect(() => {
     }, [])
@@ -24,6 +32,7 @@ const DetailForm = ({ place, edit }: { place: placeInfoProps; edit: boolean }) =
                             placeholder: '이름',
                             name: 'name',
                             value: place.data.name,
+                            onChange:handleDataChanges
                         }}
                         edit={edit}
                         label="사업장명"
@@ -34,6 +43,7 @@ const DetailForm = ({ place, edit }: { place: placeInfoProps; edit: boolean }) =
                             placeholder: '코드',
                             name: 'code',
                             value: place.data.code,
+                            onChange:handleDataChanges
                         }}
                         edit={edit}
                         label="코드"
@@ -44,6 +54,7 @@ const DetailForm = ({ place, edit }: { place: placeInfoProps; edit: boolean }) =
                             placeholder: '주소',
                             name: 'addr',
                             value: place.data.addr,
+                            onChange:handleDataChanges
                         }}
                         edit={edit}
                         label="주소"
@@ -54,6 +65,7 @@ const DetailForm = ({ place, edit }: { place: placeInfoProps; edit: boolean }) =
                             placeholder: '전화번호',
                             name: 'tel',
                             value: place.data.tel,
+                            onChange:handleDataChanges
                         }}
                         edit={edit}
                         label="전화번호"
@@ -64,6 +76,7 @@ const DetailForm = ({ place, edit }: { place: placeInfoProps; edit: boolean }) =
                             placeholder: '계약번호',
                             name: 'contractNum',
                             value: place.data.contractNum,
+                            onChange:handleDataChanges
                         }}
                         edit={edit}
                         label="계약번호"
@@ -72,8 +85,9 @@ const DetailForm = ({ place, edit }: { place: placeInfoProps; edit: boolean }) =
                         input={{
                             type: 'date',
                             placeholder: '계약일자',
-                            name: 'contracatedAt',
-                            value: place.data.contractedAt ? moment(place.data.contractedAt).format('YYYY-MM-DD') : ''
+                            name: 'contractedAt',
+                            value: place.data.contractedAt ? moment(place.data.contractedAt).format('YYYY-MM-DD') : '',
+                            onChange:handleDataChanges
                         }}
                         edit={edit}
                         label="계약일자"
@@ -83,7 +97,8 @@ const DetailForm = ({ place, edit }: { place: placeInfoProps; edit: boolean }) =
                             type: 'date',
                             placeholder: '해약일자',
                             name: 'canceledAt',
-                            value: place.data.canceledAt ? moment(place.data.canceledAt).format('YYYY-MM-DD') : ''
+                            value: place.data.canceledAt ? moment(place.data.canceledAt).format('YYYY-MM-DD') : '',
+                            onChange:handleDataChanges
                         }}
                         edit={edit}
                         label="해약일자"

@@ -26,6 +26,10 @@ const PlaceDetailClient = ({ placeid }: PlaceDetailClient) => {
         setEdit(!edit);
     }
 
+    const checkData = () => {
+        console.log(place.data)
+    }
+
     return (
         <>
             <DetailForm place={place} edit={edit} />
@@ -33,7 +37,7 @@ const PlaceDetailClient = ({ placeid }: PlaceDetailClient) => {
                 {
                     edit ?
                         <>
-                            <Button label="저장" onClick={handleEdit} />
+                            <Button label="저장" onClick={checkData} />
                             <Button label="취소" onClick={handleEdit} />
                         </>
                         :

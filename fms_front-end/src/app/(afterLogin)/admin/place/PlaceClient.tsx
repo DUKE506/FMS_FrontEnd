@@ -10,7 +10,7 @@ import Link from "next/link";
 import { IconBtn } from "@/components/IconBtn/IconBtn";
 import PlaceTable from "./_components/PlaceTable/PlaceTable";
 import styles from './page.module.css'
-import moment from "moment";
+
 
 
 const PlaceClient = () => {

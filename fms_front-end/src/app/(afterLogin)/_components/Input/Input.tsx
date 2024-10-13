@@ -63,7 +63,6 @@ export const RowInput = ({ input, label, edit }: InputContainerProps) => {
 }
 
 export const ColInput = ({ input, label, edit }: InputContainerProps) => {
-    console.log(edit)
     return (
         <div className={Styles.col}>
             <Label label={label} />

@@ -1,5 +1,5 @@
 import { createPlace, findAllPlaceTable, findOnePlace } from "@/app/api/place/place"
-import { CreatePlaceProps, PlaceTableProps } from "@/types/place/place.type"
+import { CreatePlaceProps, DetailPlaceProps, PlaceTableProps } from "@/types/place/place.type"
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import moment from "moment";
 
@@ -21,6 +21,22 @@ export const submitPlace = createAsyncThunk(
 )
 
 /**
+ * 사업장 수정 액션
+ * --
+ */
+// export const submitPlace = createAsyncThunk(
+//     'place/update',
+//     async(placeData : DetailPlaceProps, thunkAPI) => {
+//         try{
+//             // const 
+//         }catch(err){
+//             console.log(err)
+//         }
+//     }
+// )
+
+
+/**
  * 사업장 전체 조회 액션
  * --
  */
@@ -38,6 +54,7 @@ export const getAllPlaceTableData = createAsyncThunk(
 
 /**
  * 날짜 포맷 변환
+ * --
  */
 export const convertDates = createAsyncThunk(
     'place/convertDates',

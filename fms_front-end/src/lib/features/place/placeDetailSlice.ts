@@ -1,5 +1,5 @@
 import { DetailPlaceProps } from "@/types/place/place.type"
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { findOnePlaceAction } from "./placeActions";
 import { error } from "console";
 
@@ -25,7 +25,16 @@ const initialState: { data: { info: placeInfoProps; perm: any; manager: any[]; }
 const PlaceDetailSlice = createSlice({
     name: 'placeDetail',
     initialState,
-    reducers: {},
+    reducers: {
+        updatePlaceInfo:(state, action : PayloadAction<{name:string; value:string|Date}>)=>{
+            const {name, value} = action.payload;
+            console.log(name,value)
+            state.data.info.data = {
+                ...state.data.info.data,
+                [name]:value
+            };
+        }
+    },
     extraReducers: (bulider) => {
         bulider
             .addCase(findOnePlaceAction.pending, (state) => {
@@ -41,5 +50,5 @@ const PlaceDetailSlice = createSlice({
             })
     }
 })
-
+export const { updatePlaceInfo } = PlaceDetailSlice.actions;
 export default PlaceDetailSlice.reducer;
