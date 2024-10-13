@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import placeReducer from './features/place/placeSlice'
 import placeTableReducer from './features/place/placeTableSlice'
+import placeDetailReducer from './features/place/placeDetailSlice'
 
 const store = configureStore({
   reducer: {
     place: placeReducer,
-    placeTable: placeTableReducer
+    placeTable: placeTableReducer,
+    placeDetail: placeDetailReducer,
   },
 })
 

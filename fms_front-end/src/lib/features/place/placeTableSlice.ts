@@ -1,6 +1,6 @@
 import { PlaceTableProps } from "@/types/place/place.type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getAllPlaceTableData } from "./placeActions";
+import { convertDates, getAllPlaceTableData } from "./placeActions";
 
 
 
@@ -35,6 +35,10 @@ const placeTableSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload as string;
 
+            })
+            .addCase(convertDates.fulfilled, (state, action) => {
+                state.loading = false;
+                state.data = action.payload as PlaceTableProps[];
             })
     },
 

@@ -8,6 +8,5 @@
 .analysis_section {
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    /* margin-bottom: var(--pad-wide); */
+    gap: var(--pad-wide)
 }

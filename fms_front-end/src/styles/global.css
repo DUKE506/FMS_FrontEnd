@@ -16,6 +16,7 @@
   --color-grn1: #518071;
   --color-grn1-1: #51807125;
   --color-grn2: #9bca96;
+  --color-grn3: #c1d8b8;
 
   --color-pp1: #474554;
   --color-pp2: #ACA7CB;
@@ -254,8 +255,12 @@ body {
 
 .body {
   width: 100%;
-  display: flex;
-  gap: var(--pad-wide)
+  /* display: flex;
+  gap: var(--pad-wide) */
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+  column-gap: var(--pad-wide);
+
 }
 
 @media (max-width: 1280px) {

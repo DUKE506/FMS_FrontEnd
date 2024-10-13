@@ -1,7 +1,5 @@
-
-.button{
-    width: 100%;
-    padding : var(--pad-default) var(--pad-wide);
+.button {
+    padding: var(--pad-default) var(--pad-wide);
     border-radius: var(--radius-min);
 
 
@@ -11,7 +9,11 @@
     transition: all .3s;
 }
 
-.button:hover{
+.width {
+    width: 100%;
+}
+
+.button:hover {
     /* background-color: var(--color-gr3); */
     background-color: var(--color-gr1);
 }

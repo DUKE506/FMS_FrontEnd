@@ -6,7 +6,7 @@ export interface PlaceTableProps {
     addr: string;
     contractNum: string;
     tel: string;
-    contractedAt: Date;
+    contractedAt: Date | string;
     state: boolean
 }
 
@@ -18,4 +18,16 @@ export interface CreatePlaceProps {
     contractNum: string;
     contractedAt: Date | null;
     note: string;
+}
+
+export interface DetailPlaceProps {
+    id: number;
+    code: string;
+    name: string;
+    addr: string;
+    tel: string;
+    contractNum: string;
+    contractedAt: Date;
+    canceledAt: Date;
+    state: boolean
 }

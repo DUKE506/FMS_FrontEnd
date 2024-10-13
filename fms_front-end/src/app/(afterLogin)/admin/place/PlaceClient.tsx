@@ -1,7 +1,7 @@
 'use client'
 
 import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base";
-import { getAllPlaceTableData } from "@/lib/features/place/placeActions";
+import { convertDates, getAllPlaceTableData } from "@/lib/features/place/placeActions";
 import { AppDispatch, RootState } from "@/lib/store";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
@@ -10,14 +10,18 @@ import Link from "next/link";
 import { IconBtn } from "@/components/IconBtn/IconBtn";
 import PlaceTable from "./_components/PlaceTable/PlaceTable";
 import styles from './page.module.css'
+import moment from "moment";
 
 
 const PlaceClient = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { data } = useSelector((state: RootState) => state.placeTable)
 
+
     useEffect(() => {
-        dispatch(getAllPlaceTableData());
+        dispatch(getAllPlaceTableData()).then(() => {
+            dispatch(convertDates());
+        });
     }, [])
 
     return (

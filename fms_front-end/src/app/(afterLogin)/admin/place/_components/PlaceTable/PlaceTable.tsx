@@ -1,7 +1,7 @@
 "use client"
 
 import { Body, Columns, Header, HeaderCell, HeaderRow, Table } from "../../../../_components/Table/Table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PlaceTableProps } from "@/types/place/place.type";
 
 
@@ -35,6 +35,11 @@ const colums = [
 
 const PlaceTable = ({ placedata }: { placedata: PlaceTableProps[] }) => {
     const [checkItems, setCheckItems] = useState<PlaceTableProps[]>([]);
+    const [detailUrl, setDetailUrl] = useState<string[]>([]);
+
+    useEffect(() => {
+        convertUrl();
+    }, [placedata])
 
     //row 체크 함수
     const handleRowCheck = (row: PlaceTableProps) => {
@@ -46,6 +51,15 @@ const PlaceTable = ({ placedata }: { placedata: PlaceTableProps[] }) => {
             });
         }
 
+    }
+
+    /**
+     * 상세페이지 url 생성 함수
+     * --
+     */
+    const convertUrl = () => {
+        const urls = placedata.map((data) => `/admin/place/${data.id}`);
+        setDetailUrl(urls);
     }
 
     return (
@@ -64,6 +78,7 @@ const PlaceTable = ({ placedata }: { placedata: PlaceTableProps[] }) => {
                     columns={colums}
                     onRowClick={handleRowCheck}
                     checkItems={checkItems}
+                    url={detailUrl}
                 />
             </Body>
         </Table>

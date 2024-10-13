@@ -48,7 +48,8 @@ export const Form = () => {
                     value: place.name,
                     onChange: handelInputChanges
                 }}
-                label="이름"
+                label="사업장명"
+                edit
             />
             <ColInput
                 input={{
@@ -59,6 +60,7 @@ export const Form = () => {
                     onChange: handelInputChanges
                 }}
                 label="코드"
+                edit
             />
             <ColInput
                 input={{
@@ -69,6 +71,7 @@ export const Form = () => {
                     onChange: handelInputChanges
                 }}
                 label="전화번호"
+                edit
             />
             <ColInput
                 input={{
@@ -79,6 +82,7 @@ export const Form = () => {
                     onChange: handelInputChanges
                 }}
                 label="주소"
+                edit
             />
             <ColInput
                 input={{
@@ -89,6 +93,7 @@ export const Form = () => {
                     onChange: handelInputChanges
                 }}
                 label="계약번호"
+                edit
             />
             <ColInput
                 input={{
@@ -99,6 +104,7 @@ export const Form = () => {
                     onChange: handelInputChanges
                 }}
                 label="계약일자"
+                edit
             />
             <ColInput
                 input={{
@@ -109,6 +115,7 @@ export const Form = () => {
                     onChange: handelInputChanges
                 }}
                 label="비고"
+                edit
             />
         </div>
     )

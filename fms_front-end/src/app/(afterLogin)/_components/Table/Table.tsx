@@ -1,5 +1,6 @@
 
 
+import Link from 'next/link';
 import styles from './Table.module.css'
 import { Children, createContext, ReactNode, useContext, useEffect } from 'react';
 
@@ -73,10 +74,14 @@ export const Row = ({ children, onClick }: { children: ReactNode; onClick?: () =
     )
 }
 
-export const Cell = ({ children, active }: { children: ReactNode; active: boolean }) => {
+export const Cell = ({ children, active, url }: { children: ReactNode; active: boolean; url?: string }) => {
+
     return (
         <td className={`${styles.td} ${active ? styles.active : ''}`}>
-            {children}
+            {
+                url ? <Link href={url}>{children}</Link> : children
+            }
+
         </td>
     )
 }
@@ -85,17 +90,19 @@ export const Columns = <T extends TableData>({
     columns,
     onRowClick,
     checkItems,
+    url,
 }: {
     columns: ColumnProps<T>[];
     onRowClick: (row: T) => void;
     checkItems: T[];
+    url?: string[];
 }) => {
     const data = useContext(TableContext) as T[];
 
     //체크 요소 contextapi로 전달받아서 내부적으로 관리
     useEffect(() => {
 
-    }, [checkItems])
+    }, [url, checkItems])
 
 
     return (
@@ -105,8 +112,8 @@ export const Columns = <T extends TableData>({
 
                 return (
                     <Row key={idx} onClick={() => onRowClick(item)}>
-                        {columns.map((col, idx) => (
-                            <Cell key={idx} active={isActive}>
+                        {columns.map((col, colidx) => (
+                            <Cell key={colidx} active={isActive} url={col.accessor == 'name' ? url?.[idx] : undefined}>
                                 {col.render
                                     ? col.render(item[col.accessor], item)
                                     : item[col.accessor]

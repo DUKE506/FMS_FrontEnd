@@ -5,7 +5,8 @@ import { FormContainer } from "./Form/Form"
 import { AppDispatch, RootState } from "@/lib/store"
 import { submitPlace } from "@/lib/features/place/placeActions"
 import { resetForm } from "@/lib/features/place/placeSlice"
-
+import Button from "@/components/Button/Button"
+import Styles from './PlaceAddClient.module.css'
 
 export const PlaceAddClient = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -19,7 +20,11 @@ export const PlaceAddClient = () => {
     return (
         <>
             <FormContainer />
-            <button onClick={submit}>버튼</button>
+            <div className={Styles.flex_left}>
+                <Button label="버튼" onClick={submit} />
+            </div>
+
+
         </>
 
     )
