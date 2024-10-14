@@ -1,6 +1,6 @@
 import { DetailPlaceProps } from "@/types/place/place.type"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { findOnePlaceAction } from "./placeActions";
+import { editPlace, findOnePlaceAction } from "./placeActions";
 import { error } from "console";
 
 
@@ -47,6 +47,9 @@ const PlaceDetailSlice = createSlice({
             .addCase(findOnePlaceAction.rejected, (state, action) => {
                 state.data.info.loading = false;
                 state.data.info.error = action.payload as string;
+            })
+            .addCase(editPlace.fulfilled, (state, action)=>{
+                
             })
     }
 })
