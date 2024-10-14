@@ -106,17 +106,6 @@ export const Form = () => {
                 label="계약일자"
                 edit
             />
-            <ColInput
-                input={{
-                    type: 'text',
-                    placeholder: '비고',
-                    name: 'note',
-                    value: place.note,
-                    onChange: handelInputChanges
-                }}
-                label="비고"
-                edit
-            />
         </div>
     )
 }

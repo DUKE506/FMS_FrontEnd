@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DetailForm from "./DetailForm/DetailForm";
 import { AppDispatch, RootState } from "@/lib/store";
 import { useEffect, useState } from "react";
-import { findOnePlaceAction } from "@/lib/features/place/placeActions";
+import { editPlace, findOnePlaceAction } from "@/lib/features/place/placeActions";
 import Button from "@/components/Button/Button";
 import Styles from './PlaceDetailClient.module.css'
 
@@ -22,12 +22,18 @@ const PlaceDetailClient = ({ placeid }: PlaceDetailClient) => {
         dispatch(findOnePlaceAction(placeid));
     }, [dispatch, placeid])
 
+    //수정모드
     const handleEdit = () => {
         setEdit(!edit);
     }
 
-    const checkData = () => {
-        console.log(place.data)
+    /**
+     * 수정 
+     */
+    const onUpdate = async() => {
+        await dispatch(editPlace(place.data));
+        dispatch(findOnePlaceAction(placeid));
+        handleEdit();
     }
 
     return (
@@ -37,7 +43,7 @@ const PlaceDetailClient = ({ placeid }: PlaceDetailClient) => {
                 {
                     edit ?
                         <>
-                            <Button label="저장" onClick={checkData} />
+                            <Button label="저장" onClick={onUpdate} />
                             <Button label="취소" onClick={handleEdit} />
                         </>
                         :

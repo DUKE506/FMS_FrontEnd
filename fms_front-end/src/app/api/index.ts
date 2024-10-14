@@ -70,6 +70,9 @@ export const put = async <T>(endpoint: string, body: any, options?: RequestInit)
     return apiManager<T>(endpoint, { ...options, method: 'PUT', body: JSON.stringify(body) });
 }
 
+export const patch = async <T>(endpoint: string, body: any, options?: RequestInit): Promise<ApiResponse<T>> => {
+    return apiManager<T>(endpoint, { ...options, method: 'PATCH', body: JSON.stringify(body) });
+}
 
 export const del = async <T>(endpoint: string, options?: RequestInit): Promise<ApiResponse<T>> => {
     return apiManager<T>(endpoint, { ...options, method: 'DELETE' });

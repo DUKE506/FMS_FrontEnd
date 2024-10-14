@@ -1,6 +1,6 @@
 
 import { CreatePlaceProps, DetailPlaceProps, PlaceTableProps } from "@/types/place/place.type";
-import { ApiResponse, get, post } from ".."
+import { ApiResponse, get, patch, post } from ".."
 
 
 /**
@@ -22,6 +22,15 @@ export const createPlace = async (createPlace: CreatePlaceProps): Promise<ApiRes
     return await post('/place', createPlace);
 }
 
+/**
+ * 사업장 단일 조회 api
+ * @param id 
+ * @returns 
+ */
 export const findOnePlace = async (id: number): Promise<ApiResponse<DetailPlaceProps>> => {
     return await get(`place/${id}`);
+}
+
+export const updatePlace = async(updatePlace : DetailPlaceProps):Promise<ApiResponse<DetailPlaceProps>> =>{
+    return await patch(`place/${updatePlace.id}`, updatePlace);
 }
