@@ -7,6 +7,7 @@ import { submitPlace } from "@/lib/features/place/placeActions"
 import { resetForm } from "@/lib/features/place/placeSlice"
 import Button from "@/components/Button/Button"
 import Styles from './PlaceAddClient.module.css'
+import Perm from "./Perm/Perm"
 
 export const PlaceAddClient = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -20,6 +21,7 @@ export const PlaceAddClient = () => {
     return (
         <>
             <FormContainer />
+            <Perm/>
             <div className={Styles.flex_left}>
                 <Button label="버튼" onClick={submit} />
             </div>
