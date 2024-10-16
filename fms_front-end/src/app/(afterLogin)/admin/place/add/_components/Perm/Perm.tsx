@@ -11,57 +11,69 @@ import Energy from '../../../../../../../../public/images/energy.svg'
 import User from '../../../../../../../../public/images/users.svg'
 import Voc from '../../../../../../../../public/images/voc.svg'
 import Machine from '../../../../../../../../public/images/machine.svg'
-import Toggle from "@/app/(afterLogin)/_components/Toggle/Toggle"
+import {Toggle ,ToggleList} from "@/app/(afterLogin)/_components/Toggle/Toggle"
 import Styles from './Perm.module.css'
 
 const toggleData = [
-    {
-        icon: <Basic/>,
-        title:'기본'
-    },
+    // {
+    //     icon: <Basic/>,
+    //     title:'기본',
+    //     active:false
+    // },
     {
         icon: <Machine/>,
-        title:'기계'
+        title:'기계',
+        active:false
     },
     {
         icon: <Electric/>,
-        title:'전기'
+        title:'전기',
+        active:false
     },
     {
         icon: <Lift/>,
-        title:'승강'
+        title:'승강',
+        active:false
     },
     {
         icon: <Fire/>,
-        title:'소방'
+        title:'소방',
+        active:false
     },
     {
         icon: <Building/>,
-        title:'건축'
+        title:'건축',
+        active:false
     },
     {
         icon: <Network/>,
-        title:'통신'
+        title:'통신',
+        active:false
     },
     {
         icon: <Beauty/>,
-        title:'미화'
+        title:'미화',
+        active:false
     },
     {
         icon: <Securtiy/>,
-        title:'보안'
+        title:'보안',
+        active:false
     },
     {
         icon: <Energy/>,
-        title:'에너지'
+        title:'에너지',
+        active:false
     },
-    {
-        icon: <User/>,
-        title:'사용자'
-    },
+    // {
+    //     icon: <User/>,
+    //     title:'사용자',
+    //     active:false
+    // },
     {
         icon: <Voc/>,
-        title:'민원'
+        title:'민원',
+        active:false
     },
 ]
 
@@ -74,16 +86,7 @@ const Perm = () =>{
             <BaseHeader title="사업장 권한"/>
         }
         >
-            <div className={Styles.row}>
-            {
-                toggleData.map((value,idx)=>{
-                    return(
-                        <Toggle icon={value.icon} title={value.title}/>
-                    )
-                })
-            }
-            </div>
-            
+            <ToggleList data={toggleData}/>
         </BaseContainer>
         </>
     )

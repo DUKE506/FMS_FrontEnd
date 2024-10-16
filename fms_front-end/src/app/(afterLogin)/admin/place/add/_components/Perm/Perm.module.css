@@ -5,3 +5,10 @@
     align-items: center;
     width: 100%;
 }
+
+
+.grid{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
