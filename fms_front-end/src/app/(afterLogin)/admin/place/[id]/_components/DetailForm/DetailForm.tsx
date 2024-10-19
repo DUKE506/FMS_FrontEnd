@@ -3,7 +3,7 @@ import { ColInput } from "@/app/(afterLogin)/_components/Input/Input";
 import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base";
 import Styles from './DetailForm.module.css'
 import { DetailPlaceProps } from "@/types/place/place.type";
-import { placeInfoProps, updatePlaceInfo } from "@/lib/features/place/placeDetailSlice";
+import { placeInfoProps, updatePlaceDetail } from "@/lib/features/place/placeDetailSlice";
 import { useEffect } from "react";
 import moment from "moment";
 import { useDispatch } from "react-redux";
@@ -14,7 +14,7 @@ const DetailForm = ({ place, edit }: { place: placeInfoProps; edit: boolean }) =
 
     const handleDataChanges = (e : React.ChangeEvent<HTMLInputElement>) => {        
         const {name, value} = e.target;
-        dispatch(updatePlaceInfo({name,value}))
+        dispatch(updatePlaceDetail({name,value}))
     }
 
     useEffect(() => {

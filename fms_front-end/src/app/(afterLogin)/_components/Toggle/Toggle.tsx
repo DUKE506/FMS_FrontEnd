@@ -1,5 +1,5 @@
 'use client'
-import React, { ReactElement, SVGProps, useState } from 'react';
+import React, { ReactElement, SVGProps, useEffect, useState } from 'react';
 import Styles from './Toggle.module.css'
 
 interface ToggleProps {
@@ -13,19 +13,17 @@ interface ToggleProps {
 
 
 export const Toggle = ({ icon, title, value, name, onChange }: ToggleProps) => {
-    const [on, setOn] = useState<boolean>(value);
+    // const [on, setOn] = useState<boolean>(value);
 
     const color = value ? "#ffffff" : "#518071";
-
-    const OnActive = () => {
-        const newValue = !on;
-        value = newValue;
-        setOn(newValue)
-        onChange(name, newValue);
+    
+    const OnActive = (onOff : boolean) => {
+        value = onOff;
+        onChange(name, onOff);
     }
 
     return (
-        <div className={`${Styles.toggle} ${value ? Styles.active : ''}`} onClick={OnActive}>
+        <div className={`${Styles.toggle} ${value ? Styles.active : ''}`} onClick={()=>OnActive(!value)}>
             <div className={Styles.wrap}>
                 {
                     React.cloneElement(icon, { fill: color })
@@ -48,6 +46,7 @@ export const ToggleList = ({ data, }: ToggleListProps) => {
                 data.map((value, idx) => {
                     return (
                         <Toggle
+                        key={value.name+idx}
                             icon={value.icon}
                             title={value.title}
                             name={value.name}

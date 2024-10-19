@@ -12,12 +12,11 @@ export interface placeInfoProps {
 }
 
 
-const initialState: { data: { info: placeInfoProps; perm: any; manager: any[]; } } = {
-    data: {
-        info: { data: {} as DetailPlaceProps, loading: false, error: null },
-        perm: {},
-        manager: []
-    }
+const initialState:  placeInfoProps = {
+    data: {} as DetailPlaceProps,
+    loading: false,
+    error: null ,
+    
 }
 
 
@@ -26,11 +25,11 @@ const PlaceDetailSlice = createSlice({
     name: 'placeDetail',
     initialState,
     reducers: {
-        updatePlaceInfo:(state, action : PayloadAction<{name:string; value:string|Date}>)=>{
+        updatePlaceDetail:(state, action : PayloadAction<{name:string; value:string|Date|boolean}>)=>{
             const {name, value} = action.payload;
             console.log(name,value)
-            state.data.info.data = {
-                ...state.data.info.data,
+            state.data = {
+                ...state.data,
                 [name]:value
             };
         }
@@ -38,20 +37,20 @@ const PlaceDetailSlice = createSlice({
     extraReducers: (bulider) => {
         bulider
             .addCase(findOnePlaceAction.pending, (state) => {
-                state.data.info.loading = true;
+                state.loading = true;
             })
             .addCase(findOnePlaceAction.fulfilled, (state, action) => {
-                state.data.info.loading = false;
-                state.data.info.data = action.payload as DetailPlaceProps;
+                state.loading = false;
+                state.data = action.payload as DetailPlaceProps;
             })
             .addCase(findOnePlaceAction.rejected, (state, action) => {
-                state.data.info.loading = false;
-                state.data.info.error = action.payload as string;
+                state.loading = false;
+                state.error = action.payload as string;
             })
             .addCase(editPlace.fulfilled, (state, action)=>{
                 
             })
     }
 })
-export const { updatePlaceInfo } = PlaceDetailSlice.actions;
+export const { updatePlaceDetail } = PlaceDetailSlice.actions;
 export default PlaceDetailSlice.reducer;
