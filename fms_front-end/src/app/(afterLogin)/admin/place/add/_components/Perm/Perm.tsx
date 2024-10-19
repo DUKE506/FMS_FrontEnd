@@ -6,88 +6,117 @@ import Electric from '../../../../../../../../public/images/electric.svg'
 import Lift from '../../../../../../../../public/images/elevator.svg'
 import Fire from '../../../../../../../../public/images/fire.svg'
 import Network from '../../../../../../../../public/images/network.svg'
-import Securtiy from '../../../../../../../../public/images/security.svg'
+import Security from '../../../../../../../../public/images/security.svg'
 import Energy from '../../../../../../../../public/images/energy.svg'
 import User from '../../../../../../../../public/images/users.svg'
 import Voc from '../../../../../../../../public/images/voc.svg'
 import Machine from '../../../../../../../../public/images/machine.svg'
-import {Toggle ,ToggleList} from "@/app/(afterLogin)/_components/Toggle/Toggle"
+import { Toggle, ToggleList } from "@/app/(afterLogin)/_components/Toggle/Toggle"
 import Styles from './Perm.module.css'
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "@/lib/store"
+import { updateField } from "@/lib/features/place/placeSlice"
+import { ReactElement } from "react"
 
-const toggleData = [
-    // {
-    //     icon: <Basic/>,
-    //     title:'기본',
-    //     active:false
-    // },
-    {
-        icon: <Machine/>,
-        title:'기계',
-        active:false
-    },
-    {
-        icon: <Electric/>,
-        title:'전기',
-        active:false
-    },
-    {
-        icon: <Lift/>,
-        title:'승강',
-        active:false
-    },
-    {
-        icon: <Fire/>,
-        title:'소방',
-        active:false
-    },
-    {
-        icon: <Building/>,
-        title:'건축',
-        active:false
-    },
-    {
-        icon: <Network/>,
-        title:'통신',
-        active:false
-    },
-    {
-        icon: <Beauty/>,
-        title:'미화',
-        active:false
-    },
-    {
-        icon: <Securtiy/>,
-        title:'보안',
-        active:false
-    },
-    {
-        icon: <Energy/>,
-        title:'에너지',
-        active:false
-    },
-    // {
-    //     icon: <User/>,
-    //     title:'사용자',
-    //     active:false
-    // },
-    {
-        icon: <Voc/>,
-        title:'민원',
-        active:false
-    },
-]
+interface ToggleData {
+    icon: ReactElement;
+    title: string;
+    name: string;
+    value: boolean;
+    onChange: (name: string, value: boolean) => void;
+}
 
 
-const Perm = () =>{
-    return(
+const Perm = () => {
+    const dispatch = useDispatch();
+    const place = useSelector((state: RootState) => state.place);
+
+    const handleInputChange = (name: string, value: boolean) => {
+        dispatch(updateField({ name, value }));
+    }
+
+    const toggleData: ToggleData[] = [
+        {
+            icon: <Machine />,
+            title: '기계',
+            name: 'machinePerm',
+            value: place.machinePerm,
+            onChange: (name, value) => handleInputChange(name, value)
+        },
+        {
+            icon: <Electric />,
+            title: '전기',
+            name: 'electricPerm',
+            value: place.electricPerm,
+            onChange: (name, value) => handleInputChange(name, value)
+        },
+        {
+            icon: <Lift />,
+            title: '승강',
+            name: 'liftPerm',
+            value: place.liftPerm,
+            onChange: (name, value) => handleInputChange(name, value)
+        },
+        {
+            icon: <Fire />,
+            title: '소방',
+            name: 'firePerm',
+            value: place.firePerm,
+            onChange: (name, value) => handleInputChange(name, value)
+        },
+        {
+            icon: <Building />,
+            title: '건축',
+            name: 'constructPerm',
+            value: place.constructPerm,
+            onChange: (name, value) => handleInputChange(name, value)
+        },
+        {
+            icon: <Network />,
+            title: '통신',
+            name: 'networkPerm',
+            value: place.networkPerm,
+            onChange: (name, value) => handleInputChange(name, value)
+        },
+        {
+            icon: <Beauty />,
+            title: '미화',
+            name: 'beautyPerm',
+            value: place.beautyPerm,
+            onChange: (name, value) => handleInputChange(name, value)
+        },
+        {
+            icon: <Security />,
+            title: '보안',
+            name: 'securityPerm',
+            value: place.securityPerm,
+            onChange: (name, value) => handleInputChange(name, value)
+        },
+        {
+            icon: <Energy />,
+            title: '에너지',
+            name: 'energyPerm',
+            value: place.energyPerm,
+            onChange: (name, value) => handleInputChange(name, value)
+        },
+        {
+            icon: <Voc />,
+            title: '민원',
+            name: 'vocPerm',
+            value: place.vocPerm,
+            onChange: (name, value) => handleInputChange(name, value)
+        },
+    ]
+
+    return (
         <>
-        <BaseContainer
-        header={
-            <BaseHeader title="사업장 권한"/>
-        }
-        >
-            <ToggleList data={toggleData}/>
-        </BaseContainer>
+            <BaseContainer
+                header={
+                    <BaseHeader title="사업장 권한" />
+                }
+            >
+                <ToggleList data={toggleData} />
+            </BaseContainer>
         </>
     )
 }

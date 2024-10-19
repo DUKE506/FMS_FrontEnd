@@ -2,8 +2,6 @@
 import { ColInput } from "@/app/(afterLogin)/_components/Input/Input"
 import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base"
 import Styles from './Form.module.css'
-import { useState } from "react"
-import { CreatePlaceProps } from "@/types/place/place.type"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "@/lib/store"
 import { updateField } from "@/lib/features/place/placeSlice"

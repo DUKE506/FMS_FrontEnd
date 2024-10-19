@@ -21,7 +21,7 @@ export const PlaceAddClient = () => {
     return (
         <>
             <FormContainer />
-            <Perm/>
+            <Perm />
             <div className={Styles.flex_left}>
                 <Button label="버튼" onClick={submit} />
             </div>

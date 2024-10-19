@@ -17,7 +17,17 @@ export interface CreatePlaceProps {
     addr: string;
     contractNum: string;
     contractedAt: Date | null;
-    note: string;
+    note: string; // 삭제 예정
+    machinePerm: boolean,
+    electricPerm: boolean,
+    liftPerm: boolean,
+    firePerm: boolean,
+    constructPerm: boolean,
+    networkPerm: boolean,
+    beautyPerm: boolean,
+    securityPerm: boolean,
+    energyPerm: boolean,
+    vocPerm: boolean,
 }
 
 export interface DetailPlaceProps {
@@ -30,4 +40,14 @@ export interface DetailPlaceProps {
     contractedAt: Date;
     canceledAt: Date;
     state: boolean
+    machinePerm: boolean,
+    electricPerm: boolean,
+    liftPerm: boolean,
+    firePerm: boolean,
+    constructPerm: boolean,
+    networkPerm: boolean,
+    beautyPerm: boolean,
+    securityPerm: boolean,
+    energyPerm: boolean,
+    vocPerm: boolean,
 }

@@ -6,7 +6,7 @@
     width: 100%;
 
     border-radius: var(--radius-default);
-    padding: var(--pad-default);
+    padding: var(--pad-default) var(--pad-wide);
 
     box-shadow: var(--bs-default);
     background-color: var(--color-wh);

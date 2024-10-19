@@ -10,14 +10,24 @@ const initialState: CreatePlaceProps = {
   addr: '',
   contractNum: '',
   contractedAt: null,
-  note: '',
+  note: '', // 삭제 예정
+  machinePerm: false,
+  electricPerm: false,
+  liftPerm: false,
+  firePerm: false,
+  constructPerm: false,
+  networkPerm: false,
+  beautyPerm: false,
+  securityPerm: false,
+  energyPerm: false,
+  vocPerm: false,
 };
 
 const placeSlice = createSlice({
   name: 'place',
   initialState,
   reducers: {
-    updateField: (state, action: PayloadAction<{ name: string; value: string | Date }>) => {
+    updateField: (state, action: PayloadAction<{ name: string; value: string | Date | boolean }>) => {
       const { name, value } = action.payload;
       return { ...state, [name]: value };
     },
