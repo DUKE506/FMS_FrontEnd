@@ -1,0 +1,19 @@
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.li_box {
+    font-size: 1rem;
+    padding: var(--pad-default);
+    color: var(--color-gr1);
+}
+
+.li_box:hover {
+    cursor: pointer;
+    background-color: var(--color-grn1h);
+}
+
+.active {
+    background-color: var(--color-grn1h);
+}

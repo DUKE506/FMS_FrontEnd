@@ -52,7 +52,7 @@ export const DrawerGroup = ({ title, icon, url, children }: DrawerGroupProps) =>
     const [curPage, setCurPage] = useState(false);
 
     useEffect(() => {
-        if (path.includes(url??'')) {
+        if (path.includes(url ?? '')) {
             setCurPage(true);
         } else {
             setCurPage(false);
@@ -90,13 +90,13 @@ const Drawer = ({ loginType }: DrawerProps) => {
                                 {/* 관리자모드 */}
                                 <DrawerGroup
                                     icon={<PlaceIcon />}
-                                    title="사업장 관리"
+                                    title="사업장"
                                     url="/admin/place"
                                 />
                                 <DrawerGroup
                                     icon={<ManagerIcon />}
-                                    title="매니저 관리"
-                                    url="/admin/manager"
+                                    title="관리자"
+                                    url="/admin/administrator"
                                 />
                             </>
                             :

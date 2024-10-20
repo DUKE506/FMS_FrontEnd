@@ -1,0 +1,36 @@
+.row {
+    display: flex;
+    padding: var(--pad-default) 0;
+    gap: var(--pad-default);
+    width: 100%;
+    align-items: center;
+}
+
+.img {
+    white-space: nowrap;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    border: 1px solid var(--color-gr1);
+    background-color: var(--color-gr1);
+}
+
+
+.between {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.text {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-gr1);
+}
+
+.subtext {
+    font-size: 0.9rem;
+    color: var(--color-gr1);
+}

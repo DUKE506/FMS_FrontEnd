@@ -14,6 +14,7 @@
   --color-gr5: #d3d3d3;
 
   --color-grn1: #518071;
+  --color-grn1h: #5180712e;
   --color-grn1-1: #51807125;
   --color-grn2: #9bca96;
   --color-grn3: #c1d8b8;
@@ -206,6 +207,11 @@ button {
   border: none;
 }
 
+ul,
+ol,
+li {
+  list-style: none;
+}
 
 body {
   font-family:
