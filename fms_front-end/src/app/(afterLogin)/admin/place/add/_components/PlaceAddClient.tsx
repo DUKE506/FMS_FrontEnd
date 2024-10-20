@@ -9,15 +9,19 @@ import Button from "@/components/Button/Button"
 import Styles from './PlaceAddClient.module.css'
 import Perm from "../../_components/Perm/Perm"
 import { useEffect } from "react"
+import Link from "next/link"
 
 
 export const PlaceAddClient = () => {
     const dispatch = useDispatch<AppDispatch>()
     const place = useSelector((state: RootState) => state.place)
 
+
     useEffect(()=>{
-        dispatch(resetForm())
-    },[])
+        return()=>{
+            dispatch(resetForm())
+        }
+    },[dispatch])
 
     const submit = async () => {
         await dispatch(submitPlace(place))
@@ -29,7 +33,9 @@ export const PlaceAddClient = () => {
             <FormContainer />
             <Perm place={place} edit={true} mode="create"/>
             <div className={Styles.flex_left}>
-                <Button label="버튼" onClick={submit} />
+                <Link href={"/admin/place"}>
+                    <Button label="버튼" onClick={submit} />
+                </Link>
             </div>
 
 
