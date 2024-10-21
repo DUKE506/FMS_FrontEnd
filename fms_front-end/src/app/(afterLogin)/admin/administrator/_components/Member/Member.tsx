@@ -2,15 +2,16 @@ import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base"
 import Styles from './Member.module.css'
 import Link from "next/link";
 import { IconBtn } from "@/components/IconBtn/IconBtn";
+import { ListAdminProps } from "@/types/administrator/adminstrator";
 
-export interface MemberProps {
-    id: number;
-    name: string;
-    group: string;
-    img?: string
-}
+// export interface MemberProps {
+//     id: number;
+//     name: string;
+//     group: string;
+//     img?: string
+// }
 
-export const MemberContainer = ({ members }: { members: MemberProps[] }) => {
+export const MemberContainer = ({ members }: { members: ListAdminProps[] }) => {
     return (
         <>
             <BaseContainer
@@ -40,7 +41,7 @@ export const MemberContainer = ({ members }: { members: MemberProps[] }) => {
     )
 }
 
-const Member = ({ member }: { member: MemberProps }) => {
+const Member = ({ member }: { member: ListAdminProps }) => {
     return (
         <>
             <li className={Styles.row}>
@@ -50,7 +51,7 @@ const Member = ({ member }: { member: MemberProps }) => {
                         {member.name}
                     </span>
                     <span className={Styles.subtext}>
-                        {member.group}
+                        부서
                     </span>
                 </div>
             </li>

@@ -46,6 +46,9 @@
     */
   --bs-default: 0 0 6px 2px #d3d3d3;
 
+  --size-sub : 0.9rem;
+  --size-default : 1rem;
+  --size-title : 1rem;
 }
 
 * {
