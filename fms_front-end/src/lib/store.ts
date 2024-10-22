@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import placeReducer from './features/place/placeSlice'
 import placeTableReducer from './features/place/placeTableSlice'
+import placeListReducer from './features/place/placeListSlice'
 import placeDetailReducer from './features/place/placeDetailSlice'
 import adminReduce from './features/administrator/adminSlice'
 import adminList from './features/administrator/adminFindSlice'
@@ -8,6 +9,7 @@ const store = configureStore({
   reducer: {
     place: placeReducer,
     placeTable: placeTableReducer,
+    placeList: placeListReducer,
     placeDetail: placeDetailReducer,
     admin : adminReduce,
     adminList : adminList, 

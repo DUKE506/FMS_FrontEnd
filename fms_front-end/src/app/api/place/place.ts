@@ -1,5 +1,5 @@
 
-import { CreatePlaceProps, DetailPlaceProps, PlaceTableProps } from "@/types/place/place.type";
+import { CreatePlaceProps, DetailPlaceProps, PlaceListProps, PlaceTableProps } from "@/types/place/place.type";
 import { ApiResponse, get, patch, post } from ".."
 
 
@@ -33,4 +33,8 @@ export const findOnePlace = async (id: number): Promise<ApiResponse<DetailPlaceP
 
 export const updatePlace = async(updatePlace : DetailPlaceProps):Promise<ApiResponse<DetailPlaceProps>> =>{
     return await patch(`place/${updatePlace.id}`, updatePlace);
+}
+
+export const findAllPlaceList = async ():Promise<ApiResponse<PlaceListProps[]>> =>{
+    return await get('/place/list');
 }

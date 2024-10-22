@@ -5,8 +5,8 @@
 }
 
 .img {
-    width: 10rem;
-    height: 10rem;
+    width: 15rem;
+    height: 15rem;
     border: 1px solid var(--color-gr1);
     border-radius: 50%;
     background-color: var(--color-gr1);

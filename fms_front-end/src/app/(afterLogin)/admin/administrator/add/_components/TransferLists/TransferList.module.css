@@ -1,0 +1,39 @@
+.row{
+    display: flex;
+    gap : var(--pad-wide);
+    width: 100%;
+}
+
+.list_wrap{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.item{
+    display: flex;
+    gap: var(--pad-half);
+    padding: var(--pad-default) 0;
+}
+
+.display{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.item:hover{
+    background-color: var(--color-grn1h);
+}
+
+.text{
+    font-size: var(--size-default);
+    font-weight: bold;
+    color: var(--color-grn1);
+}
+
+.sub_text{
+    font-size: var(--size-sub);
+    color: var(--color-grn1);
+}

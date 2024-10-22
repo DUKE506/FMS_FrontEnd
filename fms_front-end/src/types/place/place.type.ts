@@ -51,3 +51,9 @@ export interface DetailPlaceProps {
     energyPerm: boolean,
     vocPerm: boolean,
 }
+
+export interface PlaceListProps {
+    id :number;
+    name : string;
+    contractNum: string;
+}
