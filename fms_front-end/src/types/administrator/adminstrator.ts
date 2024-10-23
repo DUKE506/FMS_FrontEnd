@@ -6,6 +6,7 @@ export interface createAdminProps{
     name : string;
     email : string;
     phone : string;
+    place : number[];
 }
 
 export interface ListAdminProps {

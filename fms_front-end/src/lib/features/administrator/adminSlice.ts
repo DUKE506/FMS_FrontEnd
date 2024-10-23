@@ -11,6 +11,7 @@ const initialState: createAdminProps = {
     name : '',
     email : '',
     phone : '',
+    place : [],
 }
 
 const adminSlice = createSlice({
@@ -20,6 +21,9 @@ const adminSlice = createSlice({
         updateField: (state, action:PayloadAction<{name:string, value : string | number}>)=>{
             const {name, value} = action.payload;
             return {...state, [name] : value};
+        },
+        updatePlace: (state, action:PayloadAction<number[]>)=>{
+            return {...state, place : action.payload};
         },
         resetForm: () => initialState,
     },
@@ -35,5 +39,5 @@ const adminSlice = createSlice({
 })
 
 
-export const { updateField,resetForm } = adminSlice.actions;
+export const { updateField,updatePlace,resetForm } = adminSlice.actions;
 export default adminSlice.reducer;

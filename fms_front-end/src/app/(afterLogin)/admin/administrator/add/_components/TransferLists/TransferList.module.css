@@ -4,6 +4,13 @@
     width: 100%;
 }
 
+.col{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap : var(--pad-wide);
+}
+
 .list_wrap{
     display: flex;
     flex-direction: column;
@@ -13,7 +20,16 @@
 .item{
     display: flex;
     gap: var(--pad-half);
-    padding: var(--pad-default) 0;
+    padding: var(--pad-default);
+}
+
+.active {
+    background-color: var(--color-grn1h);
+}
+
+.item:hover{
+    background-color: var(--color-grn1h);
+    cursor: pointer;
 }
 
 .display{
@@ -23,9 +39,8 @@
     
 }
 
-.item:hover{
-    background-color: var(--color-grn1h);
-}
+
+
 
 .text{
     font-size: var(--size-default);

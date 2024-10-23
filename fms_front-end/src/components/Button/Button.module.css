@@ -2,7 +2,7 @@
     padding: var(--pad-default) var(--pad-wide);
     border-radius: var(--radius-min);
 
-
+    white-space: nowrap;
     color: white;
     /* background-color: var(--color-gr1); */
     background-color: var(--color-gr3);

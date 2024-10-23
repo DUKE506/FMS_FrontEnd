@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "@/components/Button/Button";
 import { AppDispatch, RootState } from "@/lib/store";
 import { useEffect, useState } from "react";
-import { resetForm } from "@/lib/features/administrator/adminSlice";
+import { resetForm, updatePlace } from "@/lib/features/administrator/adminSlice";
 import { submitAdmin } from "@/lib/features/administrator/adminAction";
 import { getAllPlaceListAction } from "@/lib/features/place/placeActions";
 import { ConverterTransferList } from "@/utills/transformers";
@@ -21,10 +21,13 @@ const AdminAddClient = () => {
     const admin = useSelector((state:RootState) => state.admin);
     const place = useSelector((state:RootState) => state.placeList);
     const [transferData, setTransferData] = useState<TransferItem[]>([]);
+    // const [selectPlace, setSelectPlace] = useState<TransferItem[]>([]);
 
     useEffect(() => {
         dispatch(getAllPlaceListAction());
     }, [dispatch]);
+
+    
 
     useEffect(()=>{
         if(place.data.length >0){
@@ -41,6 +44,16 @@ const AdminAddClient = () => {
         }
     },[])
 
+    //사업장 선택 함수
+    const selectPlace = (select : TransferItem[]) =>{
+        const value:number[] = [];
+        select.map((v,i)=>{
+            value.push(v.id);
+        })
+        dispatch(updatePlace(value))
+    }
+
+    //관리자 등록
     const submit = async () =>{
         await dispatch(submitAdmin(admin));
     }
@@ -48,7 +61,12 @@ const AdminAddClient = () => {
         <div className={Styles.col}>
             <FormContainer createAdmin={admin} />
             <div className={Styles.row}>
-                <TransferListContainer datas={transferData} title1="all" title2="selected"/>
+                <TransferListContainer 
+                datas={transferData} 
+                title1="전체" 
+                title2="선택"
+                setState={selectPlace}
+                />
                 <div className={Styles.col}>
                     <BaseContainer>
                     <span>
