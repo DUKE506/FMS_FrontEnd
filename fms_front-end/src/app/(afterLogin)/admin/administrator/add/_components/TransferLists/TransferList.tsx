@@ -106,6 +106,12 @@ const List = ({datas, title, setCheckList, checkList} : ListProps) => {
             : [...prev, item]
         )
     }
+
+    const handleCheckboxClick= (e : React.MouseEvent<HTMLInputElement>, data : TransferItem) => {
+        e.stopPropagation();
+        checkItem(data);
+    }
+
     return(
         <>
         <BaseContainer
@@ -123,8 +129,9 @@ const List = ({datas, title, setCheckList, checkList} : ListProps) => {
                         onClick={()=>checkItem(data)}
                         key={data.name+idx} >
                             <input type="checkbox"
-                            onChange={()=>checkItem(data)}
+                            onClick={(e)=>handleCheckboxClick(e,data)}
                             checked={isCheck}
+                            readOnly
                             />
                             <div className={Styles.display}>
                                 <span className={Styles.text}>
