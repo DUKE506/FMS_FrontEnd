@@ -1,0 +1,23 @@
+.row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--pad-wide) * 2);
+}
+
+.img {
+    width: 15rem;
+    height: 15rem;
+    border: 1px solid var(--color-gr1);
+    border-radius: 50%;
+    background-color: var(--color-gr1);
+    box-shadow: 0 0 10px 6px #bdbdbd;
+}
+
+.grid {
+    flex: 1;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: calc(var(--pad-wide) * 2);
+    row-gap: calc(var(--pad-wide));
+}

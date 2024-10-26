@@ -1,23 +1,23 @@
-.row{
+.row {
     display: flex;
-    gap : var(--pad-wide);
+    gap: var(--pad-wide);
     width: 100%;
 }
 
-.col{
+.col {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap : var(--pad-wide);
+    gap: var(--pad-wide);
 }
 
-.list_wrap{
+.list_wrap {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 
-.item{
+.item {
     display: flex;
     gap: var(--pad-half);
     padding: var(--pad-default);
@@ -27,28 +27,30 @@
     background-color: var(--color-grn1h);
 }
 
-.item:hover{
+.item:hover {
     background-color: var(--color-grn1h);
     cursor: pointer;
 }
 
-.display{
+.display {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    
+
 }
 
 
 
 
-.text{
+.text {
     font-size: var(--size-default);
     font-weight: bold;
     color: var(--color-grn1);
+    white-space: nowrap;
 }
 
-.sub_text{
+.sub_text {
     font-size: var(--size-sub);
     color: var(--color-grn1);
+    white-space: nowrap;
 }

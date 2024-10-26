@@ -1,0 +1,43 @@
+.col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pad-wide);
+}
+
+.box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--pad-wide);
+    /* height: 100%; */
+    height: fit-content;
+    width: 100%;
+
+    border-radius: var(--radius-default);
+    padding: var(--pad-wide);
+
+    box-shadow: var(--bs-default);
+    background-color: var(--color-wh);
+}
+
+.box:hover,
+.box input:hover {
+    cursor: pointer;
+}
+
+.active {
+    background-color: var(--color-grn1h);
+}
+
+.title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-gr1);
+    white-space: nowrap;
+}
+
+
+.text {
+    white-space: nowrap;
+    font-size: var(--size-default);
+}

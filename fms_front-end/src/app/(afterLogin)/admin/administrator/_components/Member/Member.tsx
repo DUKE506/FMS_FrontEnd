@@ -4,12 +4,6 @@ import Link from "next/link";
 import { IconBtn } from "@/components/IconBtn/IconBtn";
 import { ListAdminProps } from "@/types/administrator/adminstrator";
 
-// export interface MemberProps {
-//     id: number;
-//     name: string;
-//     group: string;
-//     img?: string
-// }
 
 export const MemberContainer = ({ members }: { members: ListAdminProps[] }) => {
     return (
@@ -44,17 +38,21 @@ export const MemberContainer = ({ members }: { members: ListAdminProps[] }) => {
 const Member = ({ member }: { member: ListAdminProps }) => {
     return (
         <>
-            <li className={Styles.row}>
-                <div className={Styles.img}></div>
-                <div className={`${Styles.between}`}>
-                    <span className={Styles.text}>
-                        {member.name}
-                    </span>
-                    <span className={Styles.subtext}>
-                        부서
-                    </span>
-                </div>
-            </li>
+            <Link href={`/admin/administrator/${member.id}`}>
+                <li className={Styles.row}>
+
+                    <div className={Styles.img}></div>
+                    <div className={`${Styles.between}`}>
+                        <span className={Styles.text}>
+                            {member.name}
+                        </span>
+                        <span className={Styles.subtext}>
+                            부서
+                        </span>
+                    </div>
+
+                </li>
+            </Link>
         </>
     )
 }

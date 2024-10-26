@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux"
 import { AppDispatch } from "@/lib/store"
 import { updateField } from "@/lib/features/administrator/adminSlice"
 
-export const FormContainer = ({ createAdmin }: { createAdmin: createAdminProps }) => {
+export const FormContainer = ({ createAdmin }: { createAdmin?: createAdminProps }) => {
     const dispatch = useDispatch<AppDispatch>();
 
     const handleInputChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +29,7 @@ export const FormContainer = ({ createAdmin }: { createAdmin: createAdminProps }
                                 type: 'text',
                                 placeholder: '아이디',
                                 name: 'account',
-                                value: createAdmin.account,
+                                value: createAdmin?.account,
                                 onChange: handleInputChanges
                             }}
                             label="아이디"
@@ -40,7 +40,7 @@ export const FormContainer = ({ createAdmin }: { createAdmin: createAdminProps }
                                 type: 'password',
                                 placeholder: '비밀번호',
                                 name: 'password',
-                                value: createAdmin.password,
+                                value: createAdmin?.password,
                                 onChange: handleInputChanges
                             }}
                             label="비밀번호"
@@ -59,7 +59,7 @@ export const FormContainer = ({ createAdmin }: { createAdmin: createAdminProps }
                                 type: 'text',
                                 placeholder: '이름',
                                 name: 'name',
-                                value: createAdmin.name,
+                                value: createAdmin?.name,
                                 onChange: handleInputChanges
                             }}
                             label="이름"
@@ -70,7 +70,7 @@ export const FormContainer = ({ createAdmin }: { createAdmin: createAdminProps }
                                 type: 'text',
                                 placeholder: '이메일',
                                 name: 'email',
-                                value: createAdmin.email,
+                                value: createAdmin?.email,
                                 onChange: handleInputChanges
 
                             }}
@@ -82,7 +82,7 @@ export const FormContainer = ({ createAdmin }: { createAdmin: createAdminProps }
                                 type: 'text',
                                 placeholder: '전화번호',
                                 name: 'phone',
-                                value: createAdmin.phone,
+                                value: createAdmin?.phone,
                                 onChange: handleInputChanges
 
                             }}
@@ -93,7 +93,7 @@ export const FormContainer = ({ createAdmin }: { createAdmin: createAdminProps }
                             input={{
                                 type: 'text',
                                 name: "job",
-                                value: createAdmin.job
+                                value: createAdmin?.job
                             }}
                             label="권한"
                             edit={false}
