@@ -1,13 +1,13 @@
-import { AdminDetailClient } from "./_components/AdminDetailClient";
+import { AdminDetailClient } from "./AdminDetailClient";
 
 interface AdminDetailProps {
     params: { id: number };
 }
 
-const AdminDetail = ({ params }: { params: AdminDetailProps }) => {
+const AdminDetail = ({ params }: AdminDetailProps ) => {
     return (
         <>
-            <AdminDetailClient />
+            <AdminDetailClient id={params.id}/>
         </>
     )
 }

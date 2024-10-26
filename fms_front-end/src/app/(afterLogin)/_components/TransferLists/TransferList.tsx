@@ -10,7 +10,6 @@ export interface TransferItem {
     id : number;
     name : string;
     subName? : string;
-
 }
 
 interface TransferListContainerProps {
@@ -18,9 +17,10 @@ interface TransferListContainerProps {
     title1:string; 
     title2:string
     setState : (data : TransferItem[]) => void;
+    edit : boolean;
 }
 
-export const TransferListContainer = ({datas, title1, title2, setState} : TransferListContainerProps ) => {
+export const TransferListContainer = ({datas, title1, title2, setState,edit} : TransferListContainerProps ) => {
     const [copyList, setCopyList] = useState<TransferItem[]>([]); //전체 원본 복사데이터
     const [selectList, setSelectList] = useState<TransferItem[]>([]); //선택되어진 데이터
 
@@ -66,20 +66,28 @@ export const TransferListContainer = ({datas, title1, title2, setState} : Transf
     return(
         
         <div className={Styles.row}>
-            <List 
-            datas={copyList} 
-            title={title1} 
-            checkList={checkList}
+            {
+                edit ? 
+                <>
+                    <List 
+                        datas={copyList} 
+                        title={title1} 
+                        checkList={checkList}
 
-            setCheckList={setCheckList} 
-            />
+                        setCheckList={setCheckList} 
+                        />
 
-            <div className={Styles.col}>
-                <Button label="전체 추가" onClick={transferAllList}/>
-                <Button label="추가" onClick={transferList}/>
-                <Button label="제거" onClick={deleteList}/>
-                <Button label="전체 제거" onClick={deleteAllList}/>
-            </div>
+                    <div className={Styles.col}>
+                        <Button label="전체 추가" onClick={transferAllList}/>
+                        <Button label="추가" onClick={transferList}/>
+                        <Button label="제거" onClick={deleteList}/>
+                        <Button label="전체 제거" onClick={deleteAllList}/>
+                    </div>
+                </>
+            :
+            null
+            }
+            
 
             <List 
             datas={selectList} 

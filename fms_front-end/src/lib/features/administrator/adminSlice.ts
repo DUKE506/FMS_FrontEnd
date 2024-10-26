@@ -11,6 +11,7 @@ const initialState: createAdminProps = {
     name : '',
     email : '',
     phone : '',
+    job : '',
     place : [],
 }
 

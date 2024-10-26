@@ -85,14 +85,13 @@ const AdminAddClient = () => {
                     title1="전체"
                     title2="선택"
                     setState={selectPlace}
+                    edit={true}
                 />
                 <RadioBox
                     data={permObject}
                     layout="col"
                     select={selectPerm} />
             </div>
-
-
             <div className={Styles.flex_left}>
                 <Link href={"/admin/administrator"}>
                     <Button label="버튼" onClick={submit} />

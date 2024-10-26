@@ -5,6 +5,7 @@ import placeListReducer from './features/place/placeListSlice'
 import placeDetailReducer from './features/place/placeDetailSlice'
 import adminReduce from './features/administrator/adminSlice'
 import adminList from './features/administrator/adminFindSlice'
+import adminDetailReducer from './features/administrator/adminDetailSlice'
 const store = configureStore({
   reducer: {
     place: placeReducer,
@@ -13,6 +14,7 @@ const store = configureStore({
     placeDetail: placeDetailReducer,
     admin : adminReduce,
     adminList : adminList, 
+    adminDetail : adminDetailReducer
   },
 })
 

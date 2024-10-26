@@ -29,6 +29,8 @@
 }
 
 .text {
+    display: flex;
+    align-items: center;
     flex: 2;
     width: 100%;
     padding: var(--pad-half) 0;
