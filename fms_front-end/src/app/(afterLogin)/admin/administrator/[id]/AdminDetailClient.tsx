@@ -20,7 +20,7 @@ export const AdminDetailClient = ({id} : {id:number}) => {
     return (
         <>
             <FormContainer data={admin.data}/>
-        </>
+        </>     
     )
 }
 

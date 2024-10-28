@@ -6,6 +6,10 @@
     align-items: center;
 }
 
+.row:hover{
+    background-color: var(--color-grn1h);
+}
+
 .img {
     white-space: nowrap;
     width: 3.5rem;
