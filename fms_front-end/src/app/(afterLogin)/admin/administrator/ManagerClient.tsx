@@ -45,7 +45,7 @@ const ManagerClient = () => {
 
     useEffect(() => {
         dispatch(getAllAdminList());
-    }, [dispatch])
+    }, [])
 
     return (
         <>
