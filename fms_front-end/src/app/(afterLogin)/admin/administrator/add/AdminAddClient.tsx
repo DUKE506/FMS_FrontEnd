@@ -37,19 +37,12 @@ const AdminAddClient = () => {
     const [transferData, setTransferData] = useState<TransferItem[]>([]);
     // const [selectPlace, setSelectPlace] = useState<TransferItem[]>([]);
 
-    useEffect(() => {
-        dispatch(getAllPlaceListAction());
-    }, [dispatch]);
+    //전체 사업장 조회
+    // useEffect(() => {
+    //     dispatch(getAllPlaceListAction());
+    // }, [dispatch]);
 
-
-
-    useEffect(() => {
-        if (place.data.length > 0) {
-            const converted = ConverterTransferList(place.data);
-            setTransferData(converted);
-        }
-    }, [place.data])
-
+    //전체 사업장 조회
     useEffect(() => {
         dispatch(getAllPlaceListAction());
         //언마운트
@@ -57,6 +50,14 @@ const AdminAddClient = () => {
             dispatch(resetForm());
         }
     }, [])
+
+    //사업장 데이터 TransferList 컴포넌트 형태로 변환
+    useEffect(() => {
+        if (place.data.length > 0) {
+            const converted = ConverterTransferList(place.data);
+            setTransferData(converted);
+        }
+    }, [place.data])
 
     //사업장 선택 함수
     const selectPlace = (select: TransferItem[]) => {
@@ -77,13 +78,13 @@ const AdminAddClient = () => {
         await dispatch(submitAdmin(admin));
     }
     return (
-        <div className={Styles.col}>
+        <div className={`${Styles.col} ${Styles.container}` }>
             <FormContainer createAdmin={admin} />
             <div className={Styles.row}>
                 <TransferListContainer
                     datas={transferData}
-                    title1="전체"
-                    title2="선택"
+                    title="사업장"
+                    // title2="선택"
                     setState={selectPlace}
                     edit={true}
                 />

@@ -1,7 +1,8 @@
 import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base"
 import Styles from './TransferList.module.css'
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "@/components/Button/Button";
+import { ColInput, RowInput } from "../Input/Input";
 
 // 컴포넌트 사용방법
 // utill가서 transferItem형식으로 변환해서 컴포넌트에 전달하면됨
@@ -14,28 +15,42 @@ export interface TransferItem {
 
 interface TransferListContainerProps {
     datas : TransferItem[];
-    title1:string; 
-    title2:string
+    title : string;
+    selectDatas? : TransferItem[]; //선택한데이터
     setState : (data : TransferItem[]) => void;
     edit : boolean;
 }
 
-export const TransferListContainer = ({datas, title1, title2, setState,edit} : TransferListContainerProps ) => {
+export const TransferListContainer = ({datas, selectDatas,title, setState,edit} : TransferListContainerProps ) => {
     const [copyList, setCopyList] = useState<TransferItem[]>([]); //전체 원본 복사데이터
-    const [selectList, setSelectList] = useState<TransferItem[]>([]); //선택되어진 데이터
+    const [selectList, setSelectList] = useState<TransferItem[]>(selectDatas || []); //선택되어진 데이터
 
     const [checkList, setCheckList] = useState<TransferItem[]>([]); // 전체에서 선택한 데이터
     const [checkedList, setCheckedList] = useState<TransferItem[]>([]); //선택된 곳에서 선택한 데이터
     
+    
 
+    //초기 전체 데이터 세팅
     useEffect(()=>{
         setCopyList([...datas])
     },[datas])
 
+    //현재 서버에 저장된 데이터 초기 세팅
     useEffect(()=>{
-        setState(selectList) 
+        if(selectDatas !== undefined){
+            setSelectList([...selectDatas]) 
+        }
+    },[selectDatas])
+
+    //선택되어있는 데이터가 변경되었을때 동작함
+    useEffect(()=>{
+        if(JSON.stringify(selectDatas) !== JSON.stringify(selectList)){
+            setState(selectList) 
+        }
+        
     },[selectList])
 
+    
     //전체 데이터 전송
     const transferAllList = () => {
         setSelectList(prev => [...prev, ...copyList]);
@@ -64,49 +79,52 @@ export const TransferListContainer = ({datas, title1, title2, setState,edit} : T
     }
 
     return(
-        
-        <div className={Styles.row}>
-            {
-                edit ? 
-                <>
-                    <List 
-                        datas={copyList} 
-                        title={title1} 
-                        checkList={checkList}
+        <BaseContainer
+        header={
+            <BaseHeader title={title}/>
+        }
+        >
+            <div className={Styles.row}>
+                {
+                    edit ? 
+                    <>
+                        <List 
+                            datas={copyList} 
+                            checkList={checkList}
 
-                        setCheckList={setCheckList} 
-                        />
+                            setCheckList={setCheckList} 
+                            />
 
-                    <div className={Styles.col}>
-                        <Button label="전체 추가" onClick={transferAllList}/>
-                        <Button label="추가" onClick={transferList}/>
-                        <Button label="제거" onClick={deleteList}/>
-                        <Button label="전체 제거" onClick={deleteAllList}/>
-                    </div>
-                </>
-            :
-            null
-            }
-            
+                        <div className={Styles.col}>
+                            <Button label="전체 추가" onClick={transferAllList}/>
+                            <Button label="추가" onClick={transferList}/>
+                            <Button label="제거" onClick={deleteList}/>
+                            <Button label="전체 제거" onClick={deleteAllList}/>
+                        </div>
+                    </>
+                :
+                null
+                }
+                
 
-            <List 
-            datas={selectList} 
-            title={title2}  
-            checkList={checkedList} 
-            
-            setCheckList={setCheckedList}/>
-        </div>
+                <List 
+                datas={selectList} 
+                checkList={checkedList} 
+                
+                setCheckList={setCheckedList}/>
+            </div>
+        </BaseContainer>
     )
 }
 
 interface ListProps{
     datas?: TransferItem[];
-    title: string;
+    // title: string;
     setCheckList?: React.Dispatch<React.SetStateAction<TransferItem[]>>;
     checkList?: TransferItem[];
 }
 
-const List = ({datas, title, setCheckList, checkList} : ListProps) => {
+const List = ({datas, setCheckList, checkList} : ListProps) => {
     const checkItem = (item : TransferItem) =>{
         setCheckList?.((prev: TransferItem[]) =>
             prev.some(i => i.id === item.id) 
@@ -121,12 +139,14 @@ const List = ({datas, title, setCheckList, checkList} : ListProps) => {
     }
 
     return(
-        <>
-        <BaseContainer
-        header={
-            <BaseHeader title={title}/>
-        }
-        >
+        <div className={`${Styles.box} ${Styles.col}`}>
+            <ColInput input={{
+                type:"text",
+                placeholder : "검색",
+            }}
+            label="검색"
+            edit
+            />
             <ul className={Styles.list_wrap}>
             {
                 datas?.map((data, idx)=>{
@@ -156,7 +176,7 @@ const List = ({datas, title, setCheckList, checkList} : ListProps) => {
             }
             </ul>
         
-        </BaseContainer>
-        </>
+        {/* </BaseContainer> */}
+        </div>
     )
 }

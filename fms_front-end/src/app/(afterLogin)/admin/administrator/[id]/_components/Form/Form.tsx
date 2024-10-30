@@ -43,7 +43,7 @@ export const FormContainer = ({ data }: { data?: DetailAdminProps }) => {
                                 type: 'text',
                                 placeholder: '아이디',
                                 name: 'account',
-                                value: data?.account,
+                                value: data?.admin?.account,
                                 onChange: handleInputChanges
                             }}
                             label="아이디"
@@ -54,7 +54,7 @@ export const FormContainer = ({ data }: { data?: DetailAdminProps }) => {
                                 type: 'password',
                                 placeholder: '비밀번호',
                                 name: 'password',
-                                value: data?.password,
+                                value: data?.admin?.password,
                                 onChange: handleInputChanges
                             }}
                             label="비밀번호"
@@ -73,7 +73,7 @@ export const FormContainer = ({ data }: { data?: DetailAdminProps }) => {
                                 type: 'text',
                                 placeholder: '이름',
                                 name: 'name',
-                                value: data?.name,
+                                value: data?.admin?.name,
                                 onChange: handleInputChanges
                             }}
                             label="이름"
@@ -84,7 +84,7 @@ export const FormContainer = ({ data }: { data?: DetailAdminProps }) => {
                                 type: 'text',
                                 placeholder: '이메일',
                                 name: 'email',
-                                value: data?.email,
+                                value: data?.admin?.email,
                                 onChange: handleInputChanges
 
                             }}
@@ -96,7 +96,7 @@ export const FormContainer = ({ data }: { data?: DetailAdminProps }) => {
                                 type: 'text',
                                 placeholder: '전화번호',
                                 name: 'phone',
-                                value: data?.phone,
+                                value: data?.admin?.phone,
                                 onChange: handleInputChanges
 
                             }}
@@ -107,7 +107,7 @@ export const FormContainer = ({ data }: { data?: DetailAdminProps }) => {
                             input={{
                                 type: 'text',
                                 name: "job",
-                                value: data?.job
+                                value: data?.admin?.job
                             }}
                             label="권한"
                             edit={false}
