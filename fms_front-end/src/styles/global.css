@@ -1,3 +1,5 @@
+
+
 :root {
 
   /*
@@ -33,6 +35,8 @@
   --pad-default: 1rem;
   --pad-half: 0.5rem;
 
+  --pad-input : 0.75rem;
+
   /*
     Border-radius
     */
@@ -46,8 +50,8 @@
     */
   --bs-default: 0 0 6px 2px #d3d3d3;
 
-  --size-sub : 0.9rem;
-  --size-default : 1rem;
+  --size-sub : 0.7rem;
+  --size-default : 0.8rem;
   --size-title : 1rem;
 }
 
@@ -55,6 +59,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: se, sans-serif;
 }
 
 html,

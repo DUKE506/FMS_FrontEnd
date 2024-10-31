@@ -37,10 +37,6 @@ const AdminAddClient = () => {
     const [transferData, setTransferData] = useState<TransferItem[]>([]);
     // const [selectPlace, setSelectPlace] = useState<TransferItem[]>([]);
 
-    //전체 사업장 조회
-    // useEffect(() => {
-    //     dispatch(getAllPlaceListAction());
-    // }, [dispatch]);
 
     //전체 사업장 조회
     useEffect(() => {
@@ -79,20 +75,23 @@ const AdminAddClient = () => {
     }
     return (
         <div className={`${Styles.col} ${Styles.container}` }>
-            <FormContainer createAdmin={admin} />
             <div className={Styles.row}>
-                <TransferListContainer
-                    datas={transferData}
-                    title="사업장"
-                    // title2="선택"
-                    setState={selectPlace}
-                    edit={true}
-                />
-                <RadioBox
-                    data={permObject}
-                    layout="col"
-                    select={selectPerm} />
+                <FormContainer createAdmin={admin} />
+                <div className={Styles.col}>
+                    <TransferListContainer
+                        datas={transferData}
+                        title="사업장"
+                        // title2="선택"
+                        setState={selectPlace}
+                        edit={true}
+                    />
+                    <RadioBox
+                        data={permObject}
+                        layout="col"
+                        select={selectPerm} />
+                </div>
             </div>
+            
             <div className={Styles.flex_left}>
                 <Link href={"/admin/administrator"}>
                     <Button label="버튼" onClick={submit} />

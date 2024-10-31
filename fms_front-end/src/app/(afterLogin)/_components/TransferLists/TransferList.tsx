@@ -3,6 +3,11 @@ import Styles from './TransferList.module.css'
 import { useEffect, useRef, useState } from "react";
 import Button from "@/components/Button/Button";
 import { ColInput, RowInput } from "../Input/Input";
+import DoubleLeft from '../../../../../public/images/doubleLeft.svg'
+import DoubleRight from '../../../../../public/images/doubleRight.svg'
+import Left from '../../../../../public/images/left.svg'
+import Right from '../../../../../public/images/right.svg'
+
 
 // 컴포넌트 사용방법
 // utill가서 transferItem형식으로 변환해서 컴포넌트에 전달하면됨
@@ -79,41 +84,52 @@ export const TransferListContainer = ({datas, selectDatas,title, setState,edit} 
     }
 
     return(
-        <BaseContainer
-        header={
-            <BaseHeader title={title}/>
-        }
-        >
-            <div className={Styles.row}>
-                {
-                    edit ? 
-                    <>
-                        <List 
-                            datas={copyList} 
-                            checkList={checkList}
+        <div className={Styles.container}>
+            <BaseContainer
+            header={
+                <BaseHeader title={title}/>
+            }
+            >
+                <div className={Styles.row}>
+                    {
+                        edit ? 
+                        <>
+                            <List 
+                                datas={copyList} 
+                                checkList={checkList}
 
-                            setCheckList={setCheckList} 
-                            />
+                                setCheckList={setCheckList} 
+                                />
 
-                        <div className={Styles.col}>
-                            <Button label="전체 추가" onClick={transferAllList}/>
-                            <Button label="추가" onClick={transferList}/>
-                            <Button label="제거" onClick={deleteList}/>
-                            <Button label="전체 제거" onClick={deleteAllList}/>
-                        </div>
-                    </>
-                :
-                null
-                }
-                
+                            <div className={Styles.col}>
+                                <div className={Styles.btn}>
+                                    <DoubleRight onClick={transferAllList} fill="#606060"/>
+                                </div>
+                                <div className={Styles.btn}>
+                                    <Right onClick={transferList} fill="#606060"/>
+                                </div>
+                                <div className={Styles.btn}>
+                                    <Left onClick={deleteList} fill="#606060"/>
+                                </div>
+                                <div className={Styles.btn}>
+                                    <DoubleLeft onClick={deleteAllList} fill="#606060"/>
+                                </div>
+                            </div>
+                        </>
+                    :
+                    null
+                    }
+                    
 
-                <List 
-                datas={selectList} 
-                checkList={checkedList} 
-                
-                setCheckList={setCheckedList}/>
-            </div>
-        </BaseContainer>
+                    <List 
+                    datas={selectList} 
+                    checkList={checkedList} 
+                    
+                    setCheckList={setCheckedList}/>
+                </div>
+            </BaseContainer>
+        </div>
+        
     )
 }
 
@@ -144,7 +160,6 @@ const List = ({datas, setCheckList, checkList} : ListProps) => {
                 type:"text",
                 placeholder : "검색",
             }}
-            label="검색"
             edit
             />
             <ul className={Styles.list_wrap}>

@@ -5,6 +5,7 @@ import styles from './Base.module.css'
 interface BaseContainerProps {
     children: ReactNode;
     header?: ReactNode;
+    fit? : boolean,
 }
 
 interface HeaderProps {
@@ -12,12 +13,12 @@ interface HeaderProps {
     children?: ReactNode;
 }
 
-export const BaseContainer = ({ children, header }: BaseContainerProps) => {
+export const BaseContainer = ({ children, header,fit }: BaseContainerProps) => {
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${fit ? styles.fit : null}`}>
             {header}
-            <div className={styles.body}>
+            <div className={`${styles.body} ${fit ? styles.fit : null}`}>
                 {children}
             </div>
         </div>

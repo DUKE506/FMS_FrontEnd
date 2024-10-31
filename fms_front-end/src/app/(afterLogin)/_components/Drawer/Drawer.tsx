@@ -82,7 +82,7 @@ export const DrawerGroup = ({ title, icon, url, children }: DrawerGroupProps) =>
 const Drawer = ({ loginType }: DrawerProps) => {
     return (
         <>
-            <BaseContainer>
+            <BaseContainer fit={true}>
                 <div className={styles.drawer}>
                     {
                         loginType ?

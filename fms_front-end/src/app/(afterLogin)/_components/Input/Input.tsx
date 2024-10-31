@@ -51,7 +51,12 @@ interface InputContainerProps {
 export const RowInput = ({ input, label, edit }: InputContainerProps) => {
     return (
         <div className={Styles.row}>
-            <Label label={label} />
+            {
+                label ? 
+                <Label label={label} />
+                :
+                null
+            }
             {
                 edit ?
                     <Input {...input} /> :
@@ -65,7 +70,12 @@ export const RowInput = ({ input, label, edit }: InputContainerProps) => {
 export const ColInput = ({ input, label, edit }: InputContainerProps) => {
     return (
         <div className={Styles.col}>
-            <Label label={label} />
+            {
+                label ? 
+                <Label label={label} />
+                :
+                null
+            }
             {
                 edit ?
                     <Input {...input} /> :

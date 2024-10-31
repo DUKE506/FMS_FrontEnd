@@ -16,7 +16,7 @@
 .input {
     flex: 2;
     width: 100%;
-    padding: var(--pad-default);
+    padding: var(--pad-input);
     border-radius: var(--radius-default);
     font-size: 0.8rem;
 
