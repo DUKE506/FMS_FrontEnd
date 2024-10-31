@@ -4,13 +4,14 @@
     gap: var(--pad-default);
 
     background-color: white;
-
+    width: 100%;
 }
 
 .col {
     display: flex;
     flex-direction: column;
-    gap: var(--pad-default);
+    gap: var(--pad-half);
+    width: 100%;
 }
 
 .input {
@@ -20,12 +21,18 @@
     border-radius: var(--radius-default);
     font-size: 0.8rem;
 
-    border: 2px solid var(--color-gr2);
+    border: 1px solid var(--color-gr5);
     transition: all .3s;
+
+}
+
+.input:hover{
+    border : 1px solid var(--color-grn1);
 }
 
 .input:focus {
-    border: 2px solid var(--color-grn1);
+    border: 1px solid var(--color-grn1);
+    box-shadow: 0 0 0 1px var(--color-grn1) inset;
 }
 
 .text {

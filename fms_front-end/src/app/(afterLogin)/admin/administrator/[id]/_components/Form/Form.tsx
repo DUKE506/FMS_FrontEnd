@@ -14,7 +14,7 @@ export const FormContainer = ({ data }: { data?: DetailAdminProps }) => {
 
     const handleInputChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        dispatch(updateField({ name, value }));
+        // dispatch(updateField({ name, value }));
     }
     return (
         <>
@@ -34,40 +34,9 @@ export const FormContainer = ({ data }: { data?: DetailAdminProps }) => {
                 
                 }
             >
-                <form className={Styles.row}>
+                <form className={Styles.col}>
                     <div className={Styles.img}>
                     </div>
-                    <div className={Styles.grid}>
-                        <ColInput
-                            input={{
-                                type: 'text',
-                                placeholder: '아이디',
-                                name: 'account',
-                                value: data?.admin?.account,
-                                onChange: handleInputChanges
-                            }}
-                            label="아이디"
-                            edit={edit}
-                        />
-                        <ColInput
-                            input={{
-                                type: 'password',
-                                placeholder: '비밀번호',
-                                name: 'password',
-                                value: data?.admin?.password,
-                                onChange: handleInputChanges
-                            }}
-                            label="비밀번호"
-                            edit={edit}
-                        />
-                        {/* <ColInput
-                            input={{
-                                type: 'text',
-                                placeholder: '비밀번호 확인',
-                            }}
-                            label="비밀번호 확인"
-                            edit
-                        /> */}
                         <ColInput
                             input={{
                                 type: 'text',
@@ -79,6 +48,41 @@ export const FormContainer = ({ data }: { data?: DetailAdminProps }) => {
                             label="이름"
                             edit={edit}
                         />
+                        <ColInput
+                            input={{
+                                type: 'text',
+                                placeholder: '아이디',
+                                name: 'account',
+                                value: data?.admin?.account,
+                                onChange: handleInputChanges
+                            }}
+                            label="아이디"
+                            edit={edit}
+                        />
+                        {
+                            edit ?
+                            <ColInput
+                            input={{
+                                type: 'password',
+                                placeholder: '비밀번호',
+                                name: 'password',
+                                value: data?.admin?.password,
+                                onChange: handleInputChanges
+                            }}
+                            label="비밀번호"
+                            edit={edit}
+                        /> : null
+                        }
+                        
+                        {/* <ColInput
+                            input={{
+                                type: 'text',
+                                placeholder: '비밀번호 확인',
+                            }}
+                            label="비밀번호 확인"
+                            edit
+                        /> */}
+                        
                         <ColInput
                             input={{
                                 type: 'text',
@@ -112,7 +116,6 @@ export const FormContainer = ({ data }: { data?: DetailAdminProps }) => {
                             label="권한"
                             edit={false}
                         />
-                    </div>
                 </form>
             </BaseContainer>
         </>

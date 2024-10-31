@@ -27,6 +27,7 @@
 }
 
 .body {
+    height: 100%;
     padding: var(--pad-default) 0;
 }
 

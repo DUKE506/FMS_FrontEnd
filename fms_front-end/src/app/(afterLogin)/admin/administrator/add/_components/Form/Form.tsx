@@ -13,6 +13,7 @@ export const FormContainer = ({ createAdmin }: { createAdmin: createAdminProps }
         const { name, value } = e.target;
         dispatch(updateField({ name, value }));
     }
+
     return (
         <>
             <BaseContainer
@@ -93,7 +94,7 @@ export const FormContainer = ({ createAdmin }: { createAdmin: createAdminProps }
                         input={{
                             type: 'text',
                             name: "job",
-                            value: createAdmin.job
+                            value: createAdmin.job === "" ? "\u00A0" :  createAdmin.job
                         }}
                         label="권한"
                         edit={false}

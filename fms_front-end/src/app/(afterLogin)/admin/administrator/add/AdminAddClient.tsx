@@ -76,8 +76,10 @@ const AdminAddClient = () => {
     return (
         <div className={`${Styles.col} ${Styles.container}` }>
             <div className={Styles.row}>
-                <FormContainer createAdmin={admin} />
-                <div className={Styles.col}>
+                <div className={Styles.flex1}>
+                    <FormContainer createAdmin={admin} />
+                </div>
+                <div className={`${Styles.col} ${Styles.flex2}`}>
                     <TransferListContainer
                         datas={transferData}
                         title="사업장"
@@ -87,14 +89,14 @@ const AdminAddClient = () => {
                     />
                     <RadioBox
                         data={permObject}
-                        layout="col"
+                        layout="row"
                         select={selectPerm} />
                 </div>
             </div>
             
             <div className={Styles.flex_left}>
                 <Link href={"/admin/administrator"}>
-                    <Button label="버튼" onClick={submit} />
+                    <Button label="등록" onClick={submit} />
                 </Link>
             </div>
         </div>

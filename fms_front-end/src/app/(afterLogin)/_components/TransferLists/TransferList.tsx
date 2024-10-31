@@ -33,7 +33,7 @@ export const TransferListContainer = ({datas, selectDatas,title, setState,edit} 
     const [checkList, setCheckList] = useState<TransferItem[]>([]); // 전체에서 선택한 데이터
     const [checkedList, setCheckedList] = useState<TransferItem[]>([]); //선택된 곳에서 선택한 데이터
     
-    
+    const [isedit, setIsEdit] = useState<Boolean>(false);
 
     //초기 전체 데이터 세팅
     useEffect(()=>{
@@ -83,16 +83,32 @@ export const TransferListContainer = ({datas, selectDatas,title, setState,edit} 
         setCheckedList([]);
     }
 
+    //편집모드
     return(
         <div className={Styles.container}>
             <BaseContainer
             header={
-                <BaseHeader title={title}/>
+                <BaseHeader title={title}>
+                    {
+                        !edit ?
+                            isedit ?
+                            <div>
+                                <Button label="저장" />
+                                <Button label="취소" onClick={()=>(setIsEdit(false))}/>
+                            </div>    
+                            :
+                            <Button label="편집" onClick={()=>(setIsEdit(true))}/>
+                            :
+                            null
+
+                    }
+                    
+                </BaseHeader>
             }
             >
                 <div className={Styles.row}>
                     {
-                        edit ? 
+                        isedit || edit ? 
                         <>
                             <List 
                                 datas={copyList} 

@@ -7,7 +7,7 @@ import { getAdminDetail } from "@/lib/features/administrator/adminAction"
 import { TransferItem, TransferListContainer } from "@/app/(afterLogin)/_components/TransferLists/TransferList"
 import { ConverterTransferList } from "@/utills/transformers"
 import { getAllPlaceListAction } from "@/lib/features/place/placeActions"
-
+import Styles from './page.module.css'
 
 
 
@@ -38,16 +38,20 @@ export const AdminDetailClient = ({id} : {id:number}) => {
     },[detailAdmin.data.places, place.data])
 
     return (
-        <>
-            <FormContainer data={detailAdmin.data}/>
-            <TransferListContainer
+        <div className={`${Styles.row} ${Styles.container}`}>
+            <div className={Styles.flex1}>
+                <FormContainer data={detailAdmin.data}/>
+            </div>
+            <div className={Styles.flex2}>
+                <TransferListContainer
                     datas={transferData}
                     selectDatas={selectPlace}
                     title="사업장"
                     setState={setSelectPlace}
-                    edit={true}
+                    edit={false}
                 />
-        </>     
+            </div>
+        </div>     
     )
 }
 
