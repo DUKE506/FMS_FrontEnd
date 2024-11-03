@@ -12,11 +12,11 @@ export interface placeInfoProps {
 }
 
 
-const initialState:  placeInfoProps = {
+const initialState: placeInfoProps = {
     data: {} as DetailPlaceProps,
     loading: false,
-    error: null ,
-    
+    error: null,
+
 }
 
 
@@ -25,12 +25,11 @@ const PlaceDetailSlice = createSlice({
     name: 'placeDetail',
     initialState,
     reducers: {
-        updatePlaceDetail:(state, action : PayloadAction<{name:string; value:string|Date|boolean}>)=>{
-            const {name, value} = action.payload;
-            console.log(name,value)
+        updatePlaceDetail: (state, action: PayloadAction<{ name: string; value: string | Date | boolean }>) => {
+            const { name, value } = action.payload;
             state.data = {
                 ...state.data,
-                [name]:value
+                [name]: value
             };
         }
     },
@@ -47,8 +46,8 @@ const PlaceDetailSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload as string;
             })
-            .addCase(editPlace.fulfilled, (state, action)=>{
-                
+            .addCase(editPlace.fulfilled, (state, action) => {
+
             })
     }
 })

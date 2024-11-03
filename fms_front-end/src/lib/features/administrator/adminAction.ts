@@ -1,6 +1,6 @@
-import { createAdminProps } from "@/types/administrator/adminstrator";
+import { Admin, AdminPlaceList, createAdminProps } from "@/types/administrator/adminstrator";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createAdmin, findAllAdminList, findOneAdmin } from "@/app/api/administrator/administrator"
+import { createAdmin, findAdminPlace, findAllAdminList, findOneAdmin, updateAdmin, updateAdminPlace } from "@/app/api/administrator/administrator"
 
 
 
@@ -34,6 +34,10 @@ export const getAllAdminList = createAsyncThunk(
     }
 )
 
+/**
+ * 관리자 정보 상세 조회
+ * --
+ */
 export const getAdminDetail = createAsyncThunk(
     'admin/detail',
     async (id: number) => {
@@ -44,5 +48,44 @@ export const getAdminDetail = createAsyncThunk(
             throw err
         }
 
+    }
+)
+
+/**
+ * 관리자 사업장 조회
+ */
+export const getAdminPlace = createAsyncThunk(
+    'admin/adminplace',
+    async (id: number) => {
+        try {
+            const res = await findAdminPlace(id);
+            return res.data;
+        } catch (err) {
+            throw err;
+        }
+    }
+)
+
+export const patchAdmin = createAsyncThunk(
+    'admin/update',
+    async (updateAdminDto: Admin) => {
+        try {
+            const res = await updateAdmin(updateAdminDto)
+            return res.data;
+        } catch (err) {
+            throw err;
+        }
+    }
+)
+
+export const patchAdminPlace = createAsyncThunk(
+    'admin/adminplace/update',
+    async ({ id, updateAdminPlaceDto }: { id: number; updateAdminPlaceDto: AdminPlaceList[] }) => {
+        try {
+            const res = await updateAdminPlace(id, updateAdminPlaceDto);
+            return res.data;
+        } catch (err) {
+            throw err
+        }
     }
 )

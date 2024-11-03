@@ -17,3 +17,17 @@ export const ConverterTransferList = (data: PlaceListProps[] | AdminPlaceList[])
     })
     return transferItems;
 }
+
+export const TransferListToAdminPlaceList = (data: TransferItem[]): AdminPlaceList[] => {
+    const adminPlaces: AdminPlaceList[] = [];
+
+    data.map((item) => {
+        adminPlaces.push({
+            id: item.id,
+            name: item.name,
+            contractNum: item.subName ?? '',
+        })
+    })
+
+    return adminPlaces;
+}

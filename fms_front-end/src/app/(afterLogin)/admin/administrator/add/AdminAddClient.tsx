@@ -74,7 +74,7 @@ const AdminAddClient = () => {
         await dispatch(submitAdmin(admin));
     }
     return (
-        <div className={`${Styles.col} ${Styles.container}` }>
+        <div className={`${Styles.col} ${Styles.container}`}>
             <div className={Styles.row}>
                 <div className={Styles.flex1}>
                     <FormContainer createAdmin={admin} />
@@ -83,7 +83,7 @@ const AdminAddClient = () => {
                     <TransferListContainer
                         datas={transferData}
                         title="사업장"
-                        // title2="선택"
+                        isCreate={true}
                         setState={selectPlace}
                         edit={true}
                     />
@@ -93,7 +93,7 @@ const AdminAddClient = () => {
                         select={selectPerm} />
                 </div>
             </div>
-            
+
             <div className={Styles.flex_left}>
                 <Link href={"/admin/administrator"}>
                     <Button label="등록" onClick={submit} />

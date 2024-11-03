@@ -1,6 +1,6 @@
 import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base"
 import Styles from './TransferList.module.css'
-import { useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import Button from "@/components/Button/Button";
 import { ColInput, RowInput } from "../Input/Input";
 import DoubleLeft from '../../../../../public/images/doubleLeft.svg'
@@ -13,49 +13,52 @@ import Right from '../../../../../public/images/right.svg'
 // utill가서 transferItem형식으로 변환해서 컴포넌트에 전달하면됨
 
 export interface TransferItem {
-    id : number;
-    name : string;
-    subName? : string;
+    id: number;
+    name: string;
+    subName?: string;
 }
 
 interface TransferListContainerProps {
-    datas : TransferItem[];
-    title : string;
-    selectDatas? : TransferItem[]; //선택한데이터
-    setState : (data : TransferItem[]) => void;
-    edit : boolean;
+    datas: TransferItem[];
+    title: string;
+    selectDatas?: TransferItem[]; //선택한데이터
+    setState: (data: TransferItem[]) => void;
+    isCreate: boolean;
+    edit: boolean;
+    setEdit?: Dispatch<SetStateAction<boolean>>;
+    onUpdate?: () => void;
 }
 
-export const TransferListContainer = ({datas, selectDatas,title, setState,edit} : TransferListContainerProps ) => {
+export const TransferListContainer = ({ datas, selectDatas, title, isCreate, setState, edit, setEdit, onUpdate }: TransferListContainerProps) => {
     const [copyList, setCopyList] = useState<TransferItem[]>([]); //전체 원본 복사데이터
     const [selectList, setSelectList] = useState<TransferItem[]>(selectDatas || []); //선택되어진 데이터
 
     const [checkList, setCheckList] = useState<TransferItem[]>([]); // 전체에서 선택한 데이터
     const [checkedList, setCheckedList] = useState<TransferItem[]>([]); //선택된 곳에서 선택한 데이터
-    
-    const [isedit, setIsEdit] = useState<Boolean>(false);
+
+    // const [isedit, setIsEdit] = useState<Boolean>(false);
 
     //초기 전체 데이터 세팅
-    useEffect(()=>{
+    useEffect(() => {
         setCopyList([...datas])
-    },[datas])
+    }, [datas])
 
     //현재 서버에 저장된 데이터 초기 세팅
-    useEffect(()=>{
-        if(selectDatas !== undefined){
-            setSelectList([...selectDatas]) 
+    useEffect(() => {
+        if (selectDatas !== undefined) {
+            setSelectList([...selectDatas])
         }
-    },[selectDatas])
+    }, [selectDatas])
 
     //선택되어있는 데이터가 변경되었을때 동작함
-    useEffect(()=>{
-        if(JSON.stringify(selectDatas) !== JSON.stringify(selectList)){
-            setState(selectList) 
+    useEffect(() => {
+        if (JSON.stringify(selectDatas) !== JSON.stringify(selectList)) {
+            setState(selectList)
         }
-        
-    },[selectList])
 
-    
+    }, [selectList])
+
+
     //전체 데이터 전송
     const transferAllList = () => {
         setSelectList(prev => [...prev, ...copyList]);
@@ -84,130 +87,130 @@ export const TransferListContainer = ({datas, selectDatas,title, setState,edit} 
     }
 
     //편집모드
-    return(
+    return (
         <div className={Styles.container}>
             <BaseContainer
-            header={
-                <BaseHeader title={title}>
-                    {
-                        !edit ?
-                            isedit ?
-                            <div>
-                                <Button label="저장" />
-                                <Button label="취소" onClick={()=>(setIsEdit(false))}/>
-                            </div>    
-                            :
-                            <Button label="편집" onClick={()=>(setIsEdit(true))}/>
-                            :
-                            null
+                header={
+                    <BaseHeader title={title}>
+                        {
+                            !isCreate ?
+                                edit ?
+                                    <div>
+                                        <Button label="저장" onClick={onUpdate} />
+                                        <Button label="취소" onClick={() => (setEdit?.(false))} />
+                                    </div>
+                                    :
+                                    <Button label="편집" onClick={() => (setEdit?.(true))} />
+                                :
+                                null
 
-                    }
-                    
-                </BaseHeader>
-            }
+                        }
+
+                    </BaseHeader>
+                }
             >
                 <div className={Styles.row}>
                     {
-                        isedit || edit ? 
-                        <>
-                            <List 
-                                datas={copyList} 
-                                checkList={checkList}
+                        edit ?
+                            <>
+                                <List
+                                    datas={copyList}
+                                    checkList={checkList}
 
-                                setCheckList={setCheckList} 
+                                    setCheckList={setCheckList}
                                 />
 
-                            <div className={Styles.col}>
-                                <div className={Styles.btn}>
-                                    <DoubleRight onClick={transferAllList} fill="#606060"/>
+                                <div className={Styles.col}>
+                                    <div className={Styles.btn}>
+                                        <DoubleRight onClick={transferAllList} fill="#606060" />
+                                    </div>
+                                    <div className={Styles.btn}>
+                                        <Right onClick={transferList} fill="#606060" />
+                                    </div>
+                                    <div className={Styles.btn}>
+                                        <Left onClick={deleteList} fill="#606060" />
+                                    </div>
+                                    <div className={Styles.btn}>
+                                        <DoubleLeft onClick={deleteAllList} fill="#606060" />
+                                    </div>
                                 </div>
-                                <div className={Styles.btn}>
-                                    <Right onClick={transferList} fill="#606060"/>
-                                </div>
-                                <div className={Styles.btn}>
-                                    <Left onClick={deleteList} fill="#606060"/>
-                                </div>
-                                <div className={Styles.btn}>
-                                    <DoubleLeft onClick={deleteAllList} fill="#606060"/>
-                                </div>
-                            </div>
-                        </>
-                    :
-                    null
+                            </>
+                            :
+                            null
                     }
-                    
 
-                    <List 
-                    datas={selectList} 
-                    checkList={checkedList} 
-                    
-                    setCheckList={setCheckedList}/>
+
+                    <List
+                        datas={selectList}
+                        checkList={checkedList}
+
+                        setCheckList={setCheckedList} />
                 </div>
             </BaseContainer>
         </div>
-        
+
     )
 }
 
-interface ListProps{
+interface ListProps {
     datas?: TransferItem[];
     // title: string;
     setCheckList?: React.Dispatch<React.SetStateAction<TransferItem[]>>;
     checkList?: TransferItem[];
 }
 
-const List = ({datas, setCheckList, checkList} : ListProps) => {
-    const checkItem = (item : TransferItem) =>{
+const List = ({ datas, setCheckList, checkList }: ListProps) => {
+    const checkItem = (item: TransferItem) => {
         setCheckList?.((prev: TransferItem[]) =>
-            prev.some(i => i.id === item.id) 
-            ? prev.filter(i => i.id !== item.id) 
-            : [...prev, item]
+            prev.some(i => i.id === item.id)
+                ? prev.filter(i => i.id !== item.id)
+                : [...prev, item]
         )
     }
 
-    const handleCheckboxClick= (e : React.MouseEvent<HTMLInputElement>, data : TransferItem) => {
+    const handleCheckboxClick = (e: React.MouseEvent<HTMLInputElement>, data: TransferItem) => {
         e.stopPropagation();
         checkItem(data);
     }
 
-    return(
+    return (
         <div className={`${Styles.box} ${Styles.col}`}>
             <ColInput input={{
-                type:"text",
-                placeholder : "검색",
+                type: "text",
+                placeholder: "검색",
             }}
-            edit
+                edit
             />
             <ul className={Styles.list_wrap}>
-            {
-                datas?.map((data, idx)=>{
-                    let isCheck = checkList?.some(i => i.id === data.id)
-                    return(
-                        <li 
-                        className={`${Styles.item} ${isCheck ? Styles.active : ''}`}
-                        onClick={()=>checkItem(data)}
-                        key={data.name+idx} >
-                            <input type="checkbox"
-                            onClick={(e)=>handleCheckboxClick(e,data)}
-                            checked={isCheck}
-                            readOnly
-                            />
-                            <div className={Styles.display}>
-                                <span className={Styles.text}>
-                                    {data.name}
-                                </span>
-                                <span className={Styles.sub_text}>
-                                    {data.subName}
-                                </span>
-                            </div>
-                            
-                        </li>
-                    )
-                })
-            }
+                {
+                    datas?.map((data, idx) => {
+                        let isCheck = checkList?.some(i => i.id === data.id)
+                        return (
+                            <li
+                                className={`${Styles.item} ${isCheck ? Styles.active : ''}`}
+                                onClick={() => checkItem(data)}
+                                key={data.name + idx} >
+                                <input type="checkbox"
+                                    onClick={(e) => handleCheckboxClick(e, data)}
+                                    checked={isCheck}
+                                    readOnly
+                                />
+                                <div className={Styles.display}>
+                                    <span className={Styles.text}>
+                                        {data.name}
+                                    </span>
+                                    <span className={Styles.sub_text}>
+                                        {data.subName}
+                                    </span>
+                                </div>
+
+                            </li>
+                        )
+                    })
+                }
             </ul>
-        
-        {/* </BaseContainer> */}
+
+            {/* </BaseContainer> */}
         </div>
     )
 }

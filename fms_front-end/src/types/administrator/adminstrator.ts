@@ -19,18 +19,18 @@ export interface ListAdminProps {
 }
 
 export interface DetailAdminProps {
-    admin : Admin,
-    places : AdminPlaceList[]
+    admin: Admin,
+    places: AdminPlaceList[]
 }
 
-export interface AdminPlaceList{
-    adminPlaceId:number;
-    id:number;
-    name:string;
-    contractNum:string;
+export interface AdminPlaceList {
+    adminPlaceId?: number;
+    id: number;
+    name: string;
+    contractNum: string;
 }
 
-export interface Admin{
+export interface Admin {
     id: number,
     account: string;
     password: string;

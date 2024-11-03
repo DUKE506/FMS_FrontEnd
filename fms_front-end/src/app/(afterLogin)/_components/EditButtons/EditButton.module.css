@@ -1,0 +1,23 @@
+.editbtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.row {
+    display: flex;
+    gap: var(--pad-default);
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.icon:hover {
+    cursor: pointer;
+}

@@ -6,15 +6,17 @@ import placeDetailReducer from './features/place/placeDetailSlice'
 import adminReduce from './features/administrator/adminSlice'
 import adminList from './features/administrator/adminFindSlice'
 import adminDetailReducer from './features/administrator/adminDetailSlice'
+import adminPlaceReducer from './features/administrator/adminPlaceSlice'
 const store = configureStore({
   reducer: {
     place: placeReducer,
     placeTable: placeTableReducer,
     placeList: placeListReducer,
     placeDetail: placeDetailReducer,
-    admin : adminReduce,
-    adminList : adminList, 
-    adminDetail : adminDetailReducer
+    admin: adminReduce,
+    adminList: adminList,
+    adminDetail: adminDetailReducer,
+    adminPlace: adminPlaceReducer,
   },
 })
 

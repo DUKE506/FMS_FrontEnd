@@ -23,9 +23,9 @@ const PlaceDetailClient = ({ placeid }: PlaceDetailClient) => {
     //     dispatch(findOnePlaceAction(placeid));
     // }, [])
 
-    const getPlaceDetail = useCallback(()=>{
+    const getPlaceDetail = useCallback(() => {
         dispatch(findOnePlaceAction(placeid));
-    },[])
+    }, [])
 
 
     useEffect(() => {
@@ -41,17 +41,17 @@ const PlaceDetailClient = ({ placeid }: PlaceDetailClient) => {
     /**
      * 수정 
      */
-    const onUpdate = async() => {
+    const onUpdate = async () => {
         console.log(place.data.addr)
         await dispatch(editPlace(place.data));
-        dispatch(findOnePlaceAction(placeid));
+        // dispatch(findOnePlaceAction(placeid));
         handleEdit();
     }
 
     return (
         <>
             <DetailForm place={place} edit={edit} />
-            <Perm place={place.data} edit={edit} mode="update"/>
+            <Perm place={place.data} edit={edit} mode="update" />
             <div className={Styles.btn_area}>
                 {
                     edit ?
