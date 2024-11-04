@@ -1,4 +1,19 @@
 .row {
     display: flex;
-    gap: var(--pad-wide)
+    gap: var(--pad-wide);
+    width: 100%;
+}
+.col{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: var(--pad-wide);
+}
+
+.flex1{
+    flex:1;
+}
+
+.flex2{
+    flex:2;
 }

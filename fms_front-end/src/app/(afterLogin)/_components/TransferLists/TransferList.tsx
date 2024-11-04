@@ -7,6 +7,7 @@ import DoubleLeft from '../../../../../public/images/doubleLeft.svg'
 import DoubleRight from '../../../../../public/images/doubleRight.svg'
 import Left from '../../../../../public/images/left.svg'
 import Right from '../../../../../public/images/right.svg'
+import { EditButtons } from "../EditButtons/EditButtons";
 
 
 // 컴포넌트 사용방법
@@ -86,6 +87,7 @@ export const TransferListContainer = ({ datas, selectDatas, title, isCreate, set
         setCheckedList([]);
     }
 
+
     //편집모드
     return (
         <div className={Styles.container}>
@@ -94,13 +96,12 @@ export const TransferListContainer = ({ datas, selectDatas, title, isCreate, set
                     <BaseHeader title={title}>
                         {
                             !isCreate ?
-                                edit ?
-                                    <div>
-                                        <Button label="저장" onClick={onUpdate} />
-                                        <Button label="취소" onClick={() => (setEdit?.(false))} />
-                                    </div>
-                                    :
-                                    <Button label="편집" onClick={() => (setEdit?.(true))} />
+                                    <EditButtons
+                                    onCancel={() => (setEdit?.(false))}
+                                    onUpdate={()=>onUpdate?.()} 
+                                    onEdit={() => (setEdit?.(true))}
+                                    edit={edit}
+                                    />
                                 :
                                 null
 
@@ -116,7 +117,7 @@ export const TransferListContainer = ({ datas, selectDatas, title, isCreate, set
                                 <List
                                     datas={copyList}
                                     checkList={checkList}
-
+                                    edit={edit}
                                     setCheckList={setCheckList}
                                 />
 
@@ -143,7 +144,7 @@ export const TransferListContainer = ({ datas, selectDatas, title, isCreate, set
                     <List
                         datas={selectList}
                         checkList={checkedList}
-
+                        edit={edit}
                         setCheckList={setCheckedList} />
                 </div>
             </BaseContainer>
@@ -157,20 +158,26 @@ interface ListProps {
     // title: string;
     setCheckList?: React.Dispatch<React.SetStateAction<TransferItem[]>>;
     checkList?: TransferItem[];
+    edit:boolean;
 }
 
-const List = ({ datas, setCheckList, checkList }: ListProps) => {
+const List = ({ datas, setCheckList, checkList,edit }: ListProps) => {
     const checkItem = (item: TransferItem) => {
-        setCheckList?.((prev: TransferItem[]) =>
-            prev.some(i => i.id === item.id)
-                ? prev.filter(i => i.id !== item.id)
-                : [...prev, item]
-        )
+        if(edit){
+            setCheckList?.((prev: TransferItem[]) =>
+                prev.some(i => i.id === item.id)
+                    ? prev.filter(i => i.id !== item.id)
+                    : [...prev, item]
+            )
+        }
+        
     }
 
     const handleCheckboxClick = (e: React.MouseEvent<HTMLInputElement>, data: TransferItem) => {
         e.stopPropagation();
-        checkItem(data);
+        if(edit){
+            checkItem(data);
+        }
     }
 
     return (
@@ -179,7 +186,7 @@ const List = ({ datas, setCheckList, checkList }: ListProps) => {
                 type: "text",
                 placeholder: "검색",
             }}
-                edit
+                edit={true}
             />
             <ul className={Styles.list_wrap}>
                 {
@@ -190,11 +197,18 @@ const List = ({ datas, setCheckList, checkList }: ListProps) => {
                                 className={`${Styles.item} ${isCheck ? Styles.active : ''}`}
                                 onClick={() => checkItem(data)}
                                 key={data.name + idx} >
-                                <input type="checkbox"
+                                {
+                                    edit ?
+                                    <input type="checkbox"
                                     onClick={(e) => handleCheckboxClick(e, data)}
                                     checked={isCheck}
                                     readOnly
                                 />
+                                :
+                                null
+
+                                }
+                                
                                 <div className={Styles.display}>
                                     <span className={Styles.text}>
                                         {data.name}
@@ -209,8 +223,6 @@ const List = ({ datas, setCheckList, checkList }: ListProps) => {
                     })
                 }
             </ul>
-
-            {/* </BaseContainer> */}
         </div>
     )
 }

@@ -12,8 +12,8 @@
 
 .img {
     white-space: nowrap;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
     border: 1px solid var(--color-gr1);
     background-color: var(--color-gr1);
@@ -29,12 +29,12 @@
 }
 
 .text {
-    font-size: 1rem;
+    font-size: var(--size-default);
     font-weight: bold;
     color: var(--color-gr1);
 }
 
 .subtext {
-    font-size: 0.9rem;
+    font-size: var(--size-sub);
     color: var(--color-gr1);
 }

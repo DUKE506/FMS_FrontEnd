@@ -4,7 +4,7 @@
 }
 
 .li_box {
-    font-size: 1rem;
+    font-size: var(--size-default);
     padding: var(--pad-default);
     color: var(--color-gr1);
 }

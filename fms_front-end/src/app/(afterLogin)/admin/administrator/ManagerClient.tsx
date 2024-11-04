@@ -7,6 +7,7 @@ import Styles from './page.module.css'
 import { AppDispatch, RootState } from "@/lib/store";
 import { useEffect } from "react";
 import { getAllAdminList } from "@/lib/features/administrator/adminAction";
+import { FormContainer } from "./_components/Form/Form";
 
 const groupMockUp: GroupProps[] = [
     {
@@ -48,13 +49,26 @@ const ManagerClient = () => {
     }, [])
 
     return (
-        <>
-            <div className={Styles.row}>
-                <GroupContainer grouplist={groupMockUp} />
-                <MemberContainer members={data} />
+        <div className={`${Styles.row}`}>
+            <div className={`${Styles.flex1}`}>
+                <FormContainer/>
+            </div>
+            <div className={`${Styles.col} ${Styles.flex2}`}>
+                <div className={`${Styles.row} ${Styles.flex1}`}>
+                    <div className={`${Styles.flex1}`}>
+                        <GroupContainer grouplist={groupMockUp} />
+                    </div>
+                    <div className={`${Styles.flex2}`}>
+                        <MemberContainer members={data} />
+                    </div>
+                </div>
+                <div className={`${Styles.flex2}`}>
+                    null
+                </div>
+                
             </div>
 
-        </>
+        </div>
     )
 }
 
