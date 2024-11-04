@@ -1,6 +1,6 @@
 
 .nav{
-    padding: var(--pad-default) 0;
+    padding: var(--pad-default) var(--pad-wide);
     display: flex;
     justify-content: space-between;
 }

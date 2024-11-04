@@ -8,6 +8,7 @@ import { AppDispatch, RootState } from "@/lib/store";
 import { useEffect } from "react";
 import { getAllAdminList } from "@/lib/features/administrator/adminAction";
 import { FormContainer } from "./_components/Form/Form";
+import { AnalysisCard } from "./_components/Card/AnalysislCard";
 
 const groupMockUp: GroupProps[] = [
     {
@@ -40,6 +41,7 @@ const groupMockUp: GroupProps[] = [
     },
 ]
 
+
 const ManagerClient = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { data, loading, error } = useSelector((state: RootState) => state.adminList)
@@ -55,17 +57,18 @@ const ManagerClient = () => {
             </div>
             <div className={`${Styles.col} ${Styles.flex2}`}>
                 <div className={`${Styles.row} ${Styles.flex1}`}>
-                    <div className={`${Styles.flex1}`}>
+                    <AnalysisCard title="그룹" value={groupMockUp.length}/>
+                    <AnalysisCard title="관리자" value={data.length}/>
+                    <AnalysisCard title="관리자 평균 사업장" value={groupMockUp.length}/>
+                </div>
+                <div className={`${Styles.row} ${Styles.flex2}`}>
+                    <div className={`${Styles.flex1_5}`}>
                         <GroupContainer grouplist={groupMockUp} />
                     </div>
                     <div className={`${Styles.flex2}`}>
                         <MemberContainer members={data} />
                     </div>
                 </div>
-                <div className={`${Styles.flex2}`}>
-                    null
-                </div>
-                
             </div>
 
         </div>

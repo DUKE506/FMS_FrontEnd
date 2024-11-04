@@ -257,8 +257,10 @@ body {
 }
 
 .inner {
-  inline-size: min(100% - 50px*2, 1920px);
+  display: flex;
+  /* inline-size: min(100% - 50px*2, 1920px); */
   margin-inline: auto;
+  height: 100%;
 }
 
 .na-layout {
@@ -270,17 +272,18 @@ body {
 
 .body {
   width: 100%;
-  /* display: flex;
-  gap: var(--pad-wide) */
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  /* gap: var(--pad-wide); */
+  /* display: grid;
   grid-template-columns: 1fr 6fr;
-  column-gap: var(--pad-wide);
-  padding :var(--pad-wide) 0;
+  column-gap: var(--pad-wide); */
 }
 
 .body-content{
   min-height : calc(100vh - 78.59px - 4rem);
   height: 100%;
+  padding: var(--pad-default) var(--pad-wide);
 }
 
 @media (max-width: 1280px) {
