@@ -1,0 +1,22 @@
+.signin{
+    width: 360px;
+    border-radius: var(--radius-default);
+    box-shadow: var(--bs-default);
+    background-color: var(--color-grn1h);
+}
+
+
+
+.title{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color :var(--color-gr1);
+}
+
+.wrap{
+    display: flex;
+    flex-direction: column;
+    gap: var(--pad-wide);
+    padding : var(--pad-wide);
+}

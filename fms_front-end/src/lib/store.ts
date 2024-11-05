@@ -7,6 +7,7 @@ import adminReduce from './features/administrator/adminSlice'
 import adminList from './features/administrator/adminFindSlice'
 import adminDetailReducer from './features/administrator/adminDetailSlice'
 import adminPlaceReducer from './features/administrator/adminPlaceSlice'
+import signInReducer from './features/user/signInSlice'
 const store = configureStore({
   reducer: {
     place: placeReducer,
@@ -17,6 +18,7 @@ const store = configureStore({
     adminList: adminList,
     adminDetail: adminDetailReducer,
     adminPlace: adminPlaceReducer,
+    signIn :signInReducer,
   },
 })
 

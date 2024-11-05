@@ -1,5 +1,5 @@
 .button {
-    padding: var(--pad-default) var(--pad-wide);
+    padding: var(--pad-half);
     border-radius: var(--radius-min);
 
     white-space: nowrap;
@@ -14,6 +14,6 @@
 }
 
 .button:hover {
-    /* background-color: var(--color-gr3); */
+    cursor: pointer;
     background-color: var(--color-gr1);
 }

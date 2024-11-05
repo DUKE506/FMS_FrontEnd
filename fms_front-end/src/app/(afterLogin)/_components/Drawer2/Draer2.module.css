@@ -5,7 +5,8 @@
     gap:var(--pad-half);
     min-width: 240px;
     height: 100%;
-    padding :var(--pad-default)
+    padding :var(--pad-default);
+    box-shadow: var(--bs-default);
 }
 
 
