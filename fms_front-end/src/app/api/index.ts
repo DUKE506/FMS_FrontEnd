@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 const BaseUrl = "http://localhost:3001"
 
 export interface ApiResponse<T> {
@@ -12,11 +13,13 @@ export const apiManager = async <T>(
     options: RequestInit = {}
 ): Promise<ApiResponse<T>> => {
     const url = new URL(endpoint, BaseUrl);
+    const authToken = Cookies.get('authToken');
 
     const defaultOptions: RequestInit = {
         credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization' : `Bearer ${authToken}`
         },
         cache: 'no-store',
         ...options,

@@ -6,3 +6,7 @@ export interface SignInDto {
     password : string;
     mode : boolean;
 }
+
+export interface SignSuccess{
+    accessToken : string;
+}
