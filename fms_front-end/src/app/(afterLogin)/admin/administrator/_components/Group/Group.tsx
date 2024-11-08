@@ -12,7 +12,7 @@ export interface GroupProps {
 
 
 
-export const GroupContainer = ({ grouplist }: { grouplist: GroupProps[] }) => {
+export const GroupContainer = ({ groups }: { groups: GroupProps[] }) => {
     const [active, setActive] = useState<number>(0);
 
     const handleChangeActive = (id: number) => {
@@ -28,7 +28,7 @@ export const GroupContainer = ({ grouplist }: { grouplist: GroupProps[] }) => {
             >
                 <ul className={Style.col}>
                     {
-                        grouplist.map((group, idx) => {
+                        groups.map((group, idx) => {
                             return (
                                 <Group
                                     key={group.title + idx}

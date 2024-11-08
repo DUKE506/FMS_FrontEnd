@@ -38,5 +38,5 @@ export interface Admin {
     email: string;
     phone: string;
     job: string;
-    place: number[];
+    place?: number[];
 }

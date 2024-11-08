@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { getAllAdminList } from "@/lib/features/administrator/adminAction";
 import { FormContainer } from "./_components/Form/Form";
 import { AnalysisCard } from "./_components/Card/AnalysislCard";
+import { Profile } from "./_components/Profile/Profile";
 
 const groupMockUp: GroupProps[] = [
     {
@@ -51,9 +52,9 @@ const ManagerClient = () => {
     }, [])
 
     return (
-        <div className={`${Styles.row}`}>
+        <div className={`${Styles.row} ${Styles.container}`}>
             <div className={`${Styles.flex1}`}>
-                <FormContainer/>
+                <Profile/>
             </div>
             <div className={`${Styles.col} ${Styles.flex2}`}>
                 <div className={`${Styles.row} ${Styles.flex1}`}>
@@ -61,9 +62,9 @@ const ManagerClient = () => {
                     <AnalysisCard title="관리자" value={data.length}/>
                     <AnalysisCard title="관리자 평균 사업장" value={groupMockUp.length}/>
                 </div>
-                <div className={`${Styles.row} ${Styles.flex2}`}>
+                <div className={`${Styles.row} ${Styles.flex3}`}>
                     <div className={`${Styles.flex1_5}`}>
-                        <GroupContainer grouplist={groupMockUp} />
+                        <GroupContainer groups={groupMockUp} />
                     </div>
                     <div className={`${Styles.flex2}`}>
                         <MemberContainer members={data} />

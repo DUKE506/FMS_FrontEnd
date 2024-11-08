@@ -1,6 +1,9 @@
 
-.col {
+.container{
+    max-height: calc(100vh - 78.59px - 3rem);
+}
 
+.col {
     display: flex;
     flex-direction: column;
     gap: var(--pad-wide);
@@ -13,6 +16,7 @@
     width: 100%;
     display: flex;
     gap: var(--pad-wide);
+    min-height: 0;
 }
 
 .flex_left {

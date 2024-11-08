@@ -281,9 +281,9 @@ body {
 }
 
 .body-content{
-  min-height : calc(100vh - 78.59px - 4rem);
+  /* min-height : calc(100vh - 78.59px - 3rem); */
   height: 100%;
-  padding: var(--pad-default) var(--pad-wide);
+  padding: var(--pad-default) var(--pad-wide) var(--pad-wide) var(--pad-wide);
 }
 
 @media (max-width: 1280px) {

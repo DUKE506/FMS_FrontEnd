@@ -34,6 +34,7 @@
 .body {
     height: 100%;
     padding: var(--pad-default) 0;
+    overflow: scroll;
 }
 
 .fit{
