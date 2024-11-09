@@ -10,6 +10,7 @@ import { getAllPlaceListAction } from "@/lib/features/place/placeActions"
 import Styles from './page.module.css'
 import { updatePlace } from "@/lib/features/administrator/adminPlaceSlice"
 import { AdminPlaceList } from "@/types/administrator/adminstrator"
+import { Profile } from "../_components/Profile/Profile"
 
 
 
@@ -78,12 +79,14 @@ export const AdminDetailClient = ({ id }: { id: number }) => {
     return (
         <div className={`${Styles.row} ${Styles.container}`}>
             <div className={Styles.flex1}>
-                <FormContainer
-                    data={detailAdmin.data}
-                    edit={formEdit}
-                    setEdit={setFormEdit}
-                    onUpdate={handleUpdateForm}
-                />
+                {
+                    <FormContainer
+                        data={detailAdmin.data}
+                        edit={formEdit}
+                        setEdit={setFormEdit}
+                        onUpdate={handleUpdateForm}
+                    />
+                }
             </div>
             <div className={Styles.flex2}>
                 <TransferListContainer

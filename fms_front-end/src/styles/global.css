@@ -1,5 +1,3 @@
-
-
 :root {
 
   /*
@@ -36,7 +34,7 @@
   --pad-default: 1rem;
   --pad-half: 0.5rem;
 
-  --pad-input : 0.75rem;
+  --pad-input: 0.75rem;
 
   /*
     Border-radius
@@ -51,9 +49,9 @@
     */
   --bs-default: 0 0 6px 2px #d3d3d3;
 
-  --size-sub : 0.7rem;
-  --size-default : 0.8rem;
-  --size-title : 1rem;
+  --size-sub: 0.7rem;
+  --size-default: 0.8rem;
+  --size-title: 1rem;
 }
 
 * {
@@ -280,13 +278,13 @@ body {
   column-gap: var(--pad-wide); */
 }
 
-.body-content{
+.body-content {
   /* min-height : calc(100vh - 78.59px - 3rem); */
   height: 100%;
   padding: var(--pad-default) var(--pad-wide) var(--pad-wide) var(--pad-wide);
 }
 
-@media (max-width: 1280px) {
+/* @media (max-width: 1280px) {
   .inner {
     inline-size: min(100% - 50px* 2, 1920px);
   }
@@ -296,7 +294,7 @@ body {
   .inner {
     inline-size: min(100% - 20px* 2, 1920px);
   }
-}
+} */
 
 a {
   color: inherit;

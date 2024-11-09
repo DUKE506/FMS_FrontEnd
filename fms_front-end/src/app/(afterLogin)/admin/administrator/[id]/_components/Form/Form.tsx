@@ -8,6 +8,7 @@ import { Dispatch, SetStateAction, use, useState } from "react"
 import Button from "@/components/Button/Button"
 import { updateAdmin } from "@/lib/features/administrator/adminDetailSlice"
 import { EditButtons } from "@/app/(afterLogin)/_components/EditButtons/EditButtons"
+import { ProfileBody } from "../../../_components/Profile/Profile"
 
 export const FormContainer = ({ data, edit, setEdit, onUpdate }: { data?: Admin; edit: boolean; setEdit: Dispatch<SetStateAction<boolean>>; onUpdate: () => void }) => {
     // const [edit, setEdit] = useState<boolean>(false);
@@ -42,47 +43,49 @@ export const FormContainer = ({ data, edit, setEdit, onUpdate }: { data?: Admin;
 
                 }
             >
-                <form className={Styles.col}>
-                    <div className={Styles.img}>
-                    </div>
-                    <ColInput
-                        input={{
-                            type: 'text',
-                            placeholder: '이름',
-                            name: 'name',
-                            value: data?.name,
-                            onChange: handleInputChanges
-                        }}
-                        label="이름"
-                        edit={edit}
-                    />
-                    <ColInput
-                        input={{
-                            type: 'text',
-                            placeholder: '아이디',
-                            name: 'account',
-                            value: data?.account,
-                            onChange: handleInputChanges
-                        }}
-                        label="아이디"
-                        edit={edit}
-                    />
-                    {
-                        edit ?
+                {
+                    edit ?
+                        <form className={Styles.col}>
+                            <div className={Styles.img}>
+                            </div>
                             <ColInput
                                 input={{
-                                    type: 'password',
-                                    placeholder: '비밀번호',
-                                    name: 'password',
-                                    value: data?.password,
+                                    type: 'text',
+                                    placeholder: '이름',
+                                    name: 'name',
+                                    value: data?.name,
                                     onChange: handleInputChanges
                                 }}
-                                label="비밀번호"
+                                label="이름"
                                 edit={edit}
-                            /> : null
-                    }
+                            />
+                            <ColInput
+                                input={{
+                                    type: 'text',
+                                    placeholder: '아이디',
+                                    name: 'account',
+                                    value: data?.account,
+                                    onChange: handleInputChanges
+                                }}
+                                label="아이디"
+                                edit={edit}
+                            />
+                            {
+                                edit ?
+                                    <ColInput
+                                        input={{
+                                            type: 'password',
+                                            placeholder: '비밀번호',
+                                            name: 'password',
+                                            value: data?.password,
+                                            onChange: handleInputChanges
+                                        }}
+                                        label="비밀번호"
+                                        edit={edit}
+                                    /> : null
+                            }
 
-                    {/* <ColInput
+                            {/* <ColInput
                             input={{
                                 type: 'text',
                                 placeholder: '비밀번호 확인',
@@ -91,40 +94,44 @@ export const FormContainer = ({ data, edit, setEdit, onUpdate }: { data?: Admin;
                             edit
                         /> */}
 
-                    <ColInput
-                        input={{
-                            type: 'text',
-                            placeholder: '이메일',
-                            name: 'email',
-                            value: data?.email,
-                            onChange: handleInputChanges
+                            <ColInput
+                                input={{
+                                    type: 'text',
+                                    placeholder: '이메일',
+                                    name: 'email',
+                                    value: data?.email,
+                                    onChange: handleInputChanges
 
-                        }}
-                        label="이메일"
-                        edit={edit}
-                    />
-                    <ColInput
-                        input={{
-                            type: 'text',
-                            placeholder: '전화번호',
-                            name: 'phone',
-                            value: data?.phone,
-                            onChange: handleInputChanges
+                                }}
+                                label="이메일"
+                                edit={edit}
+                            />
+                            <ColInput
+                                input={{
+                                    type: 'text',
+                                    placeholder: '전화번호',
+                                    name: 'phone',
+                                    value: data?.phone,
+                                    onChange: handleInputChanges
 
-                        }}
-                        label="전화번호"
-                        edit={edit}
-                    />
-                    <ColInput
-                        input={{
-                            type: 'text',
-                            name: "job",
-                            value: data?.job
-                        }}
-                        label="권한"
-                        edit={false}
-                    />
-                </form>
+                                }}
+                                label="전화번호"
+                                edit={edit}
+                            />
+                            <ColInput
+                                input={{
+                                    type: 'text',
+                                    name: "job",
+                                    value: data?.job
+                                }}
+                                label="권한"
+                                edit={false}
+                            />
+                        </form>
+                        :
+                        <ProfileBody data={data} />
+                }
+
             </BaseContainer>
         </>
     )
