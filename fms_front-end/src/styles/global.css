@@ -25,6 +25,7 @@
 
   --color-main: #1a84b6;
 
+  --color-modalback: #00000046;
 
   /*
     Paddings
@@ -52,6 +53,9 @@
   --size-sub: 0.7rem;
   --size-default: 0.8rem;
   --size-title: 1rem;
+  
+
+  --size-icon:1rem;
 }
 
 * {
@@ -206,6 +210,10 @@ img {
   -khtml-user-drag: none;
   -moz-user-drag: none;
   -o-user-drag: none;
+}
+
+svg:hover{
+  cursor: pointer;
 }
 
 input,

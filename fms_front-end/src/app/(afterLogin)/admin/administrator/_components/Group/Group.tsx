@@ -1,8 +1,9 @@
 'use client'
-
+import OptionIcon from '../../../../../../../public/images/three-dots-vertical.svg'
 import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base"
 import Style from './Group.module.css'
 import { useState } from "react"
+import { OptionButton } from '@/app/(afterLogin)/_components/OptionButtons/OptionButton'
 
 
 export interface GroupProps {
@@ -23,7 +24,9 @@ export const GroupContainer = ({ groups }: { groups: GroupProps[] }) => {
         <>
             <BaseContainer
                 header={
-                    <BaseHeader title="그룹" />
+                    <BaseHeader title="그룹">
+                        <OptionButton/>
+                    </BaseHeader>
                 }
             >
                 <ul className={Style.col}>
@@ -47,9 +50,6 @@ export const GroupContainer = ({ groups }: { groups: GroupProps[] }) => {
 
 
 const Group = ({ group, activeid, onChangeActive }: { group: GroupProps; activeid: number; onChangeActive: (id: number) => void }) => {
-
-
-
     return (
         <>
             <li

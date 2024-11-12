@@ -2,7 +2,7 @@ import Edit from '../../../../../public/images/pencil-square.svg'
 import Cancel from '../../../../../public/images/x-lg.svg'
 
 //수정해야함
-import Save from '../../../../../public/images/eye.svg'
+import Save from '../../../../../public/images/check-lg.svg'
 import Styles from './EditButton.module.css'
 
 
