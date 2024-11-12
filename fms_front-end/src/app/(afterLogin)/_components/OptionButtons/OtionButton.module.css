@@ -1,10 +1,39 @@
 
+.container{
+    position: relative;
+}
 
+.list{
+    position: absolute;
+    top: 30px;
+    right: 0;
 
+    border-radius: var(--radius-default);
+    padding : var(--pad-default);
+    
+    background-color: white;
+    box-shadow: var(--bs-default);
+}
 
+.col{
+    display: flex;
+    flex-direction: column;
+    gap: var(--pad-default);
+}
 
+.row{
+    display: flex;
+    gap: var(--pad-default);
+}
 
+.row:hover{
+    cursor: pointer;
+}
 
-
-
-
+.text{
+    display: flex;
+    align-items: center;
+    font-size: var(--size-default);
+    color : var(--color-gr1);
+    white-space: nowrap;
+}
