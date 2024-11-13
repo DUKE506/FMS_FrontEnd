@@ -1,3 +1,4 @@
+'use client'
 import Add from '../../../../../public/images/plus-lg.svg'
 import Delete from '../../../../../public/images/trash.svg'
 import Edit from '../../../../../public/images/pencil-square.svg'
@@ -5,7 +6,11 @@ import Options from '../../../../../public/images/three-dots-vertical.svg'
 import { useState } from 'react'
 import styles from './OtionButton.module.css'
 
-export const OptionButton = () =>{
+interface OptionButtonProps{
+    add : () => void
+}
+
+export const OptionButton = ({add}:OptionButtonProps) =>{
     const [active, setActive] = useState<boolean>(false);
     const [isWork, setIsWork] = useState<boolean>(false);
 
@@ -21,7 +26,7 @@ export const OptionButton = () =>{
             />
             {
                 active ?
-                <OptionsList/>
+                <OptionsList add={add}/>
                 :
                 null
             }
@@ -30,10 +35,10 @@ export const OptionButton = () =>{
 }
 
 //옵션 : 추가, 수정, 삭제
-const OptionsList = () => {
+const OptionsList = ({add}:OptionButtonProps) => {
     return(
         <ul className={`${styles.col} ${styles.list}`}>
-            <li className={`${styles.row}`}>
+            <li className={`${styles.row}`} onClick={add}>
                 <Add 
                 style={{ fill: '#606060', width: 'var(--size-icon)', height: 'var(--size-icon)' }}
                 />

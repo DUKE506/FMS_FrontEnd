@@ -1,0 +1,19 @@
+.button {
+    padding: var(--pad-half);
+    border-radius: var(--radius-min);
+
+    white-space: nowrap;
+    color: white;
+    /* background-color: var(--color-gr1); */
+    background-color: var(--color-gr3);
+    transition: all .3s;
+}
+
+.width {
+    width: 100%;
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: var(--color-gr1);
+}

@@ -1,29 +1,48 @@
-import { InputHTMLAttributes } from "react";
+'use client'
+import { InputHTMLAttributes, ReactNode } from "react";
 import styles from './InputModal.module.css'
+import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base";
+import Button2 from "@/components/Button2/Button2";
 
 
 
 interface InputModalProps{
     title : string;
+    submitTitle : string;
     inputOption: InputHTMLAttributes<HTMLInputElement>
 }
 
-export const InputModal = async({title, inputOption} : InputModalProps) => {
+export const InputModal = ({title,submitTitle, inputOption} : InputModalProps) => {
+    const handleBtnAction= () =>{
+
+    }
     return(
         <div className={styles.modal}>
-            <span className={styles.title}>
-                {title}
-            </span>
-            <input className={styles.input} {...inputOption}/>
+            <BaseContainer
+            header={
+                <BaseHeader
+                title={title}
+                />
+            }
+            >
+            <div className={styles.col}>
+                <input className={styles.input} {...inputOption}/>
+            </div>
+            <div>
+                <Button2 label={submitTitle} onClick={handleBtnAction} />
+            </div>
+            </BaseContainer>
         </div>
     )
 }
 
-
-export const BackGround = async({}) =>{
+interface BackgroundProps{
+    children : ReactNode
+}
+export const BackGround = ({children} : BackgroundProps) =>{
     return(
         <div className={styles.background}>
-
+            {children}
         </div>
     )
 }

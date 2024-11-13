@@ -4,6 +4,7 @@ import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base"
 import Style from './Group.module.css'
 import { useState } from "react"
 import { OptionButton } from '@/app/(afterLogin)/_components/OptionButtons/OptionButton'
+import { BackGround, InputModal } from '@/app/(afterLogin)/_components/InputModal/InputModal'
 
 
 export interface GroupProps {
@@ -15,9 +16,14 @@ export interface GroupProps {
 
 export const GroupContainer = ({ groups }: { groups: GroupProps[] }) => {
     const [active, setActive] = useState<number>(0);
+    const [add, setAdd] = useState<boolean>(false);
 
     const handleChangeActive = (id: number) => {
         setActive(id === active ? 0 : id);
+    }
+
+    const handleChangeAdd = () =>{
+        setAdd(!add);
     }
 
     return (
@@ -25,7 +31,9 @@ export const GroupContainer = ({ groups }: { groups: GroupProps[] }) => {
             <BaseContainer
                 header={
                     <BaseHeader title="그룹">
-                        <OptionButton/>
+                        <OptionButton
+                        add={handleChangeAdd}
+                        />
                     </BaseHeader>
                 }
             >
@@ -44,6 +52,21 @@ export const GroupContainer = ({ groups }: { groups: GroupProps[] }) => {
                     }
                 </ul>
             </BaseContainer>
+            {
+                add ?
+                <BackGround>
+                    <InputModal 
+                    title='그룹 추가' 
+                    submitTitle='추가'
+                    inputOption={{
+                        type:'text',
+                        placeholder:'그룹명을 입력해주세요.'
+                    }}
+                    />
+                </BackGround>
+                :
+                null
+            }
         </>
     )
 }
