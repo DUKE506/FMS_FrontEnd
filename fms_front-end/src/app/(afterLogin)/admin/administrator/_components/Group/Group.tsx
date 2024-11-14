@@ -37,7 +37,8 @@ export const GroupContainer = ({ groups }: { groups: GroupProps[] }) => {
             alert('그룹명을 입력해주세요');
             return;
         }
-        console.log('그룹'+newGroup)
+        const group:CreateGroupDto = {name:newGroup}
+        CreateGroup(group)
     }
 
     return (
