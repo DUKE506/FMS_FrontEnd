@@ -3,6 +3,10 @@
   /*
     Colors
     */
+
+  --color-btn-red : #8f3737;
+  --color-btn-redh : #bd2424;
+
   --color-bk: #000000;
   --color-lg: #e4e4e4;
   --color-wh: #ffffff;
@@ -16,6 +20,7 @@
 
   --color-grn1: #518071;
   --color-grn1h: #5180712e;
+  --color-grn1h2: #2a9472;
   --color-grn1-1: #51807125;
   --color-grn2: #9bca96;
   --color-grn3: #c1d8b8;

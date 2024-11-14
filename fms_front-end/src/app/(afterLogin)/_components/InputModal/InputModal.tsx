@@ -1,21 +1,37 @@
 'use client'
-import { InputHTMLAttributes, ReactNode } from "react";
+import { InputHTMLAttributes, ReactNode, useEffect } from "react";
 import styles from './InputModal.module.css'
 import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base";
 import Button2 from "@/components/Button2/Button2";
+import { ColInput } from "../Input/Input";
 
 
 
 interface InputModalProps{
     title : string;
     submitTitle : string;
-    inputOption: InputHTMLAttributes<HTMLInputElement>
+    inputOption: InputHTMLAttributes<HTMLInputElement>;
+    value : string;
+    onChange : React.Dispatch<React.SetStateAction<string>>;
+    submit :  () => void;
+    close : () => void;
 }
 
-export const InputModal = ({title,submitTitle, inputOption} : InputModalProps) => {
-    const handleBtnAction= () =>{
+export const InputModal = ({title,submitTitle,inputOption,value,submit,close,onChange} : InputModalProps) => {
+    
+    useEffect(()=>{
+        console.log('asdasd'+value)
+    },[value])
 
+    /**
+     * 입력값
+     * @param e 
+     */
+    const handleInputChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        onChange(value);
     }
+
     return(
         <div className={styles.modal}>
             <BaseContainer
@@ -26,11 +42,13 @@ export const InputModal = ({title,submitTitle, inputOption} : InputModalProps) =
             }
             >
             <div className={styles.col}>
-                <input className={styles.input} {...inputOption}/>
+                <ColInput input={{...inputOption,onChange:(e)=>handleInputChanges(e)}} edit/>
+                <div className={styles.row}>
+                <Button2 label={submitTitle} onClick={submit} />
+                <Button2 label="취소" color="red" onClick={close} />
+                </div>
             </div>
-            <div>
-                <Button2 label={submitTitle} onClick={handleBtnAction} />
-            </div>
+            
             </BaseContainer>
         </div>
     )

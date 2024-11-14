@@ -24,6 +24,12 @@
 .col{
     display: flex;
     flex-direction: column;
+    gap: var(--pad-default);
+}
+
+.row{
+    display: flex;
+    gap: var(--pad-default);
 }
 
 .title{

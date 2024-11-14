@@ -51,6 +51,7 @@ const ManagerClient = () => {
         dispatch(getAllAdminList());
     }, [])
 
+
     return (
         <div className={`${Styles.row} ${Styles.container}`}>
             <div className={`${Styles.flex1}`}>

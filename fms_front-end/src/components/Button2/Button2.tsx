@@ -3,14 +3,15 @@ import styles from "./Button2.module.css"
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     label: string;
+    color? : string;
 }
 
 
 
-const Button2 = ({ label, ...props }: ButtonProps) => {
+const Button2 = ({ label,color, ...props }: ButtonProps) => {
     return (
         <button
-            className={styles.button}
+            className={`${styles.button} ${styles[color ?? "default"]}`}
             {...props}
         >
             {label}
