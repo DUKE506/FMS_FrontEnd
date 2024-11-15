@@ -18,10 +18,6 @@ interface InputModalProps{
 }
 
 export const InputModal = ({title,submitTitle,inputOption,value,submit,close,onChange} : InputModalProps) => {
-    
-    useEffect(()=>{
-        console.log('asdasd'+value)
-    },[value])
 
     /**
      * 입력값
