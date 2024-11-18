@@ -2,185 +2,115 @@
 import Add from '../../../../../public/images/plus-lg.svg'
 import Delete from '../../../../../public/images/trash.svg'
 import Edit from '../../../../../public/images/pencil-square.svg'
-import Options from '../../../../../public/images/three-dots-vertical.svg'
+import KebabMenu from '../../../../../public/images/three-dots-vertical.svg'
 import Save from '../../../../../public/images/check-lg.svg'
 import Cancel from '../../../../../public/images/x-lg.svg'
 import { ReactNode, useEffect, useState } from 'react'
 import styles from './OptionButton.module.css'
+import LucideIcon from '../LucideIcon/LucideIcon'
 
+type OptionType = 'create' | 'edit' | 'delete' 
+
+interface OptionProps {
+    type : OptionType,
+    icon : ReactNode,
+    label : string,
+    onClick? : ()=>void,
+}
 interface OptionButtonProps{
-    create : boolean;
-    edit : boolean;
-    remove : boolean;
-
-    add : () => void;
-    update : () => void;
-    del : () => void;
+    options:Array<OptionType>;
+    onAction  : {
+        create? : () => void;
+        edit? : () => void;
+        delete? : () => void;
+    };
+    disabled? :boolean;
+    className? :string;
 }
 
-export const OptionButton = ({create, edit,remove,add,update,del}:OptionButtonProps) =>{
-    const [active, setActive] = useState<boolean>(false);
-    const [isWork, setIsWork] = useState<boolean>(false);
-    const options:OptionProps[] = [];
-    useEffect(()=>{
-        if(create){
-            options.push({
-                icon: <Add style={{ fill: '#606060', width: 'var(--size-icon)', height: 'var(--size-icon)' }}/>,
-                title:'추가',
-            })
-        }
-        if(edit){
-            options.push({
-                icon: <Edit style={{ fill: '#606060', width: 'var(--size-icon)', height: 'var(--size-icon)' }}/>,
-                title:'수정',
-            })
-        }
-        if(remove){
-            options.push({
-                icon: <Delete style={{ fill: '#606060', width: 'var(--size-icon)', height: 'var(--size-icon)' }}/>,
-                title:'삭제',
-            })
-        }
-    },[])
-    //리스트 활성화-비활성화
-    const handleOptionsClick = () =>{
-        setActive(!active)
+export const OptionButton = ({options, onAction,disabled,className=''}:OptionButtonProps) =>{
+    const [isOpen, setIsOpen] = useState(false)
+    const [isEditing, setIsEditing] = useState(false)
+
+    const defaultOptions:Record<OptionType, OptionProps>={
+        create : {
+            type:'create',
+            label : '추가',
+            icon : <LucideIcon name="Plus" size={18}/>,
+            onClick : () => {
+                onAction.create?.()
+                setIsOpen(false)
+            }
+        },
+        edit : {
+            type:'edit',
+            label : '수정',
+            icon : <LucideIcon name='SquarePen' size={18}/>,
+            onClick : () => {
+                setIsEditing(true)
+                onAction.edit?.()
+                setIsOpen(false)
+            }
+        },
+        delete : {
+            type:'delete',
+            label : '삭제',
+            icon : <LucideIcon name='Trash2' size={18}/>,
+            onClick : () => {
+                onAction.delete?.()
+                setIsOpen(false)
+            }
+        },
     }
 
-    //수정, 삭제 모드 활성화-비활성화
-    const handleWork = () => {
-        setIsWork(!isWork);
-        update();
-        del();
+    const activeOptions = options
+    .filter(type => defaultOptions[type])
+    .map(type => defaultOptions[type])
+
+    const handleSave = () => {
+        setIsEditing(false)
+        onAction.edit?.()
+    }
+    
+    const handleCancel = () => {
+        onAction.edit?.()
+        onAction.delete?.()
+        setIsEditing(false)
     }
 
     
-
-
     return(
         <div className={styles.container}>
             {
-                !isWork ?
-                <Options 
-                style={{ fill: '#606060', width: 'var(--size-icon)', height: 'var(--size-icon)' }}
-                onClick={handleOptionsClick}
-                />
+                !isEditing ?
+                <LucideIcon name="EllipsisVertical"  onClick={() => setIsOpen(!isOpen)}/>
                 :
                 <div className={styles.row}>
-                    <div >
-                        <Save
-                        style={{ fill: '#606060', width: 'var(--size-icon)', height: 'var(--size-icon)' }}
-                        />
-                    </div>
-                    <div onClick={handleWork}>
-                        <Cancel
-                        style={{ fill: 'red', width: 'var(--size-icon)', height: 'var(--size-icon)' }}
-                        />
-                    </div>
-                    
+                    <LucideIcon name='Save' onClick={handleSave}/>
+                    <LucideIcon name='X' color='delete' onClick={handleCancel}/>
                 </div>
             }
             
             {
-                active ?
-                <OptionsList 
-                add={add} 
-                update={update}
-                del={del}
-                onWorkMode={handleWork}
-                onOptionListActive={handleOptionsClick}
-                />
-                :
-                null
+                isOpen &&(
+                    <ul className={`${styles.col} ${styles.list}`}>
+                    {
+                        activeOptions.map((option,idx)=>{
+                            return(
+                                <li className={`${styles.row}`} onClick={option.onClick}>
+                                    {option.icon}
+                                    <span className={`${styles.text}`}>
+                                        {option.label}
+                                    </span>
+                                </li>
+                            )
+                        })
+                            
+                    }
+                    </ul>
+                )
             }
         </div>
     )
 }
 
-interface OptionListProps {
-    add : () => void,
-    update : ()=> void,
-    del : ()=> void,
-
-    onWorkMode : ()=>void,
-    onOptionListActive : () => void,
-}
-
-//옵션 : 추가, 수정, 삭제
-const OptionsList = ({
-    add,
-    update,
-    del,
-
-    onWorkMode,
-    onOptionListActive
-
-}:OptionListProps) => {
-    //수정 및 삭제 클릭 시 활성된 list닫기, 목록표시 -> 편집모드로 변경
-    const handleWork = () =>{
-        onWorkMode();
-        onOptionListActive();
-    }
-
-    //수정모드
-    const handelUpdate = () => {
-        update()
-        handleWork()
-    }
-
-    //삭제모드
-    const handelDel = () => {
-        del();
-        handleWork();
-    }
-
-    return(
-        <ul className={`${styles.col} ${styles.list}`}>
-            {
-
-            }
-            {/* <li className={`${styles.row}`} onClick={add}>
-                <Add 
-                style={{ fill: '#606060', width: 'var(--size-icon)', height: 'var(--size-icon)' }}
-                />
-                <span className={`${styles.text}`}>
-                    추가
-                </span>
-            </li>
-            <li className={`${styles.row}`} onClick={handelUpdate}>
-                <Edit
-                style={{ fill: '#606060', width: 'var(--size-icon)', height: 'var(--size-icon)' }}
-                />
-                <span className={`${styles.text}`}>
-                    수정
-                </span>
-            </li>
-            <li className={`${styles.row}`} onClick={handelDel}>
-                <Delete
-                style={{ fill: '#606060', width: 'var(--size-icon)', height: 'var(--size-icon)' }}
-                />
-                <span className={`${styles.text}`}>
-                    삭제
-                </span>
-            </li> */}
-        </ul>
-    )
-}
-
-interface OptionProps {
-    icon : ReactNode,
-    title : string,
-    onClick? : ()=>void,
-}
-
-const Option = ({icon,title,onClick} : OptionProps) =>{
-
-    return(
-        <li className={`${styles.row}`} onClick={onClick}>
-        {icon}
-        <span className={`${styles.text}`}>
-            {title}
-        </span>
-    </li>
-    )
-}

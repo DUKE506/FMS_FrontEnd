@@ -1,9 +1,10 @@
-import Edit from '../../../../../public/images/pencil-square.svg'
-import Cancel from '../../../../../public/images/x-lg.svg'
+// import Edit from '../../../../../public/images/pencil-square.svg'
+// import Cancel from '../../../../../public/images/x-lg.svg'
 
-//수정해야함
-import Save from '../../../../../public/images/check-lg.svg'
+// //수정해야함
+// import Save from '../../../../../public/images/check-lg.svg'
 import Styles from './EditButton.module.css'
+import LucideIcon from '../LucideIcon/LucideIcon';
 
 
 interface EditButtonProps {
@@ -20,39 +21,12 @@ export const EditButtons = ({ edit, onCancel, onEdit, onUpdate }: EditButtonProp
                 edit
                     ?
                     <div className={Styles.row}>
-                        <UpdateBtn onClick={onUpdate} />
-                        <CancelBtn onClick={onCancel} />
+                        <LucideIcon name='Save'onClick={onUpdate}/>
+                        <LucideIcon name='X' onClick={onCancel} color='delete'/>
                     </div>
-
-
                     :
-                    <EditBtn onClick={onEdit} />
+                    <LucideIcon name="SquarePen" onClick={onEdit} />
             }
-        </div>
-    )
-}
-
-
-const EditBtn = ({ onClick }: { onClick: () => void }) => {
-    return (
-        <div className={Styles.icon} onClick={onClick}>
-            <Edit width='100%' height='100%' fill='#606060' />
-        </div>
-    )
-}
-
-const UpdateBtn = ({ onClick }: { onClick: () => void }) => {
-    return (
-        <div className={Styles.icon} onClick={onClick}>
-            <Save width='100%' height='100%' fill='#606060' />
-        </div>
-    )
-}
-
-const CancelBtn = ({ onClick }: { onClick: () => void }) => {
-    return (
-        <div className={Styles.icon} onClick={onClick}>
-            <Cancel width='100%' height='100%' fill='red' />
         </div>
     )
 }

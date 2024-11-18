@@ -1,6 +1,6 @@
 
 import reducer from "../place/placeSlice";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getGroupAction } from "./groupAction";
 import { GroupDto } from "@/types/group/group";
 
@@ -26,7 +26,13 @@ const groupSlice = createSlice({
     name : 'group',
     initialState,
     reducers : {
-
+        updateGroup : (state,action:PayloadAction<{name : keyof GroupDto, value: string}>) => {
+            const {name, value} = action.payload;
+            const group = state.data.find(g => g.name === name);
+            if(group){
+                group[name] = value;
+            }
+        }
     },
     extraReducers: (builder) =>{
         builder

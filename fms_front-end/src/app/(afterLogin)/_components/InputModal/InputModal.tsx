@@ -38,7 +38,7 @@ export const InputModal = ({title,submitTitle,inputOption,value,submit,close,onC
             }
             >
             <div className={styles.col}>
-                <ColInput input={{...inputOption,onChange:(e)=>handleInputChanges(e)}} edit/>
+                <ColInput input={{value:value ,...inputOption,onChange:(e)=>handleInputChanges(e)}} edit/>
                 <div className={styles.row}>
                 <Button2 label={submitTitle} onClick={submit} />
                 <Button2 label="취소" color="red" onClick={close} />

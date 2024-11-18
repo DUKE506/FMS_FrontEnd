@@ -15,31 +15,33 @@ import { AppDispatch } from '@/lib/store'
 export const GroupContainer = ({ groups }: { groups: GroupDto[] }) => {
     const dispatch = useDispatch<AppDispatch>();
     const [active, setActive] = useState<number>(0);
+    //추가 모달 띄우기
     const [add, setAdd] = useState<boolean>(false);
+    //수정 모드 변경
     const [update, setUpdate] = useState<boolean>(false);
+    //수정 모드 시 수정모달 띄우기
     const [updateActive, setUpdateActive]= useState<boolean>(false);
     const [del, setDel] = useState<boolean>(false);
+    //생성 그룹 state
     const [newGroup, setNewGroup] = useState<string>('');
+    //수정 그룹 state
+    const [updateGroup, setUpdateGroup] = useState<string>('');
 
     const handleChangeActive = (id: number) => {
         setActive(id === active ? 0 : id);
     }
 
-    //그룹 추가 모드 변경
-    const handleChangeAdd = () =>{
-        setAdd(!add);
-    }
-
     //그룹 수정 모드 변경
-    const handleChangeUpdate = () =>{
-        setUpdate(!update);
-    }
+    // const handleUpdate = () =>{
+    //     setUpdate(!update);
+    // }
     //그룹 수정 모달 활성화
-    const handleActiveUpdate = () => {
+    const handleActiveUpdate = (id:number) => {
         if(!update){
             return
         }
         setUpdateActive(!updateActive);
+        setUpdateGroup(groups.find(g => g.id == id)?.name ?? '')
     }
 
     //그룹 삭제 모드 변경
@@ -57,7 +59,25 @@ export const GroupContainer = ({ groups }: { groups: GroupDto[] }) => {
         }
         const group:CreateGroupDto = {name:newGroup}
         await dispatch(createGroupAction(group));
-        handleChangeAdd();
+        handleCreate();
+    }
+
+    //그룹 수정 update
+    const handleUpdate = async () => {
+        console.log('수정' + updateGroup)
+    }
+
+    const handleCreate = () => {
+        setAdd(!add);
+    }
+
+
+    const handleEdit = () => {
+        setUpdate(!update);
+    }
+
+    const handleDelete = () => {
+
     }
 
     return (
@@ -66,12 +86,12 @@ export const GroupContainer = ({ groups }: { groups: GroupDto[] }) => {
                 header={
                     <BaseHeader title="그룹">
                         <OptionButton
-                        create={true}
-                        edit={true}
-                        delete={true}
-                        add={handleChangeAdd}
-                        update={handleChangeUpdate}
-                        del={handleChangeDel}
+                        options={['create', 'edit', 'delete']}
+                        onAction={{
+                            create: () => handleCreate(),
+                            edit: () => handleEdit(),
+                            delete: () => handleDelete()
+                        }}
                         />
                     </BaseHeader>
                 }
@@ -106,7 +126,7 @@ export const GroupContainer = ({ groups }: { groups: GroupDto[] }) => {
                         placeholder:'그룹명을 입력해주세요.'
                     }}
                     submit={handleSubmit}
-                    close={handleChangeAdd}
+                    close={handleCreate}
                     />
                 </BackGround>
                 :
@@ -118,14 +138,15 @@ export const GroupContainer = ({ groups }: { groups: GroupDto[] }) => {
                     <InputModal 
                     title='그룹 수정' 
                     submitTitle='수정'
-                    value={newGroup}
-                    onChange={setNewGroup}
+                    value={updateGroup}
+                    onChange={setUpdateGroup}
                     inputOption={{
                         type:'text',
-                        placeholder:'그룹명을 입력해주세요.'
+                        placeholder:'그룹명을 입력해주세요.',
+                        name:'name',
                     }}
-                    submit={handleSubmit}
-                    close={handleActiveUpdate}
+                    submit={handleUpdate}
+                    close={()=>setUpdateActive(!updateActive)}
                     />
                 </BackGround>
                 :
@@ -140,16 +161,17 @@ const Group = ({
     group, activeid, onChangeActive, update, setUpdate 
 }: { group: GroupDto; activeid: number; 
     onChangeActive: (id: number) => void; update:boolean;
-    setUpdate:()=>void;
+    setUpdate:(id:number)=>void;
     }) => {
 
+    // 클릭 시 모달 창 띄우기
     const handleUpdateGroup = (id : number) =>{
         onChangeActive(id);
         if(update){
-            setUpdate();
+            setUpdate(id);
         }
-        
     }
+
     return (
         <>
             <li
