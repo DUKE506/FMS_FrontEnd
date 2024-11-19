@@ -13,6 +13,8 @@ import { getAllPlaceListAction } from "@/lib/features/place/placeActions";
 import { ConverterTransferList } from "@/utills/transformers";
 import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base";
 import { RadioBox, RadioBoxDataProps } from "../../../_components/RadioBox/RadioBox";
+import { findAllGroup } from "@/app/api/group/group";
+import { getGroupAction } from "@/lib/features/group/groupAction";
 
 
 
@@ -33,6 +35,7 @@ const permObject: RadioBoxDataProps[] = [
 const AdminAddClient = () => {
     const dispatch = useDispatch<AppDispatch>();
     const admin = useSelector((state: RootState) => state.admin);
+    const group = useSelector((state:RootState)=> state.groupAll)
     const place = useSelector((state: RootState) => state.placeList);
     const [transferData, setTransferData] = useState<TransferItem[]>([]);
     // const [selectPlace, setSelectPlace] = useState<TransferItem[]>([]);
@@ -41,6 +44,7 @@ const AdminAddClient = () => {
     //전체 사업장 조회
     useEffect(() => {
         dispatch(getAllPlaceListAction());
+        dispatch(getGroupAction());
         //언마운트
         return () => {
             dispatch(resetForm());
@@ -77,7 +81,7 @@ const AdminAddClient = () => {
         <div className={`${Styles.col} ${Styles.container}`}>
             <div className={Styles.row}>
                 <div className={Styles.flex1}>
-                    <FormContainer createAdmin={admin} />
+                    <FormContainer createAdmin={admin} group={group.data}/>
                 </div>
                 <div className={`${Styles.col} ${Styles.flex2}`}>
                     <TransferListContainer

@@ -12,7 +12,7 @@ interface InputModalProps{
     submitTitle : string;
     inputOption: InputHTMLAttributes<HTMLInputElement>;
     value : string;
-    onChange : React.Dispatch<React.SetStateAction<string>>;
+    onChange : React.Dispatch<React.SetStateAction<string>> | ((value:string) => void);
     submit :  () => void;
     close : () => void;
 }

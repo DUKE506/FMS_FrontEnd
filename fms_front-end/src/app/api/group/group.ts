@@ -1,5 +1,5 @@
 import { CreateGroupDto, GroupDto } from "@/types/group/group";
-import { ApiResponse, get, post } from "..";
+import { ApiResponse, get, patch, post } from "..";
 
 
 
@@ -21,4 +21,13 @@ export const createGroup = async (createGroup: CreateGroupDto): Promise<ApiRespo
  */
 export const findAllGroup = async (): Promise<ApiResponse<GroupDto[]>>  => {
     return await get('group');
+}
+
+/**
+ * patch 그룹명 수정
+ * @param group 
+ * @returns 
+ */
+export const updateGroup = async(group : GroupDto) => {
+    return patch('group',group);
 }

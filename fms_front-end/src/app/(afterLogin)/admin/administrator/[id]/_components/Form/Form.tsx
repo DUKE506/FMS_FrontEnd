@@ -25,13 +25,6 @@ export const FormContainer = ({ data, edit, setEdit, onUpdate }: { data?: Admin;
                 header={
                     <BaseHeader title="관리자">
                         {
-                            // edit ?
-                            //     <div>
-                            //         <Button label="저장" onClick={onUpdate} />
-                            //         <Button label="취소" onClick={() => setEdit(false)} />
-                            //     </div>
-                            //     :
-                            //     <Button label="편집" onClick={() => setEdit(true)} />
                             <EditButtons
                                 edit={edit}
                                 onEdit={() => setEdit(true)}
@@ -83,17 +76,7 @@ export const FormContainer = ({ data, edit, setEdit, onUpdate }: { data?: Admin;
                                         label="비밀번호"
                                         edit={edit}
                                     /> : null
-                            }
-
-                            {/* <ColInput
-                            input={{
-                                type: 'text',
-                                placeholder: '비밀번호 확인',
-                            }}
-                            label="비밀번호 확인"
-                            edit
-                        /> */}
-
+                            }                            
                             <ColInput
                                 input={{
                                     type: 'text',

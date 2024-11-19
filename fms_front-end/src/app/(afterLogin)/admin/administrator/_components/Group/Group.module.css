@@ -4,6 +4,8 @@
 }
 
 .li_box {
+    display: flex;
+    justify-content: space-between;
     font-size: var(--size-default);
     padding: var(--pad-default);
     color: var(--color-gr1);
@@ -16,4 +18,23 @@
 
 .active {
     background-color: var(--color-grn1h);
+}
+
+.text{
+    display: flex;
+    align-items: center;
+}
+
+.row{
+    display: flex;
+    align-items: center;
+    gap: var(--pad-default);
+}
+
+.option {
+    opacity: 0;
+}
+
+.li_box:hover .option{
+    opacity: 1;
 }

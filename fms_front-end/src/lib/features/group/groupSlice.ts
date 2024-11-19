@@ -26,13 +26,13 @@ const groupSlice = createSlice({
     name : 'group',
     initialState,
     reducers : {
-        updateGroup : (state,action:PayloadAction<{name : keyof GroupDto, value: string}>) => {
-            const {name, value} = action.payload;
-            const group = state.data.find(g => g.name === name);
+        updateGroupName : (state,action:PayloadAction<{id:number, value: string}>) => {
+            const {id, value} = action.payload;
+            const group = state.data.find(g => g.id === id);
             if(group){
-                group[name] = value;
+                group['name'] = value;
             }
-        }
+        },
     },
     extraReducers: (builder) =>{
         builder
@@ -56,5 +56,5 @@ const groupSlice = createSlice({
     }
 })
 
-
+export const {updateGroupName} = groupSlice.actions;
 export default groupSlice.reducer;

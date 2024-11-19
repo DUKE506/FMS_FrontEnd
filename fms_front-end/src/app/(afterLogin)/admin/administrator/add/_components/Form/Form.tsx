@@ -5,14 +5,32 @@ import { createAdminProps } from "@/types/administrator/adminstrator"
 import { useDispatch } from "react-redux"
 import { AppDispatch } from "@/lib/store"
 import { updateField } from "@/lib/features/administrator/adminSlice"
+import { GroupDto } from "@/types/group/group"
+import Select, { SelectDataProps } from "@/app/(afterLogin)/_components/SelectBox/SelectBox"
+import { useEffect, useState } from "react"
+import { ConvertSelectData } from "@/utills/Selectbox"
 
-export const FormContainer = ({ createAdmin }: { createAdmin: createAdminProps }) => {
+export const FormContainer = ({ 
+    createAdmin,
+    group,
+}: { 
+    createAdmin: createAdminProps,
+    group:GroupDto[]
+}) => {
     const dispatch = useDispatch<AppDispatch>();
+    const [selectGroup, setSelectGroup] = useState<SelectDataProps>()
+    let convertGroup:SelectDataProps[] = []
+
+    useEffect(()=>{
+        convertGroup = ConvertSelectData(group);
+    },[group])
 
     const handleInputChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         dispatch(updateField({ name, value }));
     }
+
+    // const handleSelect
 
     return (
         <>
@@ -47,14 +65,6 @@ export const FormContainer = ({ createAdmin }: { createAdmin: createAdminProps }
                         label="비밀번호"
                         edit
                     />
-                    {/* <ColInput
-                        input={{
-                            type: 'text',
-                            placeholder: '비밀번호 확인',
-                        }}
-                        label="비밀번호 확인"
-                        edit
-                    /> */}
                     <ColInput
                         input={{
                             type: 'text',
@@ -65,6 +75,12 @@ export const FormContainer = ({ createAdmin }: { createAdmin: createAdminProps }
                         }}
                         label="이름"
                         edit
+                    />
+                    <Select
+                        label="그룹"
+                        data={convertGroup}
+                        select={()=>setSelectGroup}
+                        
                     />
                     <ColInput
                         input={{

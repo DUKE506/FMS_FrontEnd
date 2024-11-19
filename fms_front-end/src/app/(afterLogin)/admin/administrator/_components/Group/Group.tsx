@@ -2,81 +2,86 @@
 import OptionIcon from '../../../../../../../public/images/three-dots-vertical.svg'
 import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base"
 import Style from './Group.module.css'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { OptionButton } from '@/app/(afterLogin)/_components/OptionButtons/OptionButton'
 import { BackGround, InputModal } from '@/app/(afterLogin)/_components/InputModal/InputModal'
 import { createGroup } from '@/app/api/group/group'
 import { CreateGroupDto, GroupDto } from '@/types/group/group'
-import { useDispatch } from 'react-redux'
-import { createGroupAction, getGroupAction } from '@/lib/features/group/groupAction'
-import { AppDispatch } from '@/lib/store'
+import { useDispatch, useSelector } from 'react-redux'
+import { createGroupAction, getGroupAction, updateGroupAction } from '@/lib/features/group/groupAction'
+import { AppDispatch, RootState } from '@/lib/store'
+import { updateGroupName } from '@/lib/features/group/groupSlice'
+import { EditButtons } from '@/app/(afterLogin)/_components/EditButtons/EditButtons'
+import LucideIcon from '@/app/(afterLogin)/_components/LucideIcon/LucideIcon'
 
 
 export const GroupContainer = ({ groups }: { groups: GroupDto[] }) => {
     const dispatch = useDispatch<AppDispatch>();
+
+    const [edit,setEdit] = useState<boolean>(false);
     const [active, setActive] = useState<number>(0);
-    //추가 모달 띄우기
+    // //추가 모달 띄우기
     const [add, setAdd] = useState<boolean>(false);
     //수정 모드 변경
     const [update, setUpdate] = useState<boolean>(false);
-    //수정 모드 시 수정모달 띄우기
-    const [updateActive, setUpdateActive]= useState<boolean>(false);
-    const [del, setDel] = useState<boolean>(false);
-    //생성 그룹 state
+    // //생성 그룹 state
     const [newGroup, setNewGroup] = useState<string>('');
-    //수정 그룹 state
-    const [updateGroup, setUpdateGroup] = useState<string>('');
+    // //수정 그룹 state
+    const [updateGroup, setUpdateGroup] = useState<GroupDto>({
+        id:0,
+        name:'',
+    });
+
+    const handleChangeEditMode = () => {
+        setEdit(!edit);
+    }
 
     const handleChangeActive = (id: number) => {
         setActive(id === active ? 0 : id);
     }
 
-    //그룹 수정 모드 변경
-    // const handleUpdate = () =>{
-    //     setUpdate(!update);
-    // }
-    //그룹 수정 모달 활성화
-    const handleActiveUpdate = (id:number) => {
-        if(!update){
-            return
-        }
-        setUpdateActive(!updateActive);
-        setUpdateGroup(groups.find(g => g.id == id)?.name ?? '')
-    }
-
-    //그룹 삭제 모드 변경
-    const handleChangeDel = () =>{
-        setDel(!del);
-    }
-
-
-
-    //그룹 추가 submit
-    const handleSubmit = async () => {
+    // 그룹 추가 함수
+    const handleCreateGroup = () => {
         if(!newGroup){
-            alert('그룹명을 입력해주세요');
+            window.alert("그룹명을 입력해주세요.")
             return;
         }
-        const group:CreateGroupDto = {name:newGroup}
-        await dispatch(createGroupAction(group));
-        handleCreate();
+        const createGroup:CreateGroupDto={
+            name : newGroup
+        };
+
+        dispatch(createGroupAction(createGroup))
+        setAdd(false);
+        setNewGroup('');
     }
 
-    //그룹 수정 update
-    const handleUpdate = async () => {
-        console.log('수정' + updateGroup)
+    // 그룹 수정 모달 활성화
+    const handleUpdateGroup = (id:number) => {
+        setUpdateGroup({id, name :groups.find(g => g.id ===id )?.name ?? ''})
+        setUpdate(true);
     }
 
-    const handleCreate = () => {
-        setAdd(!add);
+    // 그룹 수정 전송 함수
+    const handleUpdateGroupSubmit = () => {
+        if(!updateGroup){
+            window.alert("그룹명을 입력해주세요.");
+            return;
+        }
+        dispatch(updateGroupAction(updateGroup))
+        setUpdate(false);
     }
 
-
-    const handleEdit = () => {
-        setUpdate(!update);
+    //그룹명 수정함수
+    const handleChangeGroupName = (name: string) => {
+        setUpdateGroup(prev=>({
+            ...prev,
+            name : name
+        }))
     }
+    
 
-    const handleDelete = () => {
+    // 그룹 삭제 함수
+    const handelDeleteGroup = () => {
 
     }
 
@@ -85,14 +90,7 @@ export const GroupContainer = ({ groups }: { groups: GroupDto[] }) => {
             <BaseContainer
                 header={
                     <BaseHeader title="그룹">
-                        <OptionButton
-                        options={['create', 'edit', 'delete']}
-                        onAction={{
-                            create: () => handleCreate(),
-                            edit: () => handleEdit(),
-                            delete: () => handleDelete()
-                        }}
-                        />
+                        <LucideIcon name='Plus' onClick={()=>setAdd(true)}/>
                     </BaseHeader>
                 }
             >
@@ -105,8 +103,10 @@ export const GroupContainer = ({ groups }: { groups: GroupDto[] }) => {
                                     group={group}
                                     onChangeActive={handleChangeActive}
                                     activeid={active}
-                                    update={update}
-                                    setUpdate={handleActiveUpdate}
+                                    update={(id)=>{
+                                        handleUpdateGroup(id)
+                                    }}
+                                    del={handelDeleteGroup}
                                 />
                             )
                         })
@@ -125,28 +125,28 @@ export const GroupContainer = ({ groups }: { groups: GroupDto[] }) => {
                         type:'text',
                         placeholder:'그룹명을 입력해주세요.'
                     }}
-                    submit={handleSubmit}
-                    close={handleCreate}
+                    submit={handleCreateGroup}
+                    close={()=>setAdd(false)}
                     />
                 </BackGround>
                 :
                 null
             }
             {
-                updateActive ?
+                update ?
                 <BackGround>
                     <InputModal 
                     title='그룹 수정' 
                     submitTitle='수정'
-                    value={updateGroup}
-                    onChange={setUpdateGroup}
+                    value={updateGroup.name ?? ''}
+                    onChange={handleChangeGroupName}
                     inputOption={{
                         type:'text',
                         placeholder:'그룹명을 입력해주세요.',
                         name:'name',
                     }}
-                    submit={handleUpdate}
-                    close={()=>setUpdateActive(!updateActive)}
+                    submit={handleUpdateGroupSubmit}
+                    close={()=>setUpdate(false)}
                     />
                 </BackGround>
                 :
@@ -158,27 +158,25 @@ export const GroupContainer = ({ groups }: { groups: GroupDto[] }) => {
 
 
 const Group = ({ 
-    group, activeid, onChangeActive, update, setUpdate 
+    group, activeid, onChangeActive,update,del
 }: { group: GroupDto; activeid: number; 
-    onChangeActive: (id: number) => void; update:boolean;
-    setUpdate:(id:number)=>void;
+    onChangeActive: (id: number) => void;
+    update:(id:number)=>void; del:(id:number)=>void;
     }) => {
 
-    // 클릭 시 모달 창 띄우기
-    const handleUpdateGroup = (id : number) =>{
-        onChangeActive(id);
-        if(update){
-            setUpdate(id);
-        }
-    }
 
     return (
         <>
             <li
                 className={`${Style.li_box} ${activeid == group.id ? Style.active : ''} `}
-                onClick={() => handleUpdateGroup(group.id)}
             >
-                {group.name}
+                <span className={Style.text}>
+                    {group.name}
+                </span>
+                <div className={`${Style.option} ${Style.row}`}>
+                    <LucideIcon name='SquarePen'onClick={()=>update(group.id)}/>
+                    <LucideIcon name='Trash2' color='delete' onClick={()=>del(group.id)}/>
+                </div>
             </li>
         </>
     )
