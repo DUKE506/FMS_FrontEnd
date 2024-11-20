@@ -1,6 +1,6 @@
 import { Admin, AdminPlaceList, createAdminProps } from "@/types/administrator/adminstrator";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createAdmin, findAdminPlace, findAllAdminList, findOneAdmin, updateAdmin, updateAdminPlace } from "@/app/api/administrator/administrator"
+import { createAdmin, findAdminPlace, findAllAdminList, findAvgAdminPlace, findOneAdmin, updateAdmin, updateAdminPlace } from "@/app/api/administrator/administrator"
 
 
 
@@ -66,11 +66,16 @@ export const getAdminPlace = createAsyncThunk(
     }
 )
 
+/**
+ * 관리자 수정
+ * --
+ */
 export const patchAdmin = createAsyncThunk(
     'admin/update',
-    async (updateAdminDto: Admin) => {
+    async (updateAdminDto: Admin,{dispatch}) => {
         try {
             const res = await updateAdmin(updateAdminDto)
+            dispatch(getAdminDetail(updateAdminDto.id))
             return res.data;
         } catch (err) {
             throw err;
@@ -78,6 +83,10 @@ export const patchAdmin = createAsyncThunk(
     }
 )
 
+/**
+ * 관리자 사업장 수정
+ * --
+ */
 export const patchAdminPlace = createAsyncThunk(
     'admin/adminplace/update',
     async ({ id, updateAdminPlaceDto }: { id: number; updateAdminPlaceDto: AdminPlaceList[] }) => {
@@ -86,6 +95,18 @@ export const patchAdminPlace = createAsyncThunk(
             return res.data;
         } catch (err) {
             throw err
+        }
+    }
+)
+
+export const getAvgAdminPlace = createAsyncThunk(
+    'admin/adminplace/avg',
+    async()=>{
+        try{
+            const res = await findAvgAdminPlace();
+            return res.data;
+        }catch(err){
+            throw err;
         }
     }
 )

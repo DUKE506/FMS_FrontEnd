@@ -19,10 +19,12 @@ export const FormContainer = ({
 }) => {
     const dispatch = useDispatch<AppDispatch>();
     const [selectGroup, setSelectGroup] = useState<SelectDataProps>()
-    let convertGroup:SelectDataProps[] = []
+    const [convertedGroups, setConvertedGroups] = useState<SelectDataProps[]>([]);
 
     useEffect(()=>{
-        convertGroup = ConvertSelectData(group);
+        setConvertedGroups(ConvertSelectData(group));
+        setSelectGroup(convertedGroups[0]);
+        dispatch(updateField({name:'group' , value:convertedGroups[0]?.id}))
     },[group])
 
     const handleInputChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +32,11 @@ export const FormContainer = ({
         dispatch(updateField({ name, value }));
     }
 
-    // const handleSelect
+    //그룹 선택
+    const handleSelectGroup = (groupId:number) => {
+        dispatch(updateField({name:'group' , value:groupId}))
+    }
+
 
     return (
         <>
@@ -78,9 +84,8 @@ export const FormContainer = ({
                     />
                     <Select
                         label="그룹"
-                        data={convertGroup}
-                        select={()=>setSelectGroup}
-                        
+                        data={convertedGroups}
+                        onSelect={(id)=>handleSelectGroup(id)}
                     />
                     <ColInput
                         input={{

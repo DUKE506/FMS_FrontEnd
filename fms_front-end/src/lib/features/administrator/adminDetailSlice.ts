@@ -2,6 +2,7 @@ import { findOneAdmin } from "@/app/api/administrator/administrator";
 import { Admin, AdminPlaceList } from "@/types/administrator/adminstrator";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getAdminDetail, patchAdmin } from "./adminAction";
+import { GroupDto } from "@/types/group/group";
 
 
 
@@ -23,7 +24,10 @@ const AdminDetailSlice = createSlice({
     name: 'adminInfo',
     initialState,
     reducers: {
-        updateAdmin: (state, action: PayloadAction<{ name: string, value: string }>) => {
+        updateAdmin: (
+            state, 
+            action: PayloadAction<{ name: string, value: string | GroupDto}>
+        ) => {
             const { name, value } = action.payload;
             state.data = {
                 ...state.data,

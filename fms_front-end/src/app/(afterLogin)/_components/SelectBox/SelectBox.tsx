@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-
+import styles from './SelectBox.module.css'
+import LucideIcon from "../LucideIcon/LucideIcon";
 
 
 export interface SelectDataProps{
@@ -10,41 +11,54 @@ export interface SelectDataProps{
 interface SelectProps{
     label? : string;
     data : SelectDataProps[];
-    select : React.Dispatch<React.SetStateAction<SelectDataProps>>;
+    onSelect : (id:number)=>void;
+    select? : SelectDataProps;
 }
 
-const Select = ({label, data, select}:SelectProps) => {
+const Select = ({label, data, onSelect,select}:SelectProps) => {
+    const [open, setOpen] = useState<boolean>(false)
     const [selected, setSelected] = useState<SelectDataProps>({
-        id:data[0]?.id,
-        name : data[0]?.name
+        id:0,
+        name : ''
     })
 
     useEffect(()=>{
-        
-    },[])
+        setSelected(select??data[0])
+    },[data])
 
     //선택 함수
     const handleSelect = (item : SelectDataProps) => {
         setSelected(item)
+        onSelect(item.id);
+    }
+
+    const handleOpen = () => {
+        setOpen(!open)
     }
     return(
-        <div>
+        <div className={`${styles.select}`} onClick={handleOpen}>
             {
                 label ?
-                <div>
+                <label className={`${styles.label}`}>
                     {label}
-                </div>
+                </label>
                 :
                 null
             }
-            <label>
-                {selected.name}
-            </label>
-            <ul>
+            <div className={`${styles.display} ${styles.row} ${open ? styles.focus : null}`}>
+                <span className={`${styles.text}`}>
+                    {selected?.name}
+                </span>
+                <span className={`${styles.icon} ${open ? styles.reverse : null}`}>
+                    <LucideIcon name='ChevronDown'strokeWidth={3}/>
+                </span>
+            </div>
+            
+            <ul className={`${styles.ul} ${open ? styles.open : null}`}>
                 {
                     data.map((item, idx) => {
                         return(
-                            <li key={item.name+idx} onClick={()=>handleSelect(item)}>
+                            <li className={`${styles.li}`} key={item.name+idx} onClick={()=>handleSelect(item)}>
                                 {item.name}
                             </li>
                         )

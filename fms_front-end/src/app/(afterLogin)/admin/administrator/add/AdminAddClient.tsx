@@ -73,6 +73,8 @@ const AdminAddClient = () => {
         dispatch(updateField({ name: 'job', value: data.value }))
     }
 
+    
+
     //관리자 등록
     const submit = async () => {
         await dispatch(submitAdmin(admin));

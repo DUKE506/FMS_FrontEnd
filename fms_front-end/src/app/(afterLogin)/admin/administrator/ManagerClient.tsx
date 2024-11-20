@@ -6,7 +6,7 @@ import { MemberContainer } from "./_components/Member/Member";
 import Styles from './page.module.css'
 import { AppDispatch, RootState } from "@/lib/store";
 import { useEffect } from "react";
-import { getAllAdminList } from "@/lib/features/administrator/adminAction";
+import { getAllAdminList, getAvgAdminPlace } from "@/lib/features/administrator/adminAction";
 import { FormContainer } from "./_components/Form/Form";
 import { AnalysisCard } from "./_components/Card/AnalysislCard";
 import { Profile } from "./_components/Profile/Profile";
@@ -18,10 +18,12 @@ const ManagerClient = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { data, loading, error } = useSelector((state: RootState) => state.adminList)
     const group = useSelector((state:RootState) => state.groupAll)
+    let avgGroup;
 
     useEffect(() => {
         dispatch(getAllAdminList());
         dispatch(getGroupAction())
+        avgGroup = dispatch(getAvgAdminPlace)
     }, [dispatch])
 
 
@@ -34,7 +36,7 @@ const ManagerClient = () => {
                 <div className={`${Styles.row} ${Styles.flex1}`}>
                     <AnalysisCard title="그룹" value={group.data.length}/>
                     <AnalysisCard title="관리자" value={data.length}/>
-                    <AnalysisCard title="관리자 평균 사업장" value={group.data.length}/>
+                    <AnalysisCard title="관리자 평균 사업장" value={Number(avgGroup)}/>
                 </div>
                 <div className={`${Styles.row} ${Styles.flex3}`}>
                     <div className={`${Styles.flex1_5}`}>

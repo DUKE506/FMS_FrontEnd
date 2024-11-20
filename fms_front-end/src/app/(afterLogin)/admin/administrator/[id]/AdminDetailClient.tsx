@@ -11,6 +11,7 @@ import Styles from './page.module.css'
 import { updatePlace } from "@/lib/features/administrator/adminPlaceSlice"
 import { AdminPlaceList } from "@/types/administrator/adminstrator"
 import { Profile } from "../_components/Profile/Profile"
+import { getGroupAction } from "@/lib/features/group/groupAction"
 
 
 
@@ -18,6 +19,8 @@ export const AdminDetailClient = ({ id }: { id: number }) => {
     const dispatch = useDispatch<AppDispatch>();
     //전체 사업장 조회
     const place = useSelector((state: RootState) => state.placeList)
+    //그룹
+    const group = useSelector((state:RootState)=> state.groupAll)
     //관리자 정보(개인정보, 관리 사업장 정보)
     const detailAdmin = useSelector((state: RootState) => state.adminDetail)
     const adminPlaces = useSelector((state: RootState) => state.adminPlace)
@@ -31,9 +34,10 @@ export const AdminDetailClient = ({ id }: { id: number }) => {
 
     // 관리자 상세 조회
     useEffect(() => {
-        dispatch(getAdminDetail(id))
-        dispatch(getAdminPlace(id))
-        dispatch(getAllPlaceListAction())
+        dispatch(getAdminDetail(id)) //관리자 단일 조회
+        dispatch(getAdminPlace(id)) //관리자 사업장 조회
+        dispatch(getGroupAction()); //그룹 전체 조회
+        dispatch(getAllPlaceListAction()) //사업장 전체 조회
     }, [])
 
     useEffect(() => {
@@ -83,6 +87,7 @@ export const AdminDetailClient = ({ id }: { id: number }) => {
                     <FormContainer
                         data={detailAdmin.data}
                         edit={formEdit}
+                        group={group.data}
                         setEdit={setFormEdit}
                         onUpdate={handleUpdateForm}
                     />

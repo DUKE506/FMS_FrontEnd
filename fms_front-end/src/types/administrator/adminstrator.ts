@@ -1,3 +1,5 @@
+import { GroupDto } from "../group/group";
+
 
 
 export interface createAdminProps {
@@ -8,6 +10,7 @@ export interface createAdminProps {
     phone: string;
     job: string;
     place: number[];
+    group:number;
 }
 
 export interface ListAdminProps {
@@ -38,5 +41,6 @@ export interface Admin {
     email: string;
     phone: string;
     job: string;
+    group : GroupDto;
     adminplaces?: number[];
 }

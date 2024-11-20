@@ -63,3 +63,11 @@ export const updateAdminPlace = async (id: number, updateAdminPlaceDto: AdminPla
     return await patch(`/admin-place/${id}`, updateAdminPlaceDto);
 }
 
+/**
+ * 관리자 사업장 평균 조회
+ * @returns 
+ */
+export const findAvgAdminPlace = async(): Promise<ApiResponse<string>> => {
+    return await get('/auth/adminplace/avg')
+}
+

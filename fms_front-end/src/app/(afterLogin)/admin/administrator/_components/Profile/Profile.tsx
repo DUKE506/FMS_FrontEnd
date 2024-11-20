@@ -62,7 +62,7 @@ export const ProfileBody = ({ data }: { data?: Admin }) => {
     const infoProps: InfoProps[] = [
         {
             title: '그룹',
-            value: '시스템 개발파트'
+            value: data?.group?.name ?? ''
         },
         {
             title: '담당 사업장',
