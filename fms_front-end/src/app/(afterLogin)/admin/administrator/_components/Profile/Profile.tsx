@@ -2,32 +2,35 @@ import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base"
 import { Admin } from "@/types/administrator/adminstrator"
 import styles from './Profile.module.css'
 import { useEffect } from "react"
-const mockupUser: Admin = {
-    id: 1,
-    account: 'alfmr506',
-    password: '1234',
-    name: '이동희',
-    email: 'ehdgml506@naver.com',
-    phone: '02-151-8139',
-    job: 'Master'
-}
-
-
-
-
-
+import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from "@/lib/store"
+import { getAdminDetail } from "@/lib/features/administrator/adminAction"
 
 export const Profile = () => {
+    const dispatch = useDispatch<AppDispatch>();
+    const {data} = useSelector((state:RootState)=>state.adminDetail)
+    const {user} = useSelector((state:RootState) => state.clickAdmin)
+    const authUser = useSelector((state:RootState) => state.authUser)
     const infoProps: InfoProps[] = [
         {
             title: '그룹',
-            value: '시스템 개발파트'
+            value: data?.group?.name ?? ''
         },
         {
             title: '담당 사업장',
-            value: '7'
+            value: data?.adminplaces?.length.toString() ?? ''
         }
     ]
+
+    useEffect(()=>{
+        console.log(authUser.user?.account)
+        if(user){
+            dispatch(getAdminDetail(user));
+        }else{
+            dispatch(getAdminDetail(authUser.user?.id ?? 0));
+        }
+        
+    },[user])
     return (
         <>
             <BaseContainer
@@ -40,15 +43,15 @@ export const Profile = () => {
                         <div className={styles.img}>
                         </div>
                         <span className={styles.name}>
-                            {mockupUser.name}
+                            {data.name}
                         </span>
                     </div>
 
                     <Info datas={infoProps} />
                     <div className={styles.sub_info}>
-                        <Text title="전화번호" value={mockupUser.phone} />
-                        <Text title="이메일" value={mockupUser.email} />
-                        <Text title="권한" value={mockupUser.job} />
+                        <Text title="전화번호" value={data.phone} />
+                        <Text title="이메일" value={data.email} />
+                        <Text title="권한" value={data.job} />
                         <Text title="상태" value="재직" />
                     </div>
 

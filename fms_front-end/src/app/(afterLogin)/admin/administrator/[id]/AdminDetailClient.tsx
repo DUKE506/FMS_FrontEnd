@@ -70,6 +70,8 @@ export const AdminDetailClient = ({ id }: { id: number }) => {
 
     //관리자 정보 update
     const handleUpdateForm = async () => {
+        console.log('그룹'+detailAdmin.data.group)
+        console.log('사용자명'+detailAdmin.data.group)
         await dispatch(patchAdmin(detailAdmin.data))
         setFormEdit(false);
     }

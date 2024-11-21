@@ -101,7 +101,7 @@ export const patchAdminPlace = createAsyncThunk(
 
 export const getAvgAdminPlace = createAsyncThunk(
     'admin/adminplace/avg',
-    async()=>{
+    async(_)=>{
         try{
             const res = await findAvgAdminPlace();
             return res.data;

@@ -29,10 +29,24 @@ export const FormContainer = ({
     const [convertedGroups, setConvertedGroups] = useState<SelectDataProps[]>([]);
 
     useEffect(()=>{
-        setConvertedGroups(ConvertSelectData(group));
-        setSelectGroup(convertedGroups.find(g => g.id === data?.group?.id))
-        dispatch(updateField({name:'group' , value:convertedGroups[0]?.id}))
-    },[group,data])
+        const converted = ConvertSelectData(group)
+        setConvertedGroups(converted);
+        
+        if(edit){
+            if(data?.group){
+                setSelectGroup(convertedGroups.find(g => g.id === data?.group?.id))
+            }else{
+                if(converted.length > 0){
+                    const defaultGroup = converted[0];
+                    setSelectGroup(defaultGroup)
+                    dispatch(updateAdmin({name:'group' , value:group[0]}))
+                }
+                
+            }
+        }
+        
+        
+    },[group,data,edit])
 
     //input 입력 메서드
     const handleInputChanges = (e: React.ChangeEvent<HTMLInputElement>) => {

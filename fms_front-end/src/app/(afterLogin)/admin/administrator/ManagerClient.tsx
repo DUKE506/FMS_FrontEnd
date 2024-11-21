@@ -5,12 +5,13 @@ import { GroupContainer } from "./_components/Group/Group";
 import { MemberContainer } from "./_components/Member/Member";
 import Styles from './page.module.css'
 import { AppDispatch, RootState } from "@/lib/store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getAllAdminList, getAvgAdminPlace } from "@/lib/features/administrator/adminAction";
 import { FormContainer } from "./_components/Form/Form";
 import { AnalysisCard } from "./_components/Card/AnalysislCard";
 import { Profile } from "./_components/Profile/Profile";
 import { getGroupAction } from "@/lib/features/group/groupAction";
+import { findAvgAdminPlace } from "@/app/api/administrator/administrator";
 
 
 
@@ -18,12 +19,20 @@ const ManagerClient = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { data, loading, error } = useSelector((state: RootState) => state.adminList)
     const group = useSelector((state:RootState) => state.groupAll)
-    let avgGroup;
+    const [avgGroup, setAvgGroup] = useState<string>('');
 
     useEffect(() => {
-        dispatch(getAllAdminList());
-        dispatch(getGroupAction())
-        avgGroup = dispatch(getAvgAdminPlace)
+        const fetchData =async()=>{
+            dispatch(getAllAdminList());
+            dispatch(getGroupAction())
+            
+            const res = await dispatch(getAvgAdminPlace())
+            const avg = res.payload as string
+            if(avg){
+                setAvgGroup(avg)
+            }
+        }
+        fetchData();
     }, [dispatch])
 
 

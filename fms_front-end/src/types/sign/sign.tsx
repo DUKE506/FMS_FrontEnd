@@ -1,3 +1,4 @@
+import { User } from "@/lib/features/auth/authSlice";
 
 
 
@@ -8,5 +9,6 @@ export interface SignInDto {
 }
 
 export interface SignSuccess{
+    user : User;
     accessToken : string;
 }

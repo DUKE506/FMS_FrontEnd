@@ -26,7 +26,7 @@ const AdminDetailSlice = createSlice({
     reducers: {
         updateAdmin: (
             state, 
-            action: PayloadAction<{ name: string, value: string | GroupDto}>
+            action: PayloadAction<{ name: string, value: string |GroupDto}>
         ) => {
             const { name, value } = action.payload;
             state.data = {

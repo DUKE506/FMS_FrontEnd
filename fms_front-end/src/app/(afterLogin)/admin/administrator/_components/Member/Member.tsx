@@ -4,6 +4,9 @@ import Link from "next/link";
 import { IconBtn } from "@/components/IconBtn/IconBtn";
 import { ListAdminProps } from "@/types/administrator/adminstrator";
 import Add from '../../../../../../../public/images/plus-lg.svg'
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/lib/store";
+import { clickUser } from "@/lib/features/administrator/adminClickAdminSlice";
 
 export const MemberContainer = ({ members }: { members: ListAdminProps[] }) => {
     return (
@@ -35,15 +38,22 @@ export const MemberContainer = ({ members }: { members: ListAdminProps[] }) => {
 }
 
 const Member = ({ member }: { member: ListAdminProps }) => {
+    const dispatch = useDispatch<AppDispatch>();
+
+    //관리자 클릭, ui프로필 들고오기 위함
+    const handleClickUser = () => {
+        dispatch(clickUser(member.id))
+    }
     return (
         <>
-            <Link href={`/admin/administrator/${member.id}`}>
-                <li className={Styles.row}>
-
+            
+                <li className={Styles.row} onClick={handleClickUser}>
                     <div className={Styles.img}></div>
                     <div className={`${Styles.between}`}>
                         <span className={Styles.text}>
-                            {member.name}
+                            <Link href={`/admin/administrator/${member.id}`}>
+                                {member.name}
+                            </Link>
                         </span>
                         <span className={Styles.subtext}>
                             부서
@@ -51,7 +61,7 @@ const Member = ({ member }: { member: ListAdminProps }) => {
                     </div>
 
                 </li>
-            </Link>
+            
         </>
     )
 }

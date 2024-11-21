@@ -2,6 +2,8 @@
 import Image from 'next/image'
 import styles from './NavProfile.module.css'
 import { useRouter } from 'next/navigation';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/lib/store';
 
 interface NavProfile{
     user:{
@@ -17,9 +19,10 @@ interface NavProfile{
 
 const NavProfile = () =>{
     const router = useRouter()
+    const user = useSelector((state:RootState) => state.authUser)
 
     const OnSignOut = () =>{
-        router.push('/login')
+        router.push('/signin')
     }
 
 
@@ -32,10 +35,10 @@ const NavProfile = () =>{
                 </div>
                 <div className={styles.info}>
                     <span className={styles.job}>
-                        Master
+                        {user.user?.role}
                     </span>
                     <span className={styles.name}>
-                        이동희
+                        {user.user?.name}
                     </span>
                 </div>
             </div>
