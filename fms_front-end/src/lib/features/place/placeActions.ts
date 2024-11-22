@@ -1,4 +1,4 @@
-import { createPlace, findAllPlaceList, findAllPlaceTable, findOnePlace, updatePlace } from "@/app/api/place/place"
+import { createPlace, findAllPlaceList, findAllPlaceTable, findOnePlace, findPlaceAdmin, updatePlace } from "@/app/api/place/place"
 import { CreatePlaceProps, DetailPlaceProps, PlaceTableProps } from "@/types/place/place.type"
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import moment from "moment";
@@ -97,6 +97,21 @@ export const getAllPlaceListAction = createAsyncThunk(
     async (thunkAPI) => {
         try{
             const res = await findAllPlaceList();
+            return res.data;
+        }catch(err){
+            throw err;
+        }
+    }
+)
+
+/**
+ * 사업장 담당 관리자 조회
+ */
+export const getPlaceAdminAction = createAsyncThunk(
+    'place/placeadmin',
+    async(placeid : number)=>{
+        try{
+            const res = await findPlaceAdmin(placeid);
             return res.data;
         }catch(err){
             throw err;

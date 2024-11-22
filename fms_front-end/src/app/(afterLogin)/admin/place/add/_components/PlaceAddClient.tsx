@@ -10,6 +10,8 @@ import Styles from './PlaceAddClient.module.css'
 import Perm from "../../_components/Perm/Perm"
 import { useEffect } from "react"
 import Link from "next/link"
+import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base"
+import { ManagerTable } from "./ManagerTable/ManagerTable"
 
 
 export const PlaceAddClient = () => {
@@ -32,6 +34,13 @@ export const PlaceAddClient = () => {
         <>
             <FormContainer />
             <Perm place={place} edit={true} mode="create"/>
+            <BaseContainer
+            header={
+                <BaseHeader title="관리자"/>
+            }
+            >
+                <ManagerTable/>
+            </BaseContainer>
             <div className={Styles.flex_left}>
                 <Link href={"/admin/place"}>
                     <Button label="버튼" onClick={submit} />

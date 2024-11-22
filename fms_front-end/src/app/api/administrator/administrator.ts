@@ -40,7 +40,7 @@ export const findOneAdmin = async (id: number): Promise<ApiResponse<Admin>> => {
  * @returns 
  */
 export const findAdminPlace = async (id: number): Promise<ApiResponse<AdminPlaceList[]>> => {
-    return await get(`/admin-place/${id}`)
+    return await get(`/admin-place/admin/${id}`)
 }
 
 /**

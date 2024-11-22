@@ -57,3 +57,23 @@ export interface PlaceListProps {
     name : string;
     contractNum: string;
 }
+
+/**
+ * 담당 관리자 조회 DTO
+ */
+export interface PlaceAdminProps {
+    //adminplace 테이블 id
+    placeAdminId: number;
+    //관리자 id
+    id : number;
+    //관리자 이름
+    name : string;
+    //관리자 그룹명
+    group : string;
+    //관리자 이메일
+    email : string;
+    //관리자 전화번호
+    phone : string;
+    //관리자 권한 수준
+    job : string;
+}
