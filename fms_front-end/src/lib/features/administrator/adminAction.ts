@@ -21,6 +21,10 @@ export const submitAdmin = createAsyncThunk(
     }
 )
 
+/**
+ * 관리자 전체 조회
+ * --
+ */
 export const getAllAdminList = createAsyncThunk(
     'administrator/findAllList',
     async () => {
@@ -72,7 +76,7 @@ export const getAdminPlace = createAsyncThunk(
  */
 export const patchAdmin = createAsyncThunk(
     'admin/update',
-    async (updateAdminDto: Admin,{dispatch}) => {
+    async (updateAdminDto: Admin, { dispatch }) => {
         try {
             const res = await updateAdmin(updateAdminDto)
             dispatch(getAdminDetail(updateAdminDto.id))
@@ -101,11 +105,11 @@ export const patchAdminPlace = createAsyncThunk(
 
 export const getAvgAdminPlace = createAsyncThunk(
     'admin/adminplace/avg',
-    async(_)=>{
-        try{
+    async (_) => {
+        try {
             const res = await findAvgAdminPlace();
             return res.data;
-        }catch(err){
+        } catch (err) {
             throw err;
         }
     }

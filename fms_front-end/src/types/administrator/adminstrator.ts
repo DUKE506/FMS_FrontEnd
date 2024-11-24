@@ -10,7 +10,7 @@ export interface createAdminProps {
     phone: string;
     job: string;
     place: number[];
-    group:number;
+    group: number;
 }
 
 export interface ListAdminProps {
@@ -19,6 +19,9 @@ export interface ListAdminProps {
     name: string;
     email: string;
     phone: string;
+    job: string;
+    group: string;
+    state: string | null
 }
 
 export interface DetailAdminProps {
@@ -41,6 +44,6 @@ export interface Admin {
     email: string;
     phone: string;
     job: string;
-    group : GroupDto;
+    group: GroupDto;
     adminplaces?: number[];
 }

@@ -15,7 +15,7 @@ export const MemberContainer = ({ members }: { members: ListAdminProps[] }) => {
                 header={<BaseHeader title="관리자">
                     <Link href='/admin/administrator/add'>
                         <Add
-                        style={{ fill: '#606060', width: 'var(--size-icon)', height: 'var(--size-icon)' }}
+                            style={{ fill: '#606060', width: 'var(--size-icon)', height: 'var(--size-icon)' }}
                         />
                     </Link>
                 </BaseHeader>}
@@ -37,6 +37,24 @@ export const MemberContainer = ({ members }: { members: ListAdminProps[] }) => {
     )
 }
 
+
+export const MemberList = ({ members }: { members: ListAdminProps[] }) => {
+    return (
+        <ul className={Styles.col}>
+            {
+                members.map((member, idx) => {
+                    return (
+                        <Member
+                            key={member.name + idx}
+                            member={member}
+                        />
+                    )
+                })
+            }
+        </ul>
+    )
+}
+
 const Member = ({ member }: { member: ListAdminProps }) => {
     const dispatch = useDispatch<AppDispatch>();
 
@@ -46,22 +64,22 @@ const Member = ({ member }: { member: ListAdminProps }) => {
     }
     return (
         <>
-            
-                <li className={Styles.row} onClick={handleClickUser}>
-                    <div className={Styles.img}></div>
-                    <div className={`${Styles.between}`}>
-                        <span className={Styles.text}>
-                            <Link href={`/admin/administrator/${member.id}`}>
-                                {member.name}
-                            </Link>
-                        </span>
-                        <span className={Styles.subtext}>
-                            부서
-                        </span>
-                    </div>
 
-                </li>
-            
+            <li className={Styles.row} onClick={handleClickUser}>
+                <div className={Styles.img}></div>
+                <div className={`${Styles.between}`}>
+                    <span className={Styles.text}>
+                        <Link href={`/admin/administrator/${member.id}`}>
+                            {member.name}
+                        </Link>
+                    </span>
+                    <span className={Styles.subtext}>
+                        부서
+                    </span>
+                </div>
+
+            </li>
+
         </>
     )
 }
