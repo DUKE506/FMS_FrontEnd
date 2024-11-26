@@ -25,16 +25,22 @@
     background-color: var(--color-grn1);
 }
 
-.li:hover .title{
+.li:hover .title,
+.li:hover svg
+{
     color :#ffffff;
+    fill: #ffffff;
 }
 
 .active{
     background-color: var(--color-grn1);
 }
 
-.active .title{
+.active .title,
+.active svg
+{
     color: #ffffff;
+    fill: #ffffff;
 }
 
 .title{
@@ -43,3 +49,4 @@
     color: var(--color-gr1);
 
 }
+

@@ -22,8 +22,8 @@ export const Modal = ({
                     <BaseHeader title={title} />
                 }
             >
-                <div className={`${styles.col}`}>
-                    <div>
+                <div className={`${styles.col} ${styles.hidden}`}>
+                    <div className={`${styles.hidden} ${styles.col}`}>
                         {children}
                     </div>
                     <div className={styles.row}>

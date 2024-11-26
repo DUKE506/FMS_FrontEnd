@@ -20,7 +20,7 @@ export interface ListAdminProps {
     email: string;
     phone: string;
     job: string;
-    group: string;
+    group: GroupDto;
     state: string | null
 }
 

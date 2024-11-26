@@ -15,7 +15,7 @@ export const createAdmin = async (createAdmin: createAdminProps): Promise<ApiRes
 }
 
 /**
- * 관리자 사업장 전체 조회
+ * 관리자 전체 조회
  * --
  * @returns 
  */

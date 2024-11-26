@@ -15,6 +15,10 @@
     height: 100%;
 }
 
+.hidden{
+    overflow: hidden;
+}
+
 .row {
     display: flex;
     gap: var(--pad-default);

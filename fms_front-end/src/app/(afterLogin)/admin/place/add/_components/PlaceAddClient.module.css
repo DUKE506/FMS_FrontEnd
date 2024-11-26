@@ -2,3 +2,10 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.list_wrap{
+    border: 1px solid var(--color-gr5);
+    border-radius: var(--radius-default);
+    height: 100%;
+    overflow: auto;
+}

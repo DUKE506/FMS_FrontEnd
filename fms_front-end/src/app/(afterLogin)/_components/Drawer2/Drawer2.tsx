@@ -61,7 +61,7 @@ const DrawerItem = ({data} :{ data : Drawer2Props }) => {
     return(
         <Link href={data.url}>
             <li className={`${Styles.li} ${isCurPatch ? Styles.active : ''}`} >
-                    <div>
+                    <div className={`${Styles.icon}`}>
                         {data.icon}
                     </div>
                     <span className={Styles.title}>

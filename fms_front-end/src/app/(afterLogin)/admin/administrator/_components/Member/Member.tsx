@@ -7,6 +7,7 @@ import Add from '../../../../../../../public/images/plus-lg.svg'
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/lib/store";
 import { clickUser } from "@/lib/features/administrator/adminClickAdminSlice";
+import { useEffect, useState } from "react";
 
 export const MemberContainer = ({ members }: { members: ListAdminProps[] }) => {
     return (
@@ -38,7 +39,28 @@ export const MemberContainer = ({ members }: { members: ListAdminProps[] }) => {
 }
 
 
-export const MemberList = ({ members }: { members: ListAdminProps[] }) => {
+export const MemberList = ({ 
+    members,
+    edit=false,
+ }: { 
+    members: ListAdminProps[];
+    edit:boolean
+ }) => {
+    const [check, setCheck] = useState<ListAdminProps[]>([])
+
+    /**
+     * 선택
+     * @param member 
+     */
+    const handleSelectMember = (member:ListAdminProps) => {
+        setCheck(prev => (
+            check.some(m => m.id ===member.id) ?
+            check.filter(m => m.id !== member.id)
+            :
+            [...prev, member]
+        ))
+    }
+
     return (
         <ul className={Styles.col}>
             {
@@ -47,6 +69,13 @@ export const MemberList = ({ members }: { members: ListAdminProps[] }) => {
                         <Member
                             key={member.name + idx}
                             member={member}
+                            onClick={
+                                edit ?
+                                ()=>handleSelectMember(member)
+                                : 
+                                null
+                            }
+                            checkItem={check}
                         />
                     )
                 })
@@ -55,17 +84,38 @@ export const MemberList = ({ members }: { members: ListAdminProps[] }) => {
     )
 }
 
-const Member = ({ member }: { member: ListAdminProps }) => {
+const Member = ({ 
+    member,
+    onClick,
+    checkItem=[],
+}: { 
+    member: ListAdminProps;
+    onClick?:(()=>void) | null;
+    checkItem? : ListAdminProps[];
+}) => {
     const dispatch = useDispatch<AppDispatch>();
+
 
     //관리자 클릭, ui프로필 들고오기 위함
     const handleClickUser = () => {
         dispatch(clickUser(member.id))
     }
+
+    const isChecked = Array.isArray(checkItem) 
+        ? checkItem.some(item => item.id === member.id) 
+        : false;
+
+
     return (
         <>
-
-            <li className={Styles.row} onClick={handleClickUser}>
+            <li 
+            className={`
+                ${Styles.row} 
+                ${Styles.li} 
+                ${isChecked ? Styles.select : null }
+                `} 
+            onClick={onClick ? onClick : handleClickUser}
+            >
                 <div className={Styles.img}></div>
                 <div className={`${Styles.between}`}>
                     <span className={Styles.text}>
@@ -74,10 +124,9 @@ const Member = ({ member }: { member: ListAdminProps }) => {
                         </Link>
                     </span>
                     <span className={Styles.subtext}>
-                        부서
+                        {member.group?.name}
                     </span>
                 </div>
-
             </li>
 
         </>

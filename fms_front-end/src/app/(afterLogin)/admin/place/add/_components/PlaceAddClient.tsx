@@ -24,6 +24,7 @@ import { getAllAdminList } from "@/lib/features/administrator/adminAction"
 export const PlaceAddClient = () => {
     const [addModal, setAddModal] = useState<boolean>(false);
     const [adminList, setAdminList] = useState<ListAdminProps[]>([]);
+    const [checkAdmin, setCheckAdmin] = useState<ListAdminProps[]>([]);
     const dispatch = useDispatch<AppDispatch>()
     const place = useSelector((state: RootState) => state.place)
 
@@ -81,7 +82,9 @@ export const PlaceAddClient = () => {
             {
                 addModal ?
                     <BackGround>
-                        <Modal title="관리자 추가" onCancel={() => setAddModal(false)}>
+                        <Modal 
+                        title="관리자 추가" 
+                        onCancel={() => setAddModal(false)}>
                             <ColInput
                                 input={{
                                     type: 'text',
@@ -89,7 +92,9 @@ export const PlaceAddClient = () => {
                                 }}
                                 edit
                             />
-                            <MemberList members={adminList} />
+                            <div className={`${Styles.list_wrap}`}>
+                                <MemberList members={adminList} edit />
+                            </div>
                         </Modal>
                     </BackGround>
                     :
