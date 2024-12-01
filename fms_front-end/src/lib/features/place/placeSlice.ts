@@ -2,6 +2,7 @@ import { CreatePlaceProps } from '@/types/place/place.type';
 import { RootState } from '@/lib/store'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { submitPlace } from './placeActions';
+import { Admin, ListAdminProps } from '@/types/administrator/adminstrator';
 
 const initialState: CreatePlaceProps = {
   name: '',
@@ -21,13 +22,14 @@ const initialState: CreatePlaceProps = {
   securityPerm: false,
   energyPerm: false,
   vocPerm: false,
+  user: [],
 };
 
 const placeSlice = createSlice({
   name: 'place',
   initialState,
   reducers: {
-    updateField: (state, action: PayloadAction<{ name: string; value: string | Date | boolean }>) => {
+    updateField: (state, action: PayloadAction<{ name: string; value: string | Date | boolean | ListAdminProps[] }>) => {
       const { name, value } = action.payload;
       return { ...state, [name]: value };
     },

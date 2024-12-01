@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { FormContainer } from "./Form/Form"
 import { AppDispatch, RootState } from "@/lib/store"
 import { submitPlace } from "@/lib/features/place/placeActions"
-import { resetForm } from "@/lib/features/place/placeSlice"
+import { resetForm, updateField } from "@/lib/features/place/placeSlice"
 import Button from "@/components/Button/Button"
 import Styles from './PlaceAddClient.module.css'
 import Perm from "../../_components/Perm/Perm"
@@ -25,6 +25,7 @@ export const PlaceAddClient = () => {
     const [addModal, setAddModal] = useState<boolean>(false);
     const [adminList, setAdminList] = useState<ListAdminProps[]>([]);
     const [checkAdmin, setCheckAdmin] = useState<ListAdminProps[]>([]);
+
     const dispatch = useDispatch<AppDispatch>()
     const place = useSelector((state: RootState) => state.place)
 
@@ -54,7 +55,9 @@ export const PlaceAddClient = () => {
 
     //관리자 추가 모달 활성화
     const handleAddModal = () => {
-
+        //추가할 관리자
+        dispatch(updateField({ name: 'user', value: checkAdmin }))
+        setAddModal(false);
     }
 
     return (
@@ -71,7 +74,7 @@ export const PlaceAddClient = () => {
                     </BaseHeader>
                 }
             >
-                <ManagerTable />
+                <ManagerTable members={place.user} />
             </BaseContainer>
             <div className={Styles.flex_left}>
                 <Link href={"/admin/place"}>
@@ -82,9 +85,10 @@ export const PlaceAddClient = () => {
             {
                 addModal ?
                     <BackGround>
-                        <Modal 
-                        title="관리자 추가" 
-                        onCancel={() => setAddModal(false)}>
+                        <Modal
+                            title="관리자 추가"
+                            onSave={handleAddModal}
+                            onCancel={() => setAddModal(false)}>
                             <ColInput
                                 input={{
                                     type: 'text',
@@ -93,7 +97,10 @@ export const PlaceAddClient = () => {
                                 edit
                             />
                             <div className={`${Styles.list_wrap}`}>
-                                <MemberList members={adminList} edit />
+                                <MemberList
+                                    members={adminList}
+                                    onCheck={setCheckAdmin}
+                                    edit />
                             </div>
                         </Modal>
                     </BackGround>

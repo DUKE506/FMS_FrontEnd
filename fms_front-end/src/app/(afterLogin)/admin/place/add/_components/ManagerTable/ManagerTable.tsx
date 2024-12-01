@@ -1,4 +1,4 @@
-import { Body, Header, HeaderCell, HeaderRow, Table } from "@/app/(afterLogin)/_components/Table/Table"
+import { Body, Columns, Header, HeaderCell, HeaderRow, Table } from "@/app/(afterLogin)/_components/Table/Table"
 import { getAllAdminList } from "@/lib/features/administrator/adminAction"
 import { getPlaceAdminAction } from "@/lib/features/place/placeActions"
 import { AppDispatch } from "@/lib/store"
@@ -17,10 +17,14 @@ const columns = [
     { header: "재직", accessor: 'state' as const },
 ]
 
-export const ManagerTable = ({
+interface ManagerTableProps {
+    members: ListAdminProps[];
+}
 
-}: {
-    }) => {
+export const ManagerTable = ({
+    members,
+}: ManagerTableProps
+) => {
     const dispatch = useDispatch<AppDispatch>()
     const [adminList, setAdminList] = useState<ListAdminProps[]>([]);
     const [placeAdmin, setPlaceAdmin] = useState<ListAdminProps[]>([]);
@@ -34,8 +38,12 @@ export const ManagerTable = ({
         reqData();
     }, [])
 
+    useEffect(() => {
+        console.log("멤버", members)
+    }, [members])
+
     return (
-        <Table data={placeAdmin}>
+        <Table data={members}>
             <Header>
                 <HeaderRow>
                     {
@@ -50,6 +58,13 @@ export const ManagerTable = ({
                     }
                 </HeaderRow>
             </Header>
+            <Body>
+                <Columns
+                    columns={columns}
+                    onRowClick={() => { }}
+                    checkItems={placeAdmin}
+                />
+            </Body>
         </Table>
     )
 }

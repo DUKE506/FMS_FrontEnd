@@ -7,13 +7,15 @@ interface ModalProps {
     title: string;
     children: ReactNode;
     onCancel: () => void;
+    onSave: () => void;
 }
 
 
 export const Modal = ({
     title,
     children,
-    onCancel
+    onCancel,
+    onSave
 }: ModalProps) => {
     return (
         <div className={` ${styles.modal}`}>
@@ -27,7 +29,7 @@ export const Modal = ({
                         {children}
                     </div>
                     <div className={styles.row}>
-                        <Button2 label="추가" />
+                        <Button2 label="추가" onClick={onSave} />
                         <Button2 label="취소" onClick={onCancel} color="red" />
                     </div>
                 </div >

@@ -17,27 +17,11 @@ import { persistReducer, persistStore } from 'redux-persist'
 
 
 const persistConfig = {
-  key : 'root',
+  key: 'root',
   storage: sessionStorage,
-  whitelist:['authUser']
+  whitelist: ['authUser']
 }
 
-// const store = configureStore({
-//   reducer: {
-//     place: placeReducer,
-//     placeTable: placeTableReducer,
-//     placeList: placeListReducer,
-//     placeDetail: placeDetailReducer,
-//     admin: adminReduce,
-//     adminList: adminList,
-//     adminDetail: adminDetailReducer,
-//     adminPlace: adminPlaceReducer,
-//     signIn :signInReducer,
-//     groupAll : groupReducer,
-//     authUser : authReducer,
-//     clickAdmin : adminClickReducer,
-//   },
-// })
 // Combine Reducers
 const rootReducer = combineReducers({
   place: placeReducer,
@@ -54,7 +38,7 @@ const rootReducer = combineReducers({
   clickAdmin: adminClickReducer,
 });
 
-const persistedReducer = persistReducer(persistConfig,rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,

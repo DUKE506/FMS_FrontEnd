@@ -39,25 +39,33 @@ export const MemberContainer = ({ members }: { members: ListAdminProps[] }) => {
 }
 
 
-export const MemberList = ({ 
+export const MemberList = ({
     members,
-    edit=false,
- }: { 
+    onCheck,
+    edit = false,
+}: {
     members: ListAdminProps[];
-    edit:boolean
- }) => {
+    onCheck: React.Dispatch<React.SetStateAction<ListAdminProps[]>>;
+    edit: boolean
+}) => {
     const [check, setCheck] = useState<ListAdminProps[]>([])
 
     /**
      * 선택
      * @param member 
      */
-    const handleSelectMember = (member:ListAdminProps) => {
+    const handleSelectMember = (member: ListAdminProps) => {
         setCheck(prev => (
-            check.some(m => m.id ===member.id) ?
-            check.filter(m => m.id !== member.id)
-            :
-            [...prev, member]
+            check.some(m => m.id === member.id) ?
+                check.filter(m => m.id !== member.id)
+                :
+                [...prev, member]
+        ))
+        onCheck(prev => (
+            check.some(m => m.id === member.id) ?
+                check.filter(m => m.id !== member.id)
+                :
+                [...prev, member]
         ))
     }
 
@@ -71,9 +79,9 @@ export const MemberList = ({
                             member={member}
                             onClick={
                                 edit ?
-                                ()=>handleSelectMember(member)
-                                : 
-                                null
+                                    () => handleSelectMember(member)
+                                    :
+                                    null
                             }
                             checkItem={check}
                         />
@@ -84,14 +92,14 @@ export const MemberList = ({
     )
 }
 
-const Member = ({ 
+const Member = ({
     member,
     onClick,
-    checkItem=[],
-}: { 
+    checkItem = [],
+}: {
     member: ListAdminProps;
-    onClick?:(()=>void) | null;
-    checkItem? : ListAdminProps[];
+    onClick?: (() => void) | null;
+    checkItem?: ListAdminProps[];
 }) => {
     const dispatch = useDispatch<AppDispatch>();
 
@@ -101,20 +109,20 @@ const Member = ({
         dispatch(clickUser(member.id))
     }
 
-    const isChecked = Array.isArray(checkItem) 
-        ? checkItem.some(item => item.id === member.id) 
+    const isChecked = Array.isArray(checkItem)
+        ? checkItem.some(item => item.id === member.id)
         : false;
 
 
     return (
         <>
-            <li 
-            className={`
+            <li
+                className={`
                 ${Styles.row} 
                 ${Styles.li} 
-                ${isChecked ? Styles.select : null }
-                `} 
-            onClick={onClick ? onClick : handleClickUser}
+                ${isChecked ? Styles.select : null}
+                `}
+                onClick={onClick ? onClick : handleClickUser}
             >
                 <div className={Styles.img}></div>
                 <div className={`${Styles.between}`}>
