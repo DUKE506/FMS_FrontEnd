@@ -60,6 +60,11 @@ export const PlaceAddClient = () => {
         setAddModal(false);
     }
 
+    const handleCancelModal = () => {
+        setCheckAdmin([]);
+        setAddModal(false);
+    }
+
     return (
         <>
             <FormContainer />
@@ -88,7 +93,7 @@ export const PlaceAddClient = () => {
                         <Modal
                             title="관리자 추가"
                             onSave={handleAddModal}
-                            onCancel={() => setAddModal(false)}>
+                            onCancel={handleCancelModal}>
                             <ColInput
                                 input={{
                                     type: 'text',
