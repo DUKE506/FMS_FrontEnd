@@ -14,8 +14,8 @@ import authReducer from './features/auth/authSlice'
 import adminClickReducer from './features/administrator/adminClickAdminSlice'
 import sessionStorage from 'redux-persist/lib/storage/session'
 import { persistReducer, persistStore } from 'redux-persist'
-
-
+import placeAdminReduce from './features/place/placeAdminSlice'
+import placeDetail2Reducer from './features/place/placeDetailSlice2'
 const persistConfig = {
   key: 'root',
   storage: sessionStorage,
@@ -36,6 +36,8 @@ const rootReducer = combineReducers({
   groupAll: groupReducer,
   authUser: authReducer, // Only this reducer will persist
   clickAdmin: adminClickReducer,
+  placeAdmin: placeAdminReduce,
+  placeDetail2 : placeDetail2Reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

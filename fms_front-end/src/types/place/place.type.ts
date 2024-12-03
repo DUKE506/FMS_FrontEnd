@@ -1,4 +1,5 @@
 import { Admin, ListAdminProps } from "../administrator/adminstrator";
+import { GroupDto } from "../group/group";
 
 //사업장 테이블 인터페이스
 export interface PlaceTableProps {
@@ -55,6 +56,31 @@ export interface DetailPlaceProps {
     vocPerm: boolean,
 }
 
+export interface DetailPlaceInfoProps { 
+    id: number;
+    code: string;
+    name: string;
+    addr: string;
+    tel: string;
+    contractNum: string;
+    contractedAt: Date;
+    canceledAt: Date;
+    state: boolean
+}
+
+export interface DetailPlacePermProps{
+    machinePerm: boolean,
+    electricPerm: boolean,
+    liftPerm: boolean,
+    firePerm: boolean,
+    constructPerm: boolean,
+    networkPerm: boolean,
+    beautyPerm: boolean,
+    securityPerm: boolean,
+    energyPerm: boolean,
+    vocPerm: boolean,
+}
+
 export interface PlaceListProps {
     id: number;
     name: string;
@@ -69,10 +95,12 @@ export interface PlaceAdminProps {
     placeAdminId: number;
     //관리자 id
     id: number;
+    //
+    account? : string;
     //관리자 이름
     name: string;
     //관리자 그룹명
-    group: string;
+    group: GroupDto;
     //관리자 이메일
     email: string;
     //관리자 전화번호

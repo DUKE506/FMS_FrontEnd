@@ -1,4 +1,4 @@
-import { createPlace, findAllPlaceList, findAllPlaceTable, findOnePlace, findPlaceAdmin, updatePlace } from "@/app/api/place/place"
+import { createPlace, findAllPlaceList, findAllPlaceTable, findDetailPlaceInfo, findDetailPlacePerm, findOnePlace, findPlaceAdmin, updatePlace } from "@/app/api/place/place"
 import { CreatePlaceProps, DetailPlaceProps, PlaceTableProps } from "@/types/place/place.type"
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import moment from "moment";
@@ -112,6 +112,38 @@ export const getPlaceAdminAction = createAsyncThunk(
     async(placeid : number)=>{
         try{
             const res = await findPlaceAdmin(placeid);
+            return res.data;
+        }catch(err){
+            throw err;
+        }
+    }
+)
+
+/**
+ * 사업장 정보 조회 (INFO ONLY)
+ * --
+ */
+export const getDetailPlaceInfoAction = createAsyncThunk(
+    'place/placeinfo',
+    async(placeid: number)=>{
+        try{
+            const res = await findDetailPlaceInfo(placeid);
+            return res.data;
+        }catch(err){
+            throw err;
+        }
+    }
+)
+
+/**
+ * 사업장 권한 조회 (Perm ONLY)
+ * --
+ */
+export const getDetailPlacePermAction =createAsyncThunk(
+    'place/placeperm',
+    async(placeid: number)=>{
+        try{
+            const res = await findDetailPlacePerm(placeid);
             return res.data;
         }catch(err){
             throw err;

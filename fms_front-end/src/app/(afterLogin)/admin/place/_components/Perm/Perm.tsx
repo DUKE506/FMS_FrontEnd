@@ -12,10 +12,13 @@ import Machine from '../../../../../../../public/images/machine.svg'
 import { ToggleList } from "@/app/(afterLogin)/_components/Toggle/Toggle"
 import Styles from './Perm.module.css'
 import { useDispatch, useSelector } from "react-redux"
-import { ReactElement } from "react"
+import { ReactElement, useEffect } from "react"
 import { placeInfoProps, updatePlaceDetail } from "@/lib/features/place/placeDetailSlice"
 import { updateField } from "@/lib/features/place/placeSlice"
 import { CreatePlaceProps, DetailPlaceProps } from "@/types/place/place.type"
+import { EditButtons } from "@/app/(afterLogin)/_components/EditButtons/EditButtons"
+import { AppDispatch, RootState } from "@/lib/store"
+import { getDetailPlacePermAction } from "@/lib/features/place/placeActions"
 
 interface ToggleData {
     icon: ReactElement;
@@ -26,14 +29,22 @@ interface ToggleData {
 }
 
 interface PermProps {
+    placeid: number
     place?: DetailPlaceProps | CreatePlaceProps;
     edit?: boolean;
     mode: 'create' | 'update';
 }
 
-const Perm = ({place, edit, mode}:PermProps) => {
-    const dispatch = useDispatch();
+const Perm = ({placeid, place, edit, mode}:PermProps) => {
+    const dispatch = useDispatch<AppDispatch>();
+    const placePerm = useSelector((state:RootState) => state.placeDetail2.permData)
 
+    //사업장 권한 데이터 조회
+    useEffect(() => {
+        dispatch(getDetailPlacePermAction(placeid))
+    }, [dispatch])
+
+    //input 입력 핸들러
     const handleInputChange = (name: string, value: boolean) => {
         if(edit === true){
             mode === 'create' ?
@@ -48,70 +59,70 @@ const Perm = ({place, edit, mode}:PermProps) => {
             icon: <Machine />,
             title: '기계',
             name: 'machinePerm',
-            value: place?.machinePerm ?? false,
+            value: placePerm.machinePerm ?? false,
             onChange: (name, value) => handleInputChange(name, value)
         },
         {
             icon: <Electric />,
             title: '전기',
             name: 'electricPerm',
-            value: place?.electricPerm ?? false,
+            value: placePerm?.electricPerm ?? false,
             onChange: (name, value) => handleInputChange(name, value)
         },
         {
             icon: <Lift />,
             title: '승강',
             name: 'liftPerm',
-            value: place?.liftPerm ?? false,
+            value: placePerm.liftPerm ?? false,
             onChange: (name, value) => handleInputChange(name, value)
         },
         {
             icon: <Fire />,
             title: '소방',
             name: 'firePerm',
-            value: place?.firePerm ?? false,
+            value: placePerm.firePerm ?? false,
             onChange: (name, value) => handleInputChange(name, value)
         },
         {
             icon: <Building />,
             title: '건축',
             name: 'constructPerm',
-            value: place?.constructPerm ?? false,
+            value: placePerm.constructPerm ?? false,
             onChange: (name, value) => handleInputChange(name, value)
         },
         {
             icon: <Network />,
             title: '통신',
             name: 'networkPerm',
-            value: place?.networkPerm ?? false,
+            value: placePerm.networkPerm ?? false,
             onChange: (name, value) => handleInputChange(name, value)
         },
         {
             icon: <Beauty />,
             title: '미화',
             name: 'beautyPerm',
-            value: place?.beautyPerm ?? false,
+            value: placePerm.beautyPerm ?? false,
             onChange: (name, value) => handleInputChange(name, value)
         },
         {
             icon: <Security />,
             title: '보안',
             name: 'securityPerm',
-            value: place?.securityPerm ?? false,
+            value: placePerm.securityPerm ?? false,
             onChange: (name, value) => handleInputChange(name, value)
         },
         {
             icon: <Energy />,
             title: '에너지',
             name: 'energyPerm',
-            value: place?.energyPerm ?? false,
+            value: placePerm.energyPerm ?? false,
             onChange: (name, value) => handleInputChange(name, value)
         },
         {
             icon: <Voc />,
             title: '민원',
             name: 'vocPerm',
-            value: place?.vocPerm ?? false,
+            value: placePerm.vocPerm ?? false,
             onChange: (name, value) => handleInputChange(name, value)
         },
     ]
@@ -120,7 +131,16 @@ const Perm = ({place, edit, mode}:PermProps) => {
         <>
             <BaseContainer
                 header={
-                    <BaseHeader title="사업장 권한" />
+                    <BaseHeader title="사업장 권한">
+                        {
+                            <EditButtons
+                            edit={false}
+                            onCancel={()=>{}}
+                            onEdit={()=>{}}
+                            onUpdate={()=>{}}
+                            />
+                        }
+                    </BaseHeader>
                 }
             >
                 <ToggleList data={toggleData} />

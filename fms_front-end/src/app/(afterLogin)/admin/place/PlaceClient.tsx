@@ -1,7 +1,7 @@
 'use client'
 
 import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base";
-import { convertDates, getAllPlaceTableData } from "@/lib/features/place/placeActions";
+import { convertDates, getAllPlaceTableData, getPlaceAdminAction } from "@/lib/features/place/placeActions";
 import { AppDispatch, RootState } from "@/lib/store";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
@@ -18,7 +18,7 @@ import { ManagerTable } from "./add/_components/ManagerTable/ManagerTable";
 const PlaceClient = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { data } = useSelector((state: RootState) => state.placeTable)
-
+    const place = useSelector((state: RootState) => state.place)
 
     useEffect(() => {
         dispatch(getAllPlaceTableData()).then(() => {
@@ -52,7 +52,6 @@ const PlaceClient = () => {
                 }>
                 <PlaceTable placedata={data} />
             </BaseContainer>
-            
         </>
     )
 }

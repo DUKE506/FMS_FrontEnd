@@ -17,7 +17,7 @@ const initialState: placeAdminState = {
 }
 
 
-const placeADminSlice = createSlice({
+const PlaceAdminSlice = createSlice({
     name: 'placeAdmin',
     initialState,
     reducers: {
@@ -38,3 +38,6 @@ const placeADminSlice = createSlice({
             })
     }
 })
+
+
+export default PlaceAdminSlice.reducer;

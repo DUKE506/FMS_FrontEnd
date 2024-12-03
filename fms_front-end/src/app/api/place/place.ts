@@ -1,5 +1,5 @@
 
-import { CreatePlaceProps, DetailPlaceProps, PlaceAdminProps, PlaceListProps, PlaceTableProps } from "@/types/place/place.type";
+import { CreatePlaceProps, DetailPlaceInfoProps, DetailPlacePermProps, DetailPlaceProps, PlaceAdminProps, PlaceListProps, PlaceTableProps } from "@/types/place/place.type";
 import { ApiResponse, get, patch, post } from ".."
 
 
@@ -48,11 +48,29 @@ export const findAllPlaceList = async ():Promise<ApiResponse<PlaceListProps[]>> 
     return await get('/place/list');
 }
 
-/**
+/**z
  * 사업장 담당 관리자 목록 조회
  * @param placeid 
  * @returns 
  */
 export const findPlaceAdmin = async(placeid : number):Promise<ApiResponse<PlaceAdminProps[]>>=>{
     return await get(`/admin-place/place/${placeid}`)
+}
+
+/**
+ * 사업장 정보 조회 (INFO ONLY)
+ * @param placeid 
+ * @returns 
+ */
+export const findDetailPlaceInfo = async(placeid : number):Promise<ApiResponse<DetailPlaceInfoProps>>=>{
+    return await get(`/place/placeinfo/${placeid}`)
+}
+
+/**
+ * 사업장 권한 조회 (PERM ONLY)
+ * @param placeid 
+ * @returns 
+ */
+export const findDetailPlacePerm = async(placeid : number):Promise<ApiResponse<DetailPlacePermProps>>=>{
+    return await get(`/place/placeperm/${placeid}`)
 }
