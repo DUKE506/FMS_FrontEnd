@@ -1,5 +1,5 @@
-import { createPlace, findAllPlaceList, findAllPlaceTable, findDetailPlaceInfo, findDetailPlacePerm, findOnePlace, findPlaceAdmin, updatePlace } from "@/app/api/place/place"
-import { CreatePlaceProps, DetailPlaceProps, PlaceTableProps } from "@/types/place/place.type"
+import { createPlace, findAllPlaceList, findAllPlaceTable, findDetailPlaceInfo, findDetailPlacePerm, findOnePlace, findPlaceAdmin, updatePlace, updatePlaceInfo, updatePlacePerm } from "@/app/api/place/place"
+import { CreatePlaceProps, DetailPlaceInfoProps, DetailPlacePermProps, DetailPlaceProps, PlaceTableProps } from "@/types/place/place.type"
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import moment from "moment";
 
@@ -144,6 +144,42 @@ export const getDetailPlacePermAction =createAsyncThunk(
     async(placeid: number)=>{
         try{
             const res = await findDetailPlacePerm(placeid);
+            return res.data;
+        }catch(err){
+            throw err;
+        }
+    }
+)
+
+/**
+ * 사업장 정보 수정 (INFO ONLY)
+ * --
+ */
+export const updatePlaceInfoAction = createAsyncThunk(
+    'place/placeinfo/update',
+    async({placeid, placeinfo}:{placeid:number; placeinfo:DetailPlaceInfoProps},{dispatch}) => {
+        try{
+            const res = await updatePlaceInfo(placeid,placeinfo);
+
+            dispatch(getDetailPlaceInfoAction(placeid));
+            return res.data;
+        }catch(err){
+            throw err;
+        }
+    }
+)
+
+/**
+ * 사업장 권한 수정 (PERM ONLY)
+ * --
+ */
+export const updatePlacePermAction = createAsyncThunk(
+    'place/placeperm/update',
+    async({placeid, placeperm}:{placeid:number; placeperm:DetailPlacePermProps},{dispatch}) => {
+        try{
+            const res = await updatePlacePerm(placeid,placeperm);
+
+            dispatch(getDetailPlacePermAction(placeid));
             return res.data;
         }catch(err){
             throw err;

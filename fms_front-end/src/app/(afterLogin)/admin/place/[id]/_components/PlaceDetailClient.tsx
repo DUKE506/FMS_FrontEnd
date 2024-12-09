@@ -63,7 +63,6 @@ const PlaceDetailClient = ({ placeid }: PlaceDetailClient) => {
     const onUpdate = async () => {
         console.log(place.data.addr)
         await dispatch(editPlace(place.data));
-        // dispatch(findOnePlaceAction(placeid));
         handleEdit();
     }
 

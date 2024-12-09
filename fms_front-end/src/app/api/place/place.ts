@@ -74,3 +74,23 @@ export const findDetailPlaceInfo = async(placeid : number):Promise<ApiResponse<D
 export const findDetailPlacePerm = async(placeid : number):Promise<ApiResponse<DetailPlacePermProps>>=>{
     return await get(`/place/placeperm/${placeid}`)
 }
+
+/**
+ * 사업장 정보 수정 (INFO ONLY)
+ * @param placeid 
+ * @param placeInfo 
+ * @returns 
+ */
+export const updatePlaceInfo = async(placeid :number, placeInfo : DetailPlaceInfoProps):Promise<ApiResponse<boolean>>=>{
+    return await patch(`/place/placeinfo/${placeid}`, placeInfo);
+}
+
+/**
+ * 사업장 권한 수정 (PERM ONLY)
+ * @param placeid 
+ * @param placePerm 
+ * @returns 
+ */
+export const updatePlacePerm = async(placeid : number, placePerm : DetailPlacePermProps):Promise<ApiResponse<boolean>>=>{
+    return await patch(`/place/placePerm/${placeid}`, placePerm);
+}

@@ -2,18 +2,29 @@
 import { ColInput } from "@/app/(afterLogin)/_components/Input/Input";
 import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base";
 import Styles from './DetailForm.module.css'
-import { DetailPlaceProps } from "@/types/place/place.type";
+import { DetailPlaceInfoProps} from "@/types/place/place.type";
 import { placeInfoProps, updatePlaceDetail } from "@/lib/features/place/placeDetailSlice";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { EditButtons } from "@/app/(afterLogin)/_components/EditButtons/EditButtons";
-import { getDetailPlaceInfoAction } from "@/lib/features/place/placeActions";
+import { getDetailPlaceInfoAction, updatePlaceInfoAction } from "@/lib/features/place/placeActions";
 import { AppDispatch, RootState } from "@/lib/store";
 import { infoUpdate } from "@/lib/features/place/placeDetailSlice2";
 
 const DetailForm = ({ placeid,place, edit }: {placeid:number; place: placeInfoProps; edit: boolean }) => {
     const [formEdit, setFormEdit] = useState<boolean>(false);
+    const [info, setInfo] = useState<DetailPlaceInfoProps>({
+        id: 0,
+        code: '',
+        name: '',
+        addr: '',
+        tel: '',
+        contractNum: '',
+        contractedAt: new Date,
+        canceledAt: new Date,
+        state: true,
+    });
     const dispatch = useDispatch<AppDispatch>();
     const placeInfo = useSelector((state:RootState) => state.placeDetail2.infoData)
 
@@ -22,10 +33,33 @@ const DetailForm = ({ placeid,place, edit }: {placeid:number; place: placeInfoPr
         dispatch(getDetailPlaceInfoAction(placeid))
     }, [dispatch])
 
+    useEffect(()=>{
+        setInfo(placeInfo);
+    },[placeInfo])
+
     //input 입력 핸들러
     const handleDataChanges = (e : React.ChangeEvent<HTMLInputElement>) => {        
         const {name, value} = e.target;
-        dispatch(infoUpdate({name,value}))
+        setInfo(prev => ({
+            ...prev,
+            [name] : value
+        }))
+    }
+
+    //수정 취소
+    const handleEditCancel = () =>{
+        setFormEdit(false); // 수정모드 변경
+        setInfo(placeInfo) // 수정 값 초기화
+    }
+
+    //수정 저장
+    const handleUpdate = () => {
+        dispatch(updatePlaceInfoAction({
+            placeid : placeid,
+            placeinfo : info,
+        }));
+
+        setFormEdit(false);
     }
 
     
@@ -38,9 +72,9 @@ const DetailForm = ({ placeid,place, edit }: {placeid:number; place: placeInfoPr
                     {
                         <EditButtons
                         edit={formEdit}
-                        onCancel={()=>setFormEdit(false)}
+                        onCancel={handleEditCancel}
                         onEdit={()=>setFormEdit(true)}
-                        onUpdate={()=>{}}
+                        onUpdate={handleUpdate}
                         />
                     }
                     
@@ -52,7 +86,7 @@ const DetailForm = ({ placeid,place, edit }: {placeid:number; place: placeInfoPr
                             type: 'text',
                             placeholder: '이름',
                             name: 'name',
-                            value: placeInfo.name,
+                            value: formEdit ? info.name :  placeInfo.name,
                             onChange:handleDataChanges
                         }}
                         edit={formEdit}
@@ -63,7 +97,7 @@ const DetailForm = ({ placeid,place, edit }: {placeid:number; place: placeInfoPr
                             type: 'text',
                             placeholder: '코드',
                             name: 'code',
-                            value: placeInfo.code,
+                            value: formEdit ? info.code : placeInfo.code,
                             onChange:handleDataChanges
                         }}
                         edit={formEdit}
@@ -74,7 +108,7 @@ const DetailForm = ({ placeid,place, edit }: {placeid:number; place: placeInfoPr
                             type: 'text',
                             placeholder: '주소',
                             name: 'addr',
-                            value: placeInfo.addr,
+                            value: formEdit ? info.addr : placeInfo.addr ,
                             onChange:handleDataChanges
                         }}
                         edit={formEdit}
@@ -85,7 +119,7 @@ const DetailForm = ({ placeid,place, edit }: {placeid:number; place: placeInfoPr
                             type: 'text',
                             placeholder: '전화번호',
                             name: 'tel',
-                            value: placeInfo.tel,
+                            value: formEdit ? info.tel : placeInfo.tel,
                             onChange:handleDataChanges
                         }}
                         edit={formEdit}
@@ -96,7 +130,7 @@ const DetailForm = ({ placeid,place, edit }: {placeid:number; place: placeInfoPr
                             type: 'text',
                             placeholder: '계약번호',
                             name: 'contractNum',
-                            value: placeInfo.contractNum,
+                            value: formEdit ? info.contractNum :placeInfo.contractNum ,
                             onChange:handleDataChanges
                         }}
                         edit={formEdit}
@@ -107,7 +141,8 @@ const DetailForm = ({ placeid,place, edit }: {placeid:number; place: placeInfoPr
                             type: 'date',
                             placeholder: '계약일자',
                             name: 'contractedAt',
-                            value: placeInfo.contractedAt ? moment(place.data.contractedAt).format('YYYY-MM-DD') : '',
+                            value: formEdit ?  moment(info.contractedAt).format('YYYY-MM-DD') : moment(placeInfo.contractedAt).format('YYYY-MM-DD'),
+                            // placeInfo.contractedAt ? moment(place.data.contractedAt).format('YYYY-MM-DD') : ''
                             onChange:handleDataChanges
                         }}
                         edit={formEdit}
@@ -118,7 +153,7 @@ const DetailForm = ({ placeid,place, edit }: {placeid:number; place: placeInfoPr
                             type: 'date',
                             placeholder: '해약일자',
                             name: 'canceledAt',
-                            value: placeInfo.canceledAt ? moment(place.data.canceledAt).format('YYYY-MM-DD') : '',
+                            value: formEdit ? (info.canceledAt ? moment(info.canceledAt).format('YYYY-MM-DD') : '') : ( placeInfo.canceledAt ? moment(placeInfo.canceledAt).format('YYYY-MM-DD') : ''),
                             onChange:handleDataChanges
                         }}
                         edit={formEdit}
