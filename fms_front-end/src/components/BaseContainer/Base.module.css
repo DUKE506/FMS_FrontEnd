@@ -5,7 +5,7 @@
     width: 100%;
 
     border-radius: var(--radius-default);
-    padding: var(--pad-default) var(--pad-wide);
+    padding: var(--pad-default) var(--pad-default);
 
     box-shadow: var(--bs-default);
     background-color: var(--color-wh);
@@ -15,7 +15,7 @@
 .header {
     display: flex;
     justify-content: space-between;
-    padding: var(--pad-default) 0;
+    padding: var(--pad-default) var(--pad-default);
     /* border-bottom: 1px solid var(--color-gr2); */
 }
 
@@ -33,7 +33,7 @@
 
 .body {
     height: 100%;
-    padding: var(--pad-default) 0;
+    padding: var(--pad-default) var(--pad-default);
     overflow: scroll;
 }
 

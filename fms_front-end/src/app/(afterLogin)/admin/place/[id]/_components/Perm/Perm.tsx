@@ -1,14 +1,15 @@
+'use client'
 import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base"
-import Beauty from '../../../../../../../public/images/beauty.svg'
-import Building from '../../../../../../../public/images/building.svg'
-import Electric from '../../../../../../../public/images/electric.svg'
-import Lift from '../../../../../../../public/images/elevator.svg'
-import Fire from '../../../../../../../public/images/fire.svg'
-import Network from '../../../../../../../public/images/network.svg'
-import Security from '../../../../../../../public/images/security.svg'
-import Energy from '../../../../../../../public/images/energy.svg'
-import Voc from '../../../../../../../public/images/voc.svg'
-import Machine from '../../../../../../../public/images/machine.svg'
+import Beauty from '../../../../../../../../public/images/beauty.svg'
+import Building from '../../../../../../../../public/images/building.svg'
+import Electric from '../../../../../../../../public/images/electric.svg'
+import Lift from '../../../../../../../../public/images/elevator.svg'
+import Fire from '../../../../../../../../public/images/fire.svg'
+import Network from '../../../../../../../../public/images/network.svg'
+import Security from '../../../../../../../../public/images/security.svg'
+import Energy from '../../../../../../../../public/images/energy.svg'
+import Voc from '../../../../../../../../public/images/voc.svg'
+import Machine from '../../../../../../../../public/images/machine.svg'
 import { ToggleList } from "@/app/(afterLogin)/_components/Toggle/Toggle"
 import Styles from './Perm.module.css'
 import { useDispatch, useSelector } from "react-redux"
@@ -30,12 +31,9 @@ interface ToggleData {
 
 interface PermProps {
     placeid?: number
-    place?: DetailPlaceProps | CreatePlaceProps;
-    edit?: boolean;
-    mode: 'create' | 'update';
 }
 
-const Perm = ({placeid, place, edit, mode}:PermProps) => {
+const Perm = ({placeid}:PermProps) => {
     const [permEdit, setPermEdit] = useState<boolean>(false); // 수정 상태
     const [perm, setPerm] = useState<DetailPlacePermProps>({
         machinePerm: false,
@@ -60,22 +58,17 @@ const Perm = ({placeid, place, edit, mode}:PermProps) => {
     }, [dispatch])
 
     useEffect(()=>{
-        if(mode === 'update'){
-            setPerm(placePerm)
-        }
+        setPerm(placePerm)
     },[placePerm])
 
     //input 입력 핸들러
     const handleInputChange = (name: string, value: boolean) => {
-        if(mode ==='create' && edit === true){
-            dispatch(updateField({name,value}))
-        }else if(mode ==='update' && permEdit){
+        if(permEdit){
             setPerm(prev => ({
                 ...prev,
                 [name] : value,
             }))
         }
-        
     }
 
     //권한 수정 취소
@@ -175,15 +168,12 @@ const Perm = ({placeid, place, edit, mode}:PermProps) => {
                 header={
                     <BaseHeader title="사업장 권한">
                         {
-                            mode === 'update'
-                            ?
                             <EditButtons
                             edit={permEdit}
                             onCancel={handleCancel}
                             onEdit={()=>{setPermEdit(true)}}
                             onUpdate={handleUpdate}
                             />
-                            : null
                         }
                     </BaseHeader>
                 }

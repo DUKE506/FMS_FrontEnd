@@ -13,7 +13,6 @@ interface ToggleProps {
 
 
 export const Toggle = ({ icon, title, value, name, onChange }: ToggleProps) => {
-    // const [on, setOn] = useState<boolean>(value);
 
     const color = value ? "#ffffff" : "#518071";
     

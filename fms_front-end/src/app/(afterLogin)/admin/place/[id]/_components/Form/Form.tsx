@@ -1,18 +1,17 @@
 'use client'
 import { ColInput } from "@/app/(afterLogin)/_components/Input/Input";
 import { BaseContainer, BaseHeader } from "@/components/BaseContainer/Base";
-import Styles from './DetailForm.module.css'
+import Styles from './Form.module.css'
 import { DetailPlaceInfoProps} from "@/types/place/place.type";
-import { placeInfoProps, updatePlaceDetail } from "@/lib/features/place/placeDetailSlice";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { EditButtons } from "@/app/(afterLogin)/_components/EditButtons/EditButtons";
 import { getDetailPlaceInfoAction, updatePlaceInfoAction } from "@/lib/features/place/placeActions";
 import { AppDispatch, RootState } from "@/lib/store";
-import { infoUpdate } from "@/lib/features/place/placeDetailSlice2";
 
-const DetailForm = ({ placeid,place, edit }: {placeid:number; place: placeInfoProps; edit: boolean }) => {
+
+const Form = ({ placeid }: {placeid:number }) => {
     const [formEdit, setFormEdit] = useState<boolean>(false);
     const [info, setInfo] = useState<DetailPlaceInfoProps>({
         id: 0,
@@ -60,9 +59,7 @@ const DetailForm = ({ placeid,place, edit }: {placeid:number; place: placeInfoPr
         }));
 
         setFormEdit(false);
-    }
-
-    
+    }    
 
     return (
         <>
@@ -169,4 +166,4 @@ const DetailForm = ({ placeid,place, edit }: {placeid:number; place: placeInfoPr
 }
 
 
-export default DetailForm;
+export default Form;
