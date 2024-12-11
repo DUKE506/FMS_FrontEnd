@@ -57,7 +57,7 @@ export const ManagerTable = ({
                 <HeaderRow>
                     {
                         <HeaderCell key={'allCheck'} className="min_width">
-                            <input type="checkbox" checked={members.length === checkedAdmin.length} onChange={(e)=>{handleAllSelect(e)}}/>
+                            <input type="checkbox" checked={checkedAdmin.length > 0 && members.length === checkedAdmin.length} onChange={(e)=>{handleAllSelect(e)}}/>
                         </HeaderCell>
                     }
                     {

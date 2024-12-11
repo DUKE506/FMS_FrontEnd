@@ -8,7 +8,7 @@ import { ManagerTable } from "../../../add/_components/ManagerTable/ManagerTable
 import LucideIcon from "@/app/(afterLogin)/_components/LucideIcon/LucideIcon";
 import { BackGround } from "@/app/(afterLogin)/_components/InputModal/InputModal";
 import { Modal } from "@/app/(afterLogin)/_components/Modal/Modal";
-import { updateField } from "@/lib/features/place/placeSlice";
+import { deleteAdmin, updateField } from "@/lib/features/place/placeSlice";
 import { ColInput } from "@/app/(afterLogin)/_components/Input/Input";
 import { MemberList } from "@/app/(afterLogin)/admin/administrator/_components/Member/Member";
 import styles from './Admin.module.css'
@@ -48,6 +48,12 @@ const Admin = () => {
         setCheckAdmin([]);
         setModalActive(false);
     }
+
+    //추가한 관리자 삭제
+    const handleDeleteAdmin = () => {
+        dispatch(deleteAdmin({value:tableCheckedAdmin}))
+        setTableCheckedAdmin([])
+    }
     
     return(
         <>
@@ -61,7 +67,7 @@ const Admin = () => {
                     />
                     {
                         tableCheckedAdmin.length > 0 && (
-                            <LucideIcon name="Trash2" color='delete'/>
+                            <LucideIcon name="Trash2" color='delete' onClick={handleDeleteAdmin}/>
                         )
                     }
                 </div>

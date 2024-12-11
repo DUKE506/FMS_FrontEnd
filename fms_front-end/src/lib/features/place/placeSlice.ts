@@ -33,6 +33,11 @@ const placeSlice = createSlice({
       const { name, value } = action.payload;
       return { ...state, [name]: value };
     },
+    deleteAdmin:(state,action: PayloadAction<{value: ListAdminProps[] }>) => {
+      const {value} = action.payload;
+      return{...state,ser:value};
+      
+    },
     resetForm: () => initialState,
   },
   extraReducers: (builder) => {
@@ -49,6 +54,6 @@ const placeSlice = createSlice({
   }
 })
 
-export const { updateField, resetForm } = placeSlice.actions;
+export const { updateField, deleteAdmin,resetForm } = placeSlice.actions;
 export default placeSlice.reducer;
 
