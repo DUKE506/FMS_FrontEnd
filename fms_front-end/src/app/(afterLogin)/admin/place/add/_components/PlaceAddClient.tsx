@@ -34,12 +34,13 @@ export const PlaceAddClient = () => {
 
     return (
         <>
+            <span style={{fontWeight:"bold", color:'#518071'}}>사업장 생성</span>
             <Form />
             <Perm/>
             <Admin/>
             <div className={Styles.flex_left}>
                 <Link href={"/admin/place"}>
-                    <Button2 label="버튼" onClick={submit} />
+                    <Button2 label="생성" onClick={submit} />
                 </Link>
             </div>
         </>

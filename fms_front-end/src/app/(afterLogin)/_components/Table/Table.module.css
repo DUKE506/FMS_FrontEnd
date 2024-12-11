@@ -58,3 +58,7 @@
 .active {
     background-color: #51807125;
 }
+
+.min_width{
+    width: 1%;
+}

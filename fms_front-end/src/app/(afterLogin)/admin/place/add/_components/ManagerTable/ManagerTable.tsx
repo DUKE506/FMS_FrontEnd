@@ -19,15 +19,20 @@ const columns = [
 
 interface ManagerTableProps {
     members: ListAdminProps[];
+    checkedAdmin : ListAdminProps[];
+    onChecked : React.Dispatch<React.SetStateAction<ListAdminProps[]>>;
 }
 
 export const ManagerTable = ({
     members,
+    checkedAdmin,
+    onChecked,
 }: ManagerTableProps
 ) => {
     const dispatch = useDispatch<AppDispatch>()
     const [adminList, setAdminList] = useState<ListAdminProps[]>([]);
-    const [placeAdmin, setPlaceAdmin] = useState<ListAdminProps[]>([]);
+    // //체크된 항목
+    // const [checkedAdmin, setCheckAdmin] = useState<ListAdminProps[]>([]);
 
     useEffect(() => {
         const reqData = async () => {
@@ -38,14 +43,23 @@ export const ManagerTable = ({
         reqData();
     }, [])
 
-    useEffect(() => {
-        console.log("멤버", members)
-    }, [members])
+    //전체 선택
+    const handleAllSelect = (e:React.ChangeEvent<HTMLInputElement>) => {
+        onChecked(e.target.checked ? members : [])
+    }
+
+    // useEffect(() => {
+    // }, [members])
 
     return (
-        <Table data={members}>
+        <Table data={members} selectOption={true}>
             <Header>
                 <HeaderRow>
+                    {
+                        <HeaderCell key={'allCheck'} className="min_width">
+                            <input type="checkbox" checked={members.length === checkedAdmin.length} onChange={(e)=>{handleAllSelect(e)}}/>
+                        </HeaderCell>
+                    }
                     {
                         columns.map((header, idx) => {
                             return (
@@ -53,7 +67,6 @@ export const ManagerTable = ({
                                     {header.header}
                                 </HeaderCell>
                             )
-
                         })
                     }
                 </HeaderRow>
@@ -62,7 +75,8 @@ export const ManagerTable = ({
                 <Columns
                     columns={columns}
                     onRowClick={() => { }}
-                    checkItems={placeAdmin}
+                    checkItems={checkedAdmin}
+                    onChecked={onChecked}
                 />
             </Body>
         </Table>

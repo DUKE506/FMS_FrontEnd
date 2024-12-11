@@ -18,7 +18,10 @@ import { getAllAdminList } from "@/lib/features/administrator/adminAction";
 const Admin = () => {
     const [modalActive, setModalActive] = useState<boolean>(false);
     const [adminList, setAdminList] = useState<ListAdminProps[]>([]);
+    //모달에서 선택한 관리자
     const [checkAdmin, setCheckAdmin] = useState<ListAdminProps[]>([]);
+    //테이블에서 선택한 관리자
+    const [tableCheckedAdmin, setTableCheckedAdmin] = useState<ListAdminProps[]>([]);
 
     const dispatch = useDispatch<AppDispatch>();
     const place = useSelector((state: RootState) => state.place)
@@ -51,14 +54,22 @@ const Admin = () => {
         <BaseContainer
         header={
             <BaseHeader title="관리자">
-                <LucideIcon 
-                name="Plus"
-                onClick={() => setModalActive(true)}
-                />
+                <div className={styles.row}>
+                    <LucideIcon 
+                    name="Plus"
+                    onClick={() => setModalActive(true)}
+                    />
+                    {
+                        tableCheckedAdmin.length > 0 && (
+                            <LucideIcon name="Trash2" color='delete'/>
+                        )
+                    }
+                </div>
+                
             </BaseHeader>
         }
         >
-            <ManagerTable members={place.user}/>
+            <ManagerTable members={place.user} checkedAdmin={tableCheckedAdmin} onChecked={setTableCheckedAdmin}/>
         </BaseContainer>
         {
                 modalActive ?
