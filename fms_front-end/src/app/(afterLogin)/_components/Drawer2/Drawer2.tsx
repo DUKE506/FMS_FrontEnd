@@ -50,7 +50,6 @@ const DrawerItem = ({data} :{ data : Drawer2Props }) => {
     const [isCurPatch ,setIsCurPath] = useState(false);
 
     useEffect(()=>{
-        console.log(path)
         if(path.includes(data.url)){
             setIsCurPath(true);
         }else{

@@ -1,6 +1,8 @@
 
 import { CreatePlaceProps, DetailPlaceInfoProps, DetailPlacePermProps, DetailPlaceProps, PlaceAdminProps, PlaceListProps, PlaceTableProps } from "@/types/place/place.type";
 import { ApiResponse, get, patch, post } from ".."
+import { User } from "@/lib/features/auth/authSlice";
+import { ListAdminProps } from "@/types/administrator/adminstrator";
 
 
 /**
@@ -93,4 +95,24 @@ export const updatePlaceInfo = async(placeid :number, placeInfo : DetailPlaceInf
  */
 export const updatePlacePerm = async(placeid : number, placePerm : DetailPlacePermProps):Promise<ApiResponse<boolean>>=>{
     return await patch(`/place/placePerm/${placeid}`, placePerm);
+}
+
+/**
+ * 사업장 관리자 삭제
+ * @param placeId 
+ * @param admins 
+ * @returns 
+ */
+export const deletePlaceAdmin = async(placeId : number, admins : ListAdminProps[]):Promise<ApiResponse<boolean>> => {
+    return await patch(`admin-place/place/delete/${placeId}`, admins);
+}
+
+/**
+ * 사업장 관리자 추가
+ * @param placeId 
+ * @param admins 
+ * @returns 
+ */
+export const createPlaceAdmin = async(placeId: number, admins : ListAdminProps[]):Promise<ApiResponse<boolean>> => {
+    return await post(`admin-place/place/create/${placeId}`, admins);
 }

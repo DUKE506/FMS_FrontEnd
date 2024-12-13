@@ -33,10 +33,13 @@ const placeSlice = createSlice({
       const { name, value } = action.payload;
       return { ...state, [name]: value };
     },
+    addUser:(state,action: PayloadAction<{value: ListAdminProps[] }>) => {
+      const {value} = action.payload;
+      return{...state, user: [...state.user, ...value]}
+    },
     deleteAdmin:(state,action: PayloadAction<{value: ListAdminProps[] }>) => {
       const {value} = action.payload;
-      return{...state,ser:value};
-      
+      return{...state, user: state.user.filter(u => !value.some(deleteUser => deleteUser.id === u.id))};
     },
     resetForm: () => initialState,
   },
@@ -54,6 +57,6 @@ const placeSlice = createSlice({
   }
 })
 
-export const { updateField, deleteAdmin,resetForm } = placeSlice.actions;
+export const { updateField,addUser, deleteAdmin,resetForm } = placeSlice.actions;
 export default placeSlice.reducer;
 

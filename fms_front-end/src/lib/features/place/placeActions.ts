@@ -1,4 +1,5 @@
-import { createPlace, findAllPlaceList, findAllPlaceTable, findDetailPlaceInfo, findDetailPlacePerm, findOnePlace, findPlaceAdmin, updatePlace, updatePlaceInfo, updatePlacePerm } from "@/app/api/place/place"
+import { createPlace, createPlaceAdmin, deletePlaceAdmin, findAllPlaceList, findAllPlaceTable, findDetailPlaceInfo, findDetailPlacePerm, findOnePlace, findPlaceAdmin, updatePlace, updatePlaceInfo, updatePlacePerm } from "@/app/api/place/place"
+import { Admin, ListAdminProps } from "@/types/administrator/adminstrator";
 import { CreatePlaceProps, DetailPlaceInfoProps, DetailPlacePermProps, DetailPlaceProps, PlaceTableProps } from "@/types/place/place.type"
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import moment from "moment";
@@ -9,13 +10,14 @@ import moment from "moment";
  */
 export const submitPlace = createAsyncThunk(
     'place/submit',
-    async (placeData: CreatePlaceProps, thunkAPI) => {
+    async (placeData: CreatePlaceProps, {dispatch}) => {
         try {
             const res = await createPlace(placeData);
+            dispatch(getAllPlaceListAction());
             return res;
         } catch (err) {
             console.log(err);
-            return thunkAPI.rejectWithValue("CREATE FAILED")
+            return err
         }
     }
 )
@@ -181,6 +183,40 @@ export const updatePlacePermAction = createAsyncThunk(
 
             dispatch(getDetailPlacePermAction(placeid));
             return res.data;
+        }catch(err){
+            throw err;
+        }
+    }
+)
+
+/**
+ * 사업장 관리자 추가
+ * --
+ */
+export const addPlaceAdminAction = createAsyncThunk(
+    'place/placeadmin/create',
+    async({placeId, admins} : {placeId:number; admins:ListAdminProps[]}, {dispatch})=>{
+        try{
+            const res = await createPlaceAdmin(placeId,admins);
+            dispatch(getPlaceAdminAction(placeId));
+            return res.data
+        }catch(err){
+            throw err;
+        }
+    }
+)
+
+/**
+ * 사업장 관리자 삭제
+ * --
+ */
+export const deletePlaceAdminAction = createAsyncThunk(
+    'place/placeadmin/delete',
+    async({placeId, placeAdmin}:{placeId:number; placeAdmin:ListAdminProps[]}, {dispatch})=>{
+        try{
+            const res = await deletePlaceAdmin(placeId,placeAdmin);
+            dispatch(getPlaceAdminAction(placeId));
+            return res.data
         }catch(err){
             throw err;
         }

@@ -1,16 +1,17 @@
-import { Body, Columns, Header, HeaderCell, HeaderRow, Table } from "@/app/(afterLogin)/_components/Table/Table"
+import { Body, ColumnProps, Columns, Header, HeaderCell, HeaderRow, Table } from "@/app/(afterLogin)/_components/Table/Table"
 import { getAllAdminList } from "@/lib/features/administrator/adminAction"
 import { getPlaceAdminAction } from "@/lib/features/place/placeActions"
 import { AppDispatch } from "@/lib/store"
 import { ListAdminProps } from "@/types/administrator/adminstrator"
+import { GroupDto } from "@/types/group/group"
 import { PlaceAdminProps } from "@/types/place/place.type"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 
 
-const columns = [
+const columns:ColumnProps<ListAdminProps>[] = [
     { header: "이름", accessor: 'name' as const },
-    { header: "그룹", accessor: 'group' as const },
+    { header: "그룹", accessor: 'group', render: (value: GroupDto)=>value?.name ||'' },
     { header: "이메일", accessor: 'email' as const },
     { header: "전화번호", accessor: 'phone' as const },
     { header: "권한", accessor: 'job' as const },
@@ -31,8 +32,6 @@ export const ManagerTable = ({
 ) => {
     const dispatch = useDispatch<AppDispatch>()
     const [adminList, setAdminList] = useState<ListAdminProps[]>([]);
-    // //체크된 항목
-    // const [checkedAdmin, setCheckAdmin] = useState<ListAdminProps[]>([]);
 
     useEffect(() => {
         const reqData = async () => {

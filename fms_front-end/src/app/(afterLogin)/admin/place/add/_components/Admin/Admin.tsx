@@ -8,7 +8,7 @@ import { ManagerTable } from "../../../add/_components/ManagerTable/ManagerTable
 import LucideIcon from "@/app/(afterLogin)/_components/LucideIcon/LucideIcon";
 import { BackGround } from "@/app/(afterLogin)/_components/InputModal/InputModal";
 import { Modal } from "@/app/(afterLogin)/_components/Modal/Modal";
-import { deleteAdmin, updateField } from "@/lib/features/place/placeSlice";
+import { addUser, deleteAdmin, updateField } from "@/lib/features/place/placeSlice";
 import { ColInput } from "@/app/(afterLogin)/_components/Input/Input";
 import { MemberList } from "@/app/(afterLogin)/admin/administrator/_components/Member/Member";
 import styles from './Admin.module.css'
@@ -19,12 +19,16 @@ const Admin = () => {
     const [modalActive, setModalActive] = useState<boolean>(false);
     const [adminList, setAdminList] = useState<ListAdminProps[]>([]);
     //모달에서 선택한 관리자
-    const [checkAdmin, setCheckAdmin] = useState<ListAdminProps[]>([]);
+    const [modalCheckAdmin, setModalCheckAdmin] = useState<ListAdminProps[]>([]);
     //테이블에서 선택한 관리자
     const [tableCheckedAdmin, setTableCheckedAdmin] = useState<ListAdminProps[]>([]);
+    //검색어
+    const [search, setSearch] = useState<string>('');
 
+    //리덕스
     const dispatch = useDispatch<AppDispatch>();
     const place = useSelector((state: RootState) => state.place)
+
 
     useEffect(() => {
         const reqData = async () => {
@@ -39,13 +43,14 @@ const Admin = () => {
     //관리자 추가 모달 활성화
     const handleAddModal = () => {
         //추가할 관리자
-        dispatch(updateField({ name: 'user', value: checkAdmin }))
+        dispatch(addUser({value: modalCheckAdmin }))
+        setModalCheckAdmin([])
         setModalActive(false);
     }
 
     //모달 취소
     const handleCancelModal = () => {
-        setCheckAdmin([]);
+        setModalCheckAdmin([]);
         setModalActive(false);
     }
 
@@ -54,24 +59,27 @@ const Admin = () => {
         dispatch(deleteAdmin({value:tableCheckedAdmin}))
         setTableCheckedAdmin([])
     }
+
+    //검색어 입력
+    const handleSearch = (e : React.ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target;
+        setSearch(value)
+    }
     
     return(
         <>
         <BaseContainer
         header={
             <BaseHeader title="관리자">
-                <div className={styles.row}>
-                    <LucideIcon 
-                    name="Plus"
-                    onClick={() => setModalActive(true)}
-                    />
-                    {
-                        tableCheckedAdmin.length > 0 && (
-                            <LucideIcon name="Trash2" color='delete' onClick={handleDeleteAdmin}/>
-                        )
-                    }
-                </div>
-                
+                <LucideIcon 
+                name="Plus"
+                onClick={() => setModalActive(true)}
+                />
+                {
+                    tableCheckedAdmin.length > 0 && (
+                        <LucideIcon name="Trash2" color='delete' onClick={handleDeleteAdmin}/>
+                    )
+                }
             </BaseHeader>
         }
         >
@@ -87,14 +95,20 @@ const Admin = () => {
                             <ColInput
                                 input={{
                                     type: 'text',
-                                    placeholder: '이름, 부서, 아이디를 입력해주세요.'
+                                    placeholder: '이름, 부서, 아이디를 입력해주세요.',
+                                    value:search,
+                                    onChange:handleSearch
                                 }}
                                 edit
                             />
                             <div className={`${styles.list_wrap}`}>
                                 <MemberList
-                                    members={adminList}
-                                    onCheck={setCheckAdmin}
+                                    members={adminList.filter(all => 
+                                        !place.user.some(selectUser => selectUser.id === all.id)
+                                        && (all.name.includes(search)
+                                    )
+                                    )}
+                                    onCheck={setModalCheckAdmin}
                                     edit />
                             </div>
                         </Modal>

@@ -21,7 +21,8 @@
 
 .opt_section{
     display: flex;
-    align-items: center;;
+    align-items: center;
+    gap: var(--pad-default);
 }
 
 .title {

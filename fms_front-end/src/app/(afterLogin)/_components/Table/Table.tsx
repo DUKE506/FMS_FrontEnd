@@ -23,7 +23,7 @@ interface TableProps<T extends TableData> {
     children: ReactNode;
 }
 
-interface ColumnProps<T extends TableData> {
+export interface ColumnProps<T extends TableData> {
     header: string;
     accessor: keyof T;
     render?: (value: any, item: T) => ReactNode;
