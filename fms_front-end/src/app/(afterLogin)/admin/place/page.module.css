@@ -8,5 +8,13 @@
 .analysis_section {
     width: 100%;
     display: flex;
+    flex-direction: row;
     gap: var(--pad-wide)
+}
+
+@media (max-width:1023px){
+    .analysis_section{
+        display: flex;
+        flex-direction: column;
+    }
 }

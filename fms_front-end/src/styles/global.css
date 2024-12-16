@@ -294,8 +294,15 @@ body {
 .body-content {
   /* min-height : calc(100vh - 78.59px - 3rem); */
   height: 100%;
-  padding: var(--pad-default) var(--pad-wide) var(--pad-wide) var(--pad-wide);
+  /* padding: var(--pad-default) calc(var(--pad-wide) + var(--pad-default))  var(--pad-wide) calc(var(--pad-wide) + var(--pad-default)); */
+  padding: var(--pad-default) var(--pad-wide)  var(--pad-wide) var(--pad-wide);
 }
+@media (max-width:573px){
+  .body-content {
+    padding: var(--pad-default) 0;
+  } 
+}
+
 
 /* @media (max-width: 1280px) {
   .inner {

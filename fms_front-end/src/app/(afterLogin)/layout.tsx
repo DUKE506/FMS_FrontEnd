@@ -14,9 +14,7 @@ export default function Layout({ children }: Props) {
         <PersistGate loading={null} persistor={persistor}>
             <div className="inner">
                 <Drawer2 adminMode={true}/>
-                
                 <div className="body">
-                    {/* <Drawer loginType={true} /> */}
                     <Nav />    
                     <div className="body-content">
                         {children}

@@ -1,11 +1,12 @@
 'use client'
 
-import Styles from './Draer2.module.css'
+import Styles from './Drawer2.module.css'
 import PlaceIcon from '../../../../../public/images/place.svg'
 import AdminIcon from '../../../../../public/images/admin.svg'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import LucideIcon from '../LucideIcon/LucideIcon';
 
 interface Drawer2Props {
     title : string;
@@ -27,8 +28,11 @@ const AdminDrawerMockup:Drawer2Props[] = [
 ]
 
 export const Drawer2 = ({adminMode} : {adminMode : boolean}) => {
+    const [active, setActive] = useState<boolean>(false);
+
     return(
-        <div className={Styles.drawer}>
+        <div className={Styles.mobile}>
+            <div className={`${Styles.drawer} ${active ? Styles.open : null}`}>
             {
                 adminMode ?
                 AdminDrawerMockup.map((item,idx) =>{
@@ -39,6 +43,17 @@ export const Drawer2 = ({adminMode} : {adminMode : boolean}) => {
                 :
                 null
             }
+            </div>
+            <div className={`${Styles.absolute} ${Styles.tab} ${active ? Styles.open : null}`}>
+                {
+                    active
+                    ?
+                    <LucideIcon name='X' color='white' strokeWidth={3} onClick={()=>setActive(false)}/>
+                    :
+                    <LucideIcon name='AlignJustify' color='white' strokeWidth={3} onClick={()=>setActive(true)}/>
+                }
+                
+            </div>
         </div>
     )
 }
