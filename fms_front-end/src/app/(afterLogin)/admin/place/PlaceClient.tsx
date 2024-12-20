@@ -12,6 +12,7 @@ import PlaceTable from "./_components/PlaceTable/PlaceTable";
 import styles from './page.module.css'
 import LucideIcon from "../../_components/LucideIcon/LucideIcon";
 import { ManagerTable } from "./add/_components/ManagerTable/ManagerTable";
+import { Pagenation } from "../../_components/Pagenation/Pagenation";
 
 
 
@@ -50,7 +51,10 @@ const PlaceClient = () => {
 
                     </BaseHeader>
                 }>
-                <PlaceTable placedata={data} />
+                    <div>
+                        <Pagenation totalPage={5} curPage={1}/>
+                        <PlaceTable placedata={data} />
+                    </div>
             </BaseContainer>
         </>
     )
